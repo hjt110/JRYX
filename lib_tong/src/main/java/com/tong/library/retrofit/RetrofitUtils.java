@@ -37,13 +37,4 @@ public class RetrofitUtils {
         return mRetrofitService;
     }
 
-    public static <T> ObservableTransformer<T, T> io_main() {
-        return new ObservableTransformer<T, T>() {
-            @Override
-            public ObservableSource<T> apply(Observable<T> upstream) {
-                return upstream.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
-            }
-        };
-    }
 }
