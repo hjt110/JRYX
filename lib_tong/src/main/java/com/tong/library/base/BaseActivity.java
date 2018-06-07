@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.tong.library.mvp.BaseView;
-import com.tong.library.utils.EventBusUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -35,25 +34,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         return activity;
     }
 
-    protected boolean isRegisterEventBus(){
-        return false;
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (isRegisterEventBus()){
-            EventBusUtils.register(this);
-        }
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
-        if (isRegisterEventBus()){
-            EventBusUtils.unregister(this);
-        }
     }
 
     @Override

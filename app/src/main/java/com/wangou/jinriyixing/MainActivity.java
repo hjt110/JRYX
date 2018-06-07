@@ -20,7 +20,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-
+        tvMain.setText("hahahah");
     }
 
 }

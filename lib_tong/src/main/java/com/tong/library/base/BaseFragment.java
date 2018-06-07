@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tong.library.utils.EventBusUtils;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -30,24 +28,9 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void init(Bundle savedInstanceState);
 
-    protected boolean isRegisterEventBus(){
-        return false;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (isRegisterEventBus()){
-            EventBusUtils.register(this);
-        }
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
-        if (isRegisterEventBus()){
-            EventBusUtils.unregister(this);
-        }
     }
 }
