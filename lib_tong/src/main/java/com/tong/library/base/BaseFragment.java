@@ -38,6 +38,7 @@ public abstract class BaseFragment extends Fragment {
     public void onStart() {
         super.onStart();
         if (isUseEventBus()){
+            //add test
             EventBusUtils.register(this);
         }
     }
