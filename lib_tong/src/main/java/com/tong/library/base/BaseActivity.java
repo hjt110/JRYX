@@ -1,7 +1,6 @@
 package com.tong.library.base;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -66,8 +65,4 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     }
 
-    @Override
-    public Context getContext() {
-        return BaseActivity.this;
-    }
 }
