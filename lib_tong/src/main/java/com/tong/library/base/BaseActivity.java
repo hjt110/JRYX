@@ -5,16 +5,18 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.tong.library.mvp.BaseView;
+import com.tong.library.mvp.BasePresenter;
+import com.tong.library.mvp.IBaseView;
 import com.tong.library.utils.EventBusUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class BaseActivity extends AppCompatActivity implements BaseView {
+public abstract class BaseActivity<P extends BasePresenter<V>,V extends IBaseView> extends AppCompatActivity implements IBaseView {
 
     private Unbinder mUnbinder;
     private Activity activity;
+    private P mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,12 +24,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         setContentView(getLayoutResID());
         mUnbinder = ButterKnife.bind(this);
         activity = this;
-
-        //two test
+        mPresenter = initPresenter();
         init(savedInstanceState);
     }
 
     protected abstract int getLayoutResID();
+
+    protected abstract P initPresenter();
 
     protected abstract void init(Bundle savedInstanceState);
 
@@ -37,6 +40,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     protected boolean isUseEventBus(){
         return false;
+    }
+
+    protected P getP(){
+        return mPresenter;
     }
 
     @Override
@@ -50,6 +57,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mPresenter.detachView();
         mUnbinder.unbind();
         if (isUseEventBus()){
             EventBusUtils.unregister(this);
