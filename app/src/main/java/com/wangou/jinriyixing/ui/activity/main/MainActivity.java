@@ -8,7 +8,6 @@ import com.tong.library.base.BaseActivity;
 import com.wangou.jinriyixing.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity<MainPresenter,MainContract.View> implements MainContract.View {
 
