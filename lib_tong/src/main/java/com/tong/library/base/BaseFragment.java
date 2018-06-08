@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.tong.library.mvp.BasePresenter;
 import com.tong.library.mvp.IBaseView;
-import com.tong.library.utils.EventBusUtils;
+import com.tong.library.utils.eventbus.EventBusUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

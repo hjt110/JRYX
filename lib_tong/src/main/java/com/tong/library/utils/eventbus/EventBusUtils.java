@@ -1,4 +1,4 @@
-package com.tong.library.utils;
+package com.tong.library.utils.eventbus;
 
 import org.greenrobot.eventbus.EventBus;
 
