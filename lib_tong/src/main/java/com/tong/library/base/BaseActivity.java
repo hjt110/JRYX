@@ -23,6 +23,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         mUnbinder = ButterKnife.bind(this);
         activity = this;
 
+        //two test
         init(savedInstanceState);
     }
 
