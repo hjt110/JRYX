@@ -22,19 +22,15 @@ public class BottomPopuAdapter extends BaseAdapter {
     private boolean isSet;
     private List<Integer> posList;
     private List<Integer> colorList;
-    private boolean isSizeSet;
-    private List<Integer> sizePosList;
-    private List<Float> sizeList;
+    private float itemTextSize;
 
-    public BottomPopuAdapter(Context mContext, List<String> arg0, boolean isSet, List<Integer> posList, List<Integer> colorList, boolean isSizeSet, List<Integer> sizePosList, List<Float> sizeList) {
+    public BottomPopuAdapter(Context mContext, List<String> arg0, boolean isSet, List<Integer> posList, List<Integer> colorList, float itemTextSize) {
         this.lstImageItem = arg0;
         this.mContext = mContext;
         this.isSet = isSet;
         this.posList = posList;
         this.colorList = colorList;
-        this.isSizeSet = isSizeSet;
-        this.sizePosList = sizePosList;
-        this.sizeList = sizeList;
+        this.itemTextSize = itemTextSize;
     }
 
     public int getCount() {
@@ -69,10 +65,8 @@ public class BottomPopuAdapter extends BaseAdapter {
             }
         }
 
-        if (isSizeSet) {
-            if (sizePosList.get(position) == position) {
-                viewHolder.addtext.setTextSize(sizeList.get(position));
-            }
+        if (itemTextSize != 0) {
+            viewHolder.addtext.setTextSize(itemTextSize);
         }
 
         return view;

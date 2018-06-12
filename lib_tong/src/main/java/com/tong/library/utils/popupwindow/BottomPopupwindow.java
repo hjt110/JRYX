@@ -32,9 +32,7 @@ public class BottomPopupwindow {
         private boolean isSet;
         private List<Integer> posList = new ArrayList<>();
         private List<Integer> colorList = new ArrayList<>();
-        private boolean isSizeSet;
-        private List<Float> sizeList = new ArrayList<>();
-        private List<Integer> sizePosList = new ArrayList<>();
+        private float itemTextSize =0;
 
         public Builder(Context context, List<String> list) {
             this.context = context;
@@ -65,8 +63,6 @@ public class BottomPopupwindow {
             for (int i = 0; i < list.size(); i++) {
                 posList.add(-1);
                 colorList.add(0);
-                sizePosList.add(-1);
-                sizeList.add(0f);
             }
 
             popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -82,7 +78,12 @@ public class BottomPopupwindow {
             });
         }
 
-        public Builder setCancleColor(int color) {
+        public Builder setCancleText(String msg){
+            tv_cancle.setText(msg);
+            return this;
+        }
+
+        public Builder setCancleTextColor(int color) {
             tv_cancle.setTextColor(color);
             return this;
         }
@@ -92,17 +93,15 @@ public class BottomPopupwindow {
             return this;
         }
 
-        public Builder setTextColor(int position, int color) {
+        public Builder setItemTextColor(int position, int color) {
             isSet = true;
             posList.set(position, position);
             colorList.set(position, color);
             return this;
         }
 
-        public Builder setTextSize(int position,float size){
-            isSizeSet = true;
-            sizePosList.set(position,position);
-            sizeList.set(position,size);
+        public Builder setItemTextSize(float size){
+            itemTextSize = size;
             return this;
         }
 
@@ -118,7 +117,7 @@ public class BottomPopupwindow {
         }
 
         public Builder show() {
-            BottomPopuAdapter bottomPopuAdapter = new BottomPopuAdapter(context, list, isSet, posList, colorList,isSizeSet,sizePosList,sizeList);
+            BottomPopuAdapter bottomPopuAdapter = new BottomPopuAdapter(context, list, isSet, posList, colorList,itemTextSize);
             lv.setAdapter(bottomPopuAdapter);
             popupWindow.showAtLocation(activity.getWindow()
                     .getDecorView(), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
