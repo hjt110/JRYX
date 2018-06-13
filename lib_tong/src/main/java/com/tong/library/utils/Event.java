@@ -1,4 +1,4 @@
-package com.tong.library.utils.eventbus;
+package com.tong.library.utils;
 
 public class Event<T> {
 

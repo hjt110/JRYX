@@ -9,10 +9,11 @@ import android.widget.TextView;
 
 import com.tong.library.base.BaseActivity;
 import com.wangou.jinriyixing.R;
+import com.wangou.jinriyixing.ui.adpter.MainAdpter;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity<MainPresenter, MainContract.View> implements MainContract.View, View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.vp_main)
     ViewPager vpMain;
@@ -53,19 +54,36 @@ public class MainActivity extends BaseActivity<MainPresenter, MainContract.View>
     }
 
     @Override
-    protected MainPresenter initPresenter() {
-        return new MainPresenter(this);
+    protected void init(Bundle savedInstanceState) {
+        upIc(0);
+
+        MainAdpter mainAdpter = new MainAdpter(getSupportFragmentManager());
+        vpMain.setAdapter(mainAdpter);
+        vpMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                upIc(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void initEvent() {
         clMainHome.setOnClickListener(this);
         clMainCollection.setOnClickListener(this);
         clMainRelease.setOnClickListener(this);
         clMainCircle.setOnClickListener(this);
         clMainVideo.setOnClickListener(this);
-
-        upIc(0);
     }
 
     public void upIc(int pos) {
@@ -104,17 +122,21 @@ public class MainActivity extends BaseActivity<MainPresenter, MainContract.View>
         switch (v.getId()) {
             case R.id.cl_main_home:
                 upIc(0);
+                vpMain.setCurrentItem(0);
                 break;
             case R.id.cl_main_collection:
                 upIc(1);
+                vpMain.setCurrentItem(1);
                 break;
             case R.id.cl_main_release:
                 break;
             case R.id.cl_main_circle:
                 upIc(2);
+                vpMain.setCurrentItem(2);
                 break;
             case R.id.cl_main_video:
                 upIc(3);
+                vpMain.setCurrentItem(3);
                 break;
         }
     }

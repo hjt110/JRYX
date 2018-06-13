@@ -5,18 +5,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.tong.library.mvp.BasePresenter;
 import com.tong.library.mvp.IBaseView;
-import com.tong.library.utils.eventbus.EventBusUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class BaseActivity<P extends BasePresenter<V>,V extends IBaseView> extends AppCompatActivity implements IBaseView {
+public abstract class BaseActivity extends AppCompatActivity implements IBaseView {
 
     private Unbinder mUnbinder;
     private Activity activity;
-    private P mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,15 +23,15 @@ public abstract class BaseActivity<P extends BasePresenter<V>,V extends IBaseVie
         setContentView(getLayoutResID());
         mUnbinder = ButterKnife.bind(this);
         activity = this;
-        mPresenter = initPresenter();
         init(savedInstanceState);
+        initEvent();
     }
 
     protected abstract int getLayoutResID();
 
-    protected abstract P initPresenter();
-
     protected abstract void init(Bundle savedInstanceState);
+
+    protected abstract void initEvent();
 
     public Activity getActivity() {
         return activity;
@@ -42,25 +41,20 @@ public abstract class BaseActivity<P extends BasePresenter<V>,V extends IBaseVie
         return false;
     }
 
-    protected P getP(){
-        return mPresenter;
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
         if (isUseEventBus()){
-            EventBusUtils.register(this);
+            EventBus.getDefault().register(this);
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.detachView();
         mUnbinder.unbind();
         if (isUseEventBus()){
-            EventBusUtils.unregister(this);
+            EventBus.getDefault().unregister(this);
         }
     }
 

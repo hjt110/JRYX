@@ -6,4 +6,8 @@
 
     <color name="grey_9">#999999</color>
     <color name="red">#FE2323</color>
+    <color name="red_little">#f45850</color>
+    
+    <color name="color_3">#333333</color>
+    <color name="color_6">#666666</color>
 </resources>
