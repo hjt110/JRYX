@@ -1,8 +1,17 @@
 package com.tong.library.retrofit;
 
 
+
+import com.tong.library.bean.BaseBean;
+
+import java.util.Map;
+
 import io.reactivex.Observable;
-import retrofit2.http.GET;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.HeaderMap;
+import retrofit2.http.POST;
+
 
 /**
  * Created by Tong on 2018/4/20.
@@ -10,6 +19,8 @@ import retrofit2.http.GET;
 
 public interface RetrofitService {
 
-    @GET("s?wd=baid&ie=UTF-8")
-    Observable<String> getInfo();
+    @FormUrlEncoded
+    @POST("Common/getcode")
+    Observable<BaseBean> getCode(@HeaderMap Map<String,String> map, @Field("param")String param);
+
 }

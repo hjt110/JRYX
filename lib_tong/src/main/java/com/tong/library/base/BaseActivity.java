@@ -1,18 +1,19 @@
 package com.tong.library.base;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
-import com.tong.library.mvp.BaseView;
-import com.tong.library.utils.EventBusUtils;
+import com.tong.library.mvp.IBaseView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class BaseActivity extends AppCompatActivity implements BaseView {
+public abstract class BaseActivity extends AppCompatActivity implements IBaseView {
 
     private Unbinder mUnbinder;
     private Activity activity;
@@ -23,13 +24,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         setContentView(getLayoutResID());
         mUnbinder = ButterKnife.bind(this);
         activity = this;
-
         init(savedInstanceState);
+        initEvent();
     }
 
     protected abstract int getLayoutResID();
 
     protected abstract void init(Bundle savedInstanceState);
+
+    protected abstract void initEvent();
 
     public Activity getActivity() {
         return activity;
@@ -39,11 +42,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         return false;
     }
 
+    public void show(String msg){
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
         if (isUseEventBus()){
-            EventBusUtils.register(this);
+            EventBus.getDefault().register(this);
         }
     }
 
@@ -52,7 +59,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.onDestroy();
         mUnbinder.unbind();
         if (isUseEventBus()){
-            EventBusUtils.unregister(this);
+            EventBus.getDefault().unregister(this);
         }
     }
 
@@ -66,8 +73,4 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     }
 
-    @Override
-    public Context getContext() {
-        return BaseActivity.this;
-    }
 }

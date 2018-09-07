@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/review"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <ListView
+        android:id="@+id/lv_pop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_pop_cancle"
+        android:layout_margin="8dp"
+        android:background="@drawable/shape_kuang_conner5"
+        android:divider="#DDDDDD"
+        android:dividerHeight="0.1dp"/>
+
+    <TextView
+        android:id="@+id/tv_pop_cancle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/linearlayoutbtn"
+        android:ellipsize="end"
+        android:gravity="center_horizontal"
+        android:padding="16dp"
+        android:text="取消"
+        android:textColor="#404040"
+        android:textSize="20sp"/>
+
+
+</RelativeLayout>

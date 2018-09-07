@@ -7,13 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.tong.library.utils.EventBusUtils;
+import com.tong.library.mvp.IBaseView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements IBaseView {
 
     private Unbinder mUnbinder;
 
@@ -23,6 +26,7 @@ public abstract class BaseFragment extends Fragment {
         View view = inflater.inflate(getLayoutResID(), container, false);
         mUnbinder = ButterKnife.bind(this, view);
         init(savedInstanceState);
+        initEvent();
         return view;
     }
 
@@ -30,16 +34,21 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void init(Bundle savedInstanceState);
 
+    protected abstract void initEvent();
+
     protected boolean isUseEventBus(){
         return false;
+    }
+
+    public void show(String msg){
+        Toast.makeText(getActivity(),msg,Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onStart() {
         super.onStart();
         if (isUseEventBus()){
-            //add test
-            EventBusUtils.register(this);
+            EventBus.getDefault().register(this);
         }
     }
 
@@ -48,7 +57,17 @@ public abstract class BaseFragment extends Fragment {
         super.onDestroy();
         mUnbinder.unbind();
         if (isUseEventBus()){
-            EventBusUtils.unregister(this);
+            EventBus.getDefault().unregister(this);
         }
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
     }
 }
