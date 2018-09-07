@@ -6,7 +6,5 @@ package com.tong.library.retrofit.config;
  */
 
 public interface HttpConfig {
-     int HTTP_TIME=3;
-     int HTTP_TIME_OUT=15;
-     String BASE_URL="https://www.baidu.com/";
+     String BASE_URL="http://jryxapi.phlhr.com/api/";
 }

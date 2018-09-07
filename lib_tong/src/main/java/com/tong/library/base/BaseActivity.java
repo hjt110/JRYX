@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.tong.library.mvp.IBaseView;
 
@@ -39,6 +40,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
 
     protected boolean isUseEventBus(){
         return false;
+    }
+
+    public void show(String msg){
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
 
     @Override

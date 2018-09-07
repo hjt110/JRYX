@@ -1,98 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.activity.main.home.HomFragment">
+    tools:context=".activity.home.HomFragment">
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
+        android:id="@+id/titleBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/red_little"
-        >
+        android:background="@color/white"
+        android:elevation="3dp"
+        android:orientation="vertical">
 
-        <com.tong.library.view.CircleImageView
-            android:id="@+id/img_home_head"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/ic_head"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginLeft="11dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            />
-        
-        <ImageView
-            android:id="@+id/img_home_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/logo"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-        
-        <ImageView
-            android:id="@+id/img_home_search"
-            android:layout_width="22dp"
-            android:layout_height="21dp"
-            android:src="@mipmap/ic_home_search"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginRight="10dp"
-            />
-    </android.support.constraint.ConstraintLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/mainColor">
 
-    <android.support.constraint.ConstraintLayout
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/logo"
+                android:textColor="@color/white"/>
+
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:background="?attr/selectableItemBackground"
+                android:src="@mipmap/search"/>
+
+        </RelativeLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:tabTextColor="@color/color_6"
+            app:tabSelectedTextColor="@color/color_3"
+            app:tabIndicatorColor="@color/transparent"
+            app:tabMode="scrollable"
+            android:background="@color/white"/>
+
+
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.tong.library.view.PagerSlidingTabStrip
-            android:id="@+id/psts_home"
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/img_home_show"
-            app:pstsTabSelectedSize="@dimen/textSize_14"
-            app:pstsTabTextSize="@dimen/textSize_13"
-            app:pstsTabTextColor="@color/color_6"
-            app:pstsTabSelectedColor="@color/color_3"
-            >
-
-        </com.tong.library.view.PagerSlidingTabStrip>
-
-        <ImageView
-            android:id="@+id/img_home_show"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/ic_launcher"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginRight="14dp"
-            app:layout_constraintLeft_toRightOf="@+id/psts_home"
-            android:layout_marginLeft="18dp"
-            />
-    </android.support.constraint.ConstraintLayout>
-
-    <com.youth.banner.Banner
-        android:id="@+id/banner_home"
-        android:layout_width="match_parent"
-        android:layout_height="117dp">
-    </com.youth.banner.Banner>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rlv_home"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"/>
 </LinearLayout>

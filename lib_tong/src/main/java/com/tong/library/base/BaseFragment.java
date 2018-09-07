@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.tong.library.mvp.IBaseView;
 
@@ -37,6 +38,10 @@ public abstract class BaseFragment extends Fragment implements IBaseView {
 
     protected boolean isUseEventBus(){
         return false;
+    }
+
+    public void show(String msg){
+        Toast.makeText(getActivity(),msg,Toast.LENGTH_SHORT).show();
     }
 
     @Override
