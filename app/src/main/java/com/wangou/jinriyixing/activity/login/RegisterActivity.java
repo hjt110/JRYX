@@ -145,7 +145,6 @@ public class RegisterActivity extends BaseActivity {
         super.onDestroy();
         if (mCountDownTimer != null) {
             mCountDownTimer.cancel();
-            
         }
     }
 }
