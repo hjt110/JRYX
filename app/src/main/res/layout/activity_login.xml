@@ -62,15 +62,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="普通登录"
+                android:textColor="@color/mainColor"
                 android:textSize="16sp"/>
 
             <View
+                android:id="@+id/lineLeft"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_alignLeft="@+id/normal_login"
                 android:layout_alignRight="@+id/normal_login"
                 android:layout_below="@id/normal_login"
                 android:layout_marginTop="8dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:background="@color/mainColor"/>
 
         </RelativeLayout>
@@ -86,15 +90,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="短信登录"
+                android:textColor="@color/color_9"
                 android:textSize="16sp"/>
 
             <View
+                android:id="@+id/lineRight"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_alignLeft="@+id/sms_login"
                 android:layout_alignRight="@+id/sms_login"
                 android:layout_below="@+id/sms_login"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_marginTop="8dp"
+                android:visibility="invisible"
                 android:background="@color/mainColor"/>
 
         </RelativeLayout>
@@ -144,7 +153,7 @@
             android:layout_weight="1"
             android:background="@color/transparent"
             android:gravity="center_vertical"
-            android:hint="请输入验证码"
+            android:hint="请输入密码"
             android:textColor="@color/text_color"
             android:textColorHint="@color/color_9"/>
 
@@ -167,6 +176,7 @@
                 android:visibility="gone"/>
 
             <ImageView
+                android:id="@+id/imgEyes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -191,6 +201,7 @@
 
 
     <Button
+        android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginLeft="16dp"

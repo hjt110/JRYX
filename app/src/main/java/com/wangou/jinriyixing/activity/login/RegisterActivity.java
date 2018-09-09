@@ -63,7 +63,7 @@ public class RegisterActivity extends BaseActivity {
     public void toDo(View view) {
         switch (view.getId()) {
             case R.id.tv_getCode:
-                if (!tvGetCode.getText().toString().equals("发送验证码")) return;
+                if (!tvGetCode.getText().toString().equals("获取验证码")) return;
                 getCode(editPhone.getText().toString());
                 break;
             case R.id.btn_register:
@@ -86,7 +86,6 @@ public class RegisterActivity extends BaseActivity {
 
         Api.getInstance().getCode(headerMap, param).compose(RxSchedulers.io_main()).subscribe(baseBean -> {
             LogUtils.e("baseBean", baseBean.getMsg());
-            LogUtils.e("baseBean", baseBean.getData().toString());
         });
 
     }
@@ -105,13 +104,11 @@ public class RegisterActivity extends BaseActivity {
         mCountDownTimer = new CountDownTimer(60 * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                tvGetCode.setClickable(false);
                 tvGetCode.setText("重新发送(" + millisUntilFinished / 1000 + "s)");
             }
 
             @Override
             public void onFinish() {
-                tvGetCode.setClickable(true);
                 tvGetCode.setText("发送验证码");
             }
         }.start();
