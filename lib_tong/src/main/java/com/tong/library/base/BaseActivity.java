@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.tong.library.mvp.IBaseView;
+import com.tong.library.utils.ScreenUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -21,6 +22,11 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (ScreenUtils.isPortrait()){
+            ScreenUtils.adaptScreen4VerticalSlide(this,360);
+        }else {
+            ScreenUtils.adaptScreen4HorizontalSlide(this, 360);
+        }
         setContentView(getLayoutResID());
         mUnbinder = ButterKnife.bind(this);
         activity = this;
@@ -56,6 +62,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
 
     @Override
     protected void onDestroy() {
+        ScreenUtils.cancelAdaptScreen(this);
         super.onDestroy();
         mUnbinder.unbind();
         if (isUseEventBus()){
