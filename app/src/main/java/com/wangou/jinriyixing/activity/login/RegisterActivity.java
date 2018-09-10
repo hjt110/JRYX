@@ -14,6 +14,8 @@ import com.tong.library.retrofit.Api;
 import com.tong.library.retrofit.BaseObsever;
 import com.tong.library.retrofit.RxSchedulers;
 import com.wangou.jinriyixing.R;
+import com.wangou.jinriyixing.base.MyCallback;
+import com.wangou.jinriyixing.base.RequestHelper;
 import com.wangou.jinriyixing.utils.AesEncryptionUtil;
 import com.wangou.jinriyixing.utils.DeviceUtils;
 import com.wangou.jinriyixing.utils.LogUtils;
@@ -113,24 +115,13 @@ public class RegisterActivity extends BaseActivity {
             }
         }.start();
 
-        Map<String, String> headerMap = ParamUtils.getHeaderMap();
-        Map<String, String> map = new HashMap<>();
-        map.put("time", ParamUtils.TimeCurrent);
-        map.put("type", "register");
-        map.put("mobile", phone);
-        String param = ParamUtils.getParam(map);
-        Api.getInstance()
-                .getCode(headerMap, param)
-                .compose(RxSchedulers.io_main())
-                .subscribe(new BaseObsever<BaseBean>() {
-                    @Override
-                    public void onSuccess(BaseBean baseBean) {
-                        if (baseBean.getCode() == 0) {
-                            smsid = baseBean.getData().getSmsid();
-                        }
-                        show(baseBean.getMsg());
-                    }
-                });
+        RequestHelper.getCode(phone, "register", o -> {
+            BaseBean baseBean = (BaseBean) o;
+            if (baseBean.getCode() == 0) {
+                smsid = baseBean.getData().getSmsid();
+            }
+            show(baseBean.getMsg());
+        });
     }
 
     public void finish(View view) {

@@ -11,6 +11,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 
 /**
@@ -23,4 +24,7 @@ public interface RetrofitService {
     @POST("Common/getcode")
     Observable<BaseBean> getCode(@HeaderMap Map<String,String> map, @Field("param")String param);
 
+    @FormUrlEncoded
+    @POST("{path}")
+    Observable<Object> normalRequest(@Path("path") String path,@HeaderMap Map<String,String> map, @Field("param")String param);
 }
