@@ -12,9 +12,10 @@ import android.widget.TextView;
 import com.tong.library.base.BaseActivity;
 import com.tong.library.bean.BaseBean;
 import com.tong.library.bean.LoginBean;
+import com.tong.library.utils.JsonParse;
+import com.tong.library.utils.JsonUtil;
 import com.wangou.jinriyixing.R;
 import com.wangou.jinriyixing.base.RequestHelper;
-import com.wangou.jinriyixing.utils.LogUtils;
 import com.wangou.jinriyixing.utils.ParamUtils;
 
 import java.util.HashMap;
@@ -152,7 +153,11 @@ public class LoginActivity extends BaseActivity {
         paramMap.put("smsid", smsid);
         String param = ParamUtils.getParam(paramMap);
         RequestHelper.normalRequest("Login/smsloginrun", headerMap, param, o -> {
-            LogUtils.e("bean",o.toString());
+            String s = o.toString();
+//            LoginBean loginbean = JsonUtil.getInstance().fromJson(o.toString(), LoginBean.class);
+//            show(loginbean.getMsg());
+            LoginBean result = JsonParse.getResult(o.toString(), LoginBean.class);
+            show(result.getMsg());
         });
     }
 
