@@ -50,4 +50,11 @@ public class ParamUtils {
         return Key;
     }
 
+    /***********************liufang的接口参数*****************************************/
+    public static Map<String, String> getNormalHeaderMap() {
+        Map<String, String> map = new HashMap<>();
+        map.put("deviceid",DeviceUtils.getUniqueId());
+        map.put("time", getTimeCurrent());
+        return map;
+    }
 }

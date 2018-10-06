@@ -1,14 +1,14 @@
 package com.tong.library.retrofit;
 
-
-
 import com.tong.library.bean.BaseBean;
+import com.tong.library.bean.NewsContentBean;
 import com.tong.library.bean.NewsTitleBean;
 
 import java.util.Map;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
@@ -33,4 +33,7 @@ public interface RetrofitService {
     @GET("News/getNewsMenu")
     Observable<NewsTitleBean> getNewsTitle(@HeaderMap Map<String,String> headMap);
 
+    @FormUrlEncoded
+    @POST("News/getNewsList")
+    Observable<NewsContentBean> getNewsContent(@HeaderMap Map<String,String>headMap, @FieldMap Map<String,String> pramMap);
 }

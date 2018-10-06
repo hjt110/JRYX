@@ -20,6 +20,7 @@ import com.wangou.jinriyixing.adpter.ViewPagerAdpter;
 import com.wangou.jinriyixing.base.BaseApplication;
 import com.wangou.jinriyixing.utils.DeviceUtils;
 import com.wangou.jinriyixing.utils.LogUtils;
+import com.wangou.jinriyixing.utils.ParamUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +44,7 @@ public class HomFragment extends BaseFragment {
 
     private List<String> titleList = new ArrayList<>();
     private List<Fragment> fragmentList = new ArrayList<>();
+    private List<NewsTitleBean.DataBean> dataList = new ArrayList<>();
     private ViewPagerAdpter viewPagerAdpter;
 
     @Override
@@ -66,19 +68,27 @@ public class HomFragment extends BaseFragment {
     }
 
     private void initNews() {
-        HashMap<String,String> headmap = new HashMap<>();
-        headmap.put("deviceid", DeviceUtils.getUniqueId());
-        headmap.put("time", System.currentTimeMillis()+"");
-        Api.getInstance().getNewsTitle(headmap)
+        Api.getInstance()
+                .getNewsTitle(ParamUtils.getNormalHeaderMap())
                 .compose(RxSchedulers.io_main())
                 .subscribe(bean -> {
-                    List<NewsTitleBean.DataBean> data = bean.getData();
-                    for (NewsTitleBean.DataBean dataBean: data){
-                        titleList.add(dataBean.getMenu_name());
-                        fragmentList.add(new GeneralFragment());
+                    if (bean.getCode() == 0) {
+                        List<NewsTitleBean.DataBean> data = bean.getData();
+                        setDataList(data);
+                        for (int i = 0; i < data.size(); i++) {
+                            titleList.add(data.get(i).getMenu_name());
+                            fragmentList.add(new GeneralFragment(i));
+                        }
+                        viewPagerAdpter.notifyDataSetChanged();
                     }
-                    viewPagerAdpter.notifyDataSetChanged();
                 });
     }
 
+    protected List<NewsTitleBean.DataBean> getDataList() {
+        return dataList;
+    }
+
+    protected void setDataList(List<NewsTitleBean.DataBean> dataList) {
+        this.dataList = dataList;
+    }
 }
