@@ -43,6 +43,7 @@ public class HomFragment extends BaseFragment {
     protected void init(Bundle savedInstanceState) {
 
         initListInfo();
+        initNews();
         ViewPagerAdpter viewPagerAdpter = new ViewPagerAdpter(getChildFragmentManager(), titleList, fragmentList);
         viewPager.setAdapter(viewPagerAdpter);
         tabLayout.setupWithViewPager(viewPager);
@@ -51,6 +52,10 @@ public class HomFragment extends BaseFragment {
 
     @Override
     protected void initEvent() {
+
+    }
+
+    private void initNews() {
 
     }
 

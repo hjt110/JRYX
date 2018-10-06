@@ -6,5 +6,5 @@ package com.tong.library.retrofit.config;
  */
 
 public interface HttpConfig {
-     String BASE_URL="http://jryxapi.phlhr.com/api/";
+     String BASE_URL="http://www.jryx9.com/api/";
 }

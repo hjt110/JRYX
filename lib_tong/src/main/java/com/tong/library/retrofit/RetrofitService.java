@@ -27,4 +27,6 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("{path}")
     Observable<Object> normalRequest(@Path("path") String path,@HeaderMap Map<String,String> map, @Field("param")String param);
+
+
 }
