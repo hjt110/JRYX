@@ -173,8 +173,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         rlv.setLayoutManager(new LinearLayoutManager(this));
         NavLeftAdpter navLeftAdpter = new NavLeftAdpter(this, titleList);
         rlv.setAdapter(navLeftAdpter);
-        imgHeader.setOnClickListener(v -> startActivity(new Intent(this, LoginActivity.class)));
-        rlSetting.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,SetActivity.class)));
+        imgHeader.setOnClickListener(v -> startActivity(new Intent(this, InfoSetActivity.class)));
+        rlSetting.setOnClickListener(v -> startActivity(new Intent(this, SetActivity.class)));
     }
 
     private void test() {

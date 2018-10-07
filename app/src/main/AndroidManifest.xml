@@ -26,6 +26,8 @@
         </activity>
         <activity android:name=".activity.main.SetActivity">
         </activity>
+        <activity android:name=".activity.main.InfoSetActivity">
+        </activity>
     </application>
 
 </manifest>
