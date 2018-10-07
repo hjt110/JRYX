@@ -1,6 +1,7 @@
 package com.wangou.jinriyixing.adpter;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.tong.library.adapter.recyclerview.CommonAdapter;
@@ -45,6 +46,7 @@ public class NavLeftAdpter extends CommonAdapter<String> {
                 break;
             case 6:
                 img.setImageResource(R.mipmap.feed_back);
+                holder.getView(R.id.line_bottom).setVisibility(View.VISIBLE);
                 break;
         }
     }

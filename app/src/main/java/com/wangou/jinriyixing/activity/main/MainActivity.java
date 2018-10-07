@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -96,6 +97,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     FrameLayout navLeft;
     @BindView(R.id.drawerLayout)
     DrawerLayout drawerLayout;
+    @BindView(R.id.rl_setting)
+    RelativeLayout rlSetting;
+    @BindView(R.id.rl_email)
+    RelativeLayout rlEmail;
 
     private List<Fragment> fragmentList = new ArrayList<>();
 
@@ -135,7 +140,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         });
 
-        test();
+//        test();
     }
 
     private void initViewPager() {
@@ -169,6 +174,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         NavLeftAdpter navLeftAdpter = new NavLeftAdpter(this, titleList);
         rlv.setAdapter(navLeftAdpter);
         imgHeader.setOnClickListener(v -> startActivity(new Intent(this, LoginActivity.class)));
+        rlSetting.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,SetActivity.class)));
     }
 
     private void test() {
@@ -272,5 +278,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             return;
         }
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

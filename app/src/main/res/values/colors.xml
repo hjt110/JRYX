@@ -20,4 +20,5 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="mainColor">#f45850</color>
+    <color name="color_e">#eeeeee</color>
 </resources>
