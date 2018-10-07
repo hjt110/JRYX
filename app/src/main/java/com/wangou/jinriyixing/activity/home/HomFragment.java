@@ -1,7 +1,6 @@
 package com.wangou.jinriyixing.activity.home;
 
 
-import android.app.Application;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,18 +11,12 @@ import android.widget.LinearLayout;
 import com.tong.library.base.BaseFragment;
 import com.tong.library.bean.NewsTitleBean;
 import com.tong.library.retrofit.Api;
-import com.tong.library.retrofit.BaseObsever;
 import com.tong.library.retrofit.RxSchedulers;
-import com.tong.library.utils.JsonParse;
 import com.wangou.jinriyixing.R;
 import com.wangou.jinriyixing.adpter.ViewPagerAdpter;
-import com.wangou.jinriyixing.base.BaseApplication;
-import com.wangou.jinriyixing.utils.DeviceUtils;
-import com.wangou.jinriyixing.utils.LogUtils;
 import com.wangou.jinriyixing.utils.ParamUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;

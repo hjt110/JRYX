@@ -5,7 +5,7 @@ import android.content.Context;
 
 import com.tong.library.utils.Utils;
 
-public class BaseApplication extends Application {
+public class APP extends Application {
 
     private static Context context;
 

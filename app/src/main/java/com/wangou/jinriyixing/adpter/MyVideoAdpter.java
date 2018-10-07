@@ -6,15 +6,17 @@ import android.view.View;
 import com.bumptech.glide.Glide;
 import com.tong.library.adapter.recyclerview.CommonAdapter;
 import com.tong.library.adapter.recyclerview.base.ViewHolder;
+import com.tong.library.bean.VideoListBean;
+import com.tong.library.view.CircleImageView;
 import com.wangou.jinriyixing.R;
 
 import java.util.List;
 
 import cn.jzvd.JZVideoPlayerStandard;
 
-public class MyVideoAdpter extends CommonAdapter<String> {
+public class MyVideoAdpter extends CommonAdapter<VideoListBean.DataBean> {
 
-    public MyVideoAdpter(Context context, List<String> datas) {
+    public MyVideoAdpter(Context context, List<VideoListBean.DataBean> datas) {
         super(context, datas);
     }
 
@@ -24,9 +26,15 @@ public class MyVideoAdpter extends CommonAdapter<String> {
     }
 
     @Override
-    protected void convert(ViewHolder holder, String s, int position) {
+    protected void convert(ViewHolder holder, VideoListBean.DataBean dataBean, int position) {
         JZVideoPlayerStandard video = holder.getView(R.id.video);
-        video.setUp("http://jzvd.nathen.cn/c6e3dc12a1154626b3476d9bf3bd7266/6b56c5f0dc31428083757a45764763b0-5287d2089db37e62345123a1be272f8b.mp4", JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, "饺子闭眼睛");
-        Glide.with(mContext).load("http://p.qpic.cn/videoyun/0/2449_43b6f696980311e59ed467f22794e792_1/640").into(video.thumbImageView);
+        video.setUp(dataBean.getVideo(), JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, dataBean.getTitle());
+        Glide.with(mContext).load(dataBean.getCover()).into(video.thumbImageView);
+        CircleImageView imgHeader = holder.getView(R.id.img_header);
+        Glide.with(mContext).load(dataBean.getMember_list_headpic()).into(imgHeader);
+        holder.setText(R.id.tv_author, dataBean.getMember_list_username())
+                .setText(R.id.tv_eyes, dataBean.getViews() + "")
+                .setText(R.id.tv_comment, dataBean.getCommentcount() + "");
     }
+
 }

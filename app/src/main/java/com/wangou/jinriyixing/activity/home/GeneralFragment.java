@@ -85,16 +85,13 @@ public class GeneralFragment extends BaseFragment {
 
     private void initNewsContent() {
         NewsTitleBean.DataBean dataBean = ((HomFragment) getParentFragment()).getDataList().get(position);
-        Map<String, String> haedMap = new HashMap<>();
-        haedMap.put("deviceid", DeviceUtils.getUniqueId());
-        haedMap.put("time", System.currentTimeMillis() + "");
         Map<String, String> map = new HashMap<>();
         map.put("mid", dataBean.getId()+"");
         map.put("limit", "");
         map.put("page", "");
         map.put("key", "");
         Api.getInstance()
-                .getNewsContent(haedMap, map)
+                .getNewsContent(ParamUtils.getNormalHeaderMap(), map)
                 .compose(RxSchedulers.io_main())
                 .subscribe(new BaseObsever<NewsContentBean>() {
                     @Override

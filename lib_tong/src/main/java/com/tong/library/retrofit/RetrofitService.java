@@ -3,6 +3,8 @@ package com.tong.library.retrofit;
 import com.tong.library.bean.BaseBean;
 import com.tong.library.bean.NewsContentBean;
 import com.tong.library.bean.NewsTitleBean;
+import com.tong.library.bean.VideoListBean;
+import com.tong.library.bean.VideoTitleBean;
 
 import java.util.Map;
 
@@ -36,4 +38,11 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("News/getNewsList")
     Observable<NewsContentBean> getNewsContent(@HeaderMap Map<String,String>headMap, @FieldMap Map<String,String> pramMap);
+
+    @GET("Video/getVideoMenu")
+    Observable<VideoTitleBean> getVideoTitle(@HeaderMap Map<String,String> headMap);
+
+    @FormUrlEncoded
+    @POST("Video/getVideoList")
+    Observable<VideoListBean> getVideoList(@HeaderMap Map<String,String> headMap,@FieldMap Map<String,String> paramMap);
 }

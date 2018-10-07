@@ -1,6 +1,6 @@
 package com.wangou.jinriyixing.utils;
 
-import com.wangou.jinriyixing.base.BaseApplication;
+import com.wangou.jinriyixing.base.APP;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +22,7 @@ public class ParamUtils {
         String result = UsefulUtils.mapToJson(map);
         String rsaResult = RsaUtils.encryptByPublic(result);
         Map<String, String> map2 = new HashMap<>();
-        map2.put("deviceid", DeviceUtils.getUniqueId(BaseApplication.getContext()));
+        map2.put("deviceid", DeviceUtils.getUniqueId(APP.getContext()));
         map2.put("sign", rsaResult.replaceAll("\\s*", ""));
         return map2;
     }
