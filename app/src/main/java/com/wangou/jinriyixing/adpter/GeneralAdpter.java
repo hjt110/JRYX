@@ -82,7 +82,7 @@ public class GeneralAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (holder instanceof Bottom3ImgViewHolder) {
             Bottom3ImgViewHolder holder2 = (Bottom3ImgViewHolder) holder;
             holder2.tvTitle.setText(dataBean.getNews_title());
-            String s = dataBean.getNews_pic_allurl().toString();
+            String s = dataBean.getNews_pic_allurl().toString().replace(" ","");
             String[] split = s.substring(1, s.length() - 1).split(",");
             Glide.with(APP.getContext()).load(split[0]).into(holder2.img1);
             Glide.with(APP.getContext()).load(split[1]).into(holder2.img2);

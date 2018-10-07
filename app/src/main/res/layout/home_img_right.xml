@@ -39,7 +39,7 @@
         android:layout_marginBottom="17dp"
         android:layout_marginLeft="10dp"
         android:text="tag"
-        android:textColor="@color/red_little"
+        android:textColor="@color/ab"
         android:textSize="@dimen/textSize_10"
         />
 
@@ -51,6 +51,7 @@
         android:layout_marginLeft="9dp"
         android:layout_toRightOf="@+id/tv_tag"
         android:text="origin"
+        android:textColor="@color/ab"
         android:textSize="@dimen/textSize_10"
         />
 
