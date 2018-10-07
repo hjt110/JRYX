@@ -73,7 +73,7 @@ public class GeneralAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             Glide.with(BaseApplication.getContext()).load(dataBean.getNews_pic_allurl().toString()).into(holder1.img);
             holder1.tvAuthor.setText(dataBean.getMember_list_username());
         }
-        if (holder instanceof Bottom3ImgViewHolder){
+        if (holder instanceof Bottom3ImgViewHolder) {
             Bottom3ImgViewHolder holder2 = (Bottom3ImgViewHolder) holder;
             holder2.tvTitle.setText(dataBean.getNews_title());
             String s = dataBean.getNews_pic_allurl().toString();
@@ -82,9 +82,9 @@ public class GeneralAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             Glide.with(BaseApplication.getContext()).load(split[1]).into(holder2.img2);
             Glide.with(BaseApplication.getContext()).load(split[2]).into(holder2.img3);
             holder2.tvAuthor.setText(dataBean.getMember_list_username());
-            LogUtils.e("url1",split[0]);
-            LogUtils.e("url2",split[1]);
-            LogUtils.e("url3",split[2]);
+            LogUtils.e("url1", split[0]);
+            LogUtils.e("url2", split[1]);
+            LogUtils.e("url3", split[2]);
         }
     }
 

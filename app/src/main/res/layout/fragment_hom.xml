@@ -40,15 +40,40 @@
 
         </RelativeLayout>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabLayout"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            app:tabTextColor="@color/color_6"
-            app:tabSelectedTextColor="@color/color_3"
-            app:tabIndicatorColor="@color/transparent"
-            app:tabMode="scrollable"
-            android:background="@color/white"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                app:tabIndicatorColor="@color/transparent"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/color_3"
+                app:tabTextColor="@color/color_6"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_heng3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="18dp"
+                    android:src="@mipmap/heng3"
+                    />
+            </RelativeLayout>
+
+
+        </LinearLayout>
 
 
     </LinearLayout>
