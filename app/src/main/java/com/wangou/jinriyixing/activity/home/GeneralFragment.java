@@ -45,7 +45,7 @@ public class GeneralFragment extends BaseFragment {
     Banner banner;
 
     private GeneralAdpter generalAdpter;
-    private List<NewsContentBean.DataBean> dataList = new ArrayList<>();
+    private List<NewsContentBean.DataBean.NewslistBean> dataList = new ArrayList<>();
     private int position;
 
     @SuppressLint("ValidFragment")
@@ -61,11 +61,7 @@ public class GeneralFragment extends BaseFragment {
     @Override
     protected void init(Bundle savedInstanceState) {
 
-        List<String> imgList = new ArrayList<>();
-        imgList.add("http://pic35.photophoto.cn/20150519/0034034853356364_b.jpg");
-        imgList.add("http://pic41.nipic.com/20140514/18741514_143130429189_2.jpg");
-        imgList.add("http://imgsrc.baidu.com/imgad/pic/item/34fae6cd7b899e51fab3e9c048a7d933c8950d21.jpg");
-        banner.setImages(imgList).setImageLoader(new GlideImageLoader()).start();
+        initBanner();
 
         initNewsContent();
         rlv.setLayoutManager(new LinearLayoutManager(getActivity()) {
@@ -83,12 +79,21 @@ public class GeneralFragment extends BaseFragment {
 
     }
 
+    private void initBanner() {
+        List<String> imgList = new ArrayList<>();
+        imgList.add("http://pic35.photophoto.cn/20150519/0034034853356364_b.jpg");
+        imgList.add("http://pic41.nipic.com/20140514/18741514_143130429189_2.jpg");
+        imgList.add("http://imgsrc.baidu.com/imgad/pic/item/34fae6cd7b899e51fab3e9c048a7d933c8950d21.jpg");
+        banner.setImages(imgList).setImageLoader(new GlideImageLoader()).start();
+        banner.setVisibility(View.GONE);
+    }
+
     private void initNewsContent() {
         NewsTitleBean.DataBean dataBean = ((HomFragment) getParentFragment()).getDataList().get(position);
         Map<String, String> map = new HashMap<>();
         map.put("mid", dataBean.getId()+"");
         map.put("limit", "");
-        map.put("page", "");
+        map.put("page", "1");
         map.put("key", "");
         Api.getInstance()
                 .getNewsContent(ParamUtils.getNormalHeaderMap(), map)
@@ -97,9 +102,9 @@ public class GeneralFragment extends BaseFragment {
                     @Override
                     public void onSuccess(NewsContentBean bean) {
                         if (bean.getCode() == 0) {
-                            List<NewsContentBean.DataBean> data = bean.getData();
-                            GeneralFragment.this.dataList.clear();
-                            GeneralFragment.this.dataList.addAll(data);
+                            List<NewsContentBean.DataBean.NewslistBean> data = bean.getData().getNewslist();
+                            dataList.clear();
+                            dataList.addAll(data);
                             generalAdpter.notifyDataSetChanged();
                         }
                     }

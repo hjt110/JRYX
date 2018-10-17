@@ -21,9 +21,9 @@ public class GeneralAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private static final int TYPE_BOTTOM = 0;
     private static final int TYPE_RIGHT = 1;
     private static final int TYPE_BOTTOM_3IMAGEVIEW = 2;
-    private List<NewsContentBean.DataBean> dataList;
+    private List<NewsContentBean.DataBean.NewslistBean> dataList;
 
-    public GeneralAdpter(List<NewsContentBean.DataBean> dataList) {
+    public GeneralAdpter(List<NewsContentBean.DataBean.NewslistBean> dataList) {
         this.dataList = dataList;
     }
 
@@ -66,7 +66,7 @@ public class GeneralAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        NewsContentBean.DataBean dataBean = dataList.get(position);
+        NewsContentBean.DataBean.NewslistBean dataBean = dataList.get(position);
         if (holder instanceof BottomViewHolder) {
 //            BottomViewHolder holder1 = (BottomViewHolder) holder;
 //            holder1.tvTitle.setText(dataBean.getNews_title());

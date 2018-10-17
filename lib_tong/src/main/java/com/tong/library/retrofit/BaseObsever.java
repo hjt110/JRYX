@@ -27,7 +27,7 @@ public abstract class BaseObsever<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable e) {
-        Log.e("onError",e.toString());
+        Log.e("onError—错了！！",e.toString());
     }
 
     @Override
