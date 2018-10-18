@@ -28,9 +28,9 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ScreenUtils.isPortrait()){
-            ScreenUtils.adaptScreen4VerticalSlide(this,360);
-        }else {
+        if (ScreenUtils.isPortrait()) {
+            ScreenUtils.adaptScreen4VerticalSlide(this, 360);
+        } else {
             ScreenUtils.adaptScreen4HorizontalSlide(this, 360);
         }
         setContentView(getLayoutResID());
@@ -41,8 +41,24 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         initEvent();
     }
 
+    /**
+     * 设置状态栏颜色
+     * @param color
+     */
     protected void setStatusBar(int color) {
-        StatusBarCompat.setColorNoTranslucent(this,color);
+        StatusBarCompat.setColorNoTranslucent(this, color);
+    }
+
+    /**
+     * 设置状态栏图标颜色是否为黑色
+     * @param isDark
+     */
+    protected void setStatusBarIconDark(boolean isDark) {
+        if (isDark) {
+            StatusBarCompat.darkMode(this, true);
+        } else {
+            StatusBarCompat.darkMode(this, false);
+        }
     }
 
     protected abstract int getLayoutResID();
@@ -55,18 +71,18 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         return activity;
     }
 
-    protected boolean isUseEventBus(){
+    protected boolean isUseEventBus() {
         return false;
     }
 
-    public void show(String msg){
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    public void show(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if (isUseEventBus()){
+        if (isUseEventBus()) {
             EventBus.getDefault().register(this);
         }
     }
@@ -77,7 +93,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         ScreenUtils.cancelAdaptScreen(this);
         super.onDestroy();
         mUnbinder.unbind();
-        if (isUseEventBus()){
+        if (isUseEventBus()) {
             EventBus.getDefault().unregister(this);
         }
     }

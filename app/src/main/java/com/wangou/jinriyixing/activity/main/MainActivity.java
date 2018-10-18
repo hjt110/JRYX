@@ -114,8 +114,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void init(Bundle savedInstanceState) {
         initViewPager();
         initLeft();
-//        StatusBarCompat.setColorNoTranslucentForDrawerLayout(this,drawerLayout,getResources().getColor(R.color.white));
-        setStatusBar(getResources().getColor(R.color.red_little));
     }
 
     @Override
@@ -231,21 +229,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         switch (pos) {
             case 0:
                 setStatusBar(getResources().getColor(R.color.red_little));
+                setStatusBarIconDark(false);
                 imgMainHome.setImageResource(R.mipmap.ic_main_home_red);
                 tvMainHome.setTextColor(getResources().getColor(R.color.red));
                 break;
             case 1:
                 setStatusBar(getResources().getColor(R.color.white));
+                setStatusBarIconDark(true);
                 imgMainCollection.setImageResource(R.mipmap.ic_main_collection_red);
                 tvMainCollection.setTextColor(getResources().getColor(R.color.red));
                 break;
             case 2:
                 setStatusBar(getResources().getColor(R.color.white));
+                setStatusBarIconDark(true);
                 imgMainCircle.setImageResource(R.mipmap.ic_main_circle_red);
                 tvMainCircle.setTextColor(getResources().getColor(R.color.red));
                 break;
             case 3:
                 setStatusBar(getResources().getColor(R.color.white));
+                setStatusBarIconDark(true);
                 imgMainVideo.setImageResource(R.mipmap.ic_main_video_red);
                 tvMainVideo.setTextColor(getResources().getColor(R.color.red));
                 break;
