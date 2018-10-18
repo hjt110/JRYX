@@ -17,7 +17,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.tong.library.adapter.recyclerview.MultiItemTypeAdapter;
 import com.tong.library.base.BaseActivity;
+import com.tong.library.utils.MessageEvent;
 import com.tong.library.view.CircleImageView;
 import com.wangou.jinriyixing.R;
 import com.wangou.jinriyixing.activity.circle.CircleFragment;
@@ -25,6 +27,7 @@ import com.wangou.jinriyixing.activity.collection.CollectionFragment;
 import com.wangou.jinriyixing.activity.home.HomFragment;
 import com.wangou.jinriyixing.activity.login.LoginActivity;
 import com.wangou.jinriyixing.activity.navigation.InfoSetActivity;
+import com.wangou.jinriyixing.activity.navigation.MyCircleActivity;
 import com.wangou.jinriyixing.activity.navigation.SetActivity;
 import com.wangou.jinriyixing.activity.video.VideoFragment;
 import com.wangou.jinriyixing.adpter.MainAdpter;
@@ -33,6 +36,8 @@ import com.wangou.jinriyixing.utils.AesEncryptionUtil;
 import com.wangou.jinriyixing.utils.DeviceUtils;
 import com.wangou.jinriyixing.utils.LogUtils;
 import com.wangou.jinriyixing.utils.RsaUtils;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -175,8 +180,42 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         rlv.setLayoutManager(new LinearLayoutManager(this));
         NavLeftAdpter navLeftAdpter = new NavLeftAdpter(this, titleList);
         rlv.setAdapter(navLeftAdpter);
-        imgHeader.setOnClickListener(v -> startActivity(new Intent(this, InfoSetActivity.class)));
-        rlSetting.setOnClickListener(v -> startActivity(new Intent(this, SetActivity.class)));
+        navLeftAdpter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+                switch (position) {
+                    case 0:
+                        startActivity(new Intent(getActivity(), MyCircleActivity.class));
+                        drawerLayout.closeDrawers();
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                }
+            }
+
+            @Override
+            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+                return false;
+            }
+        });
+        imgHeader.setOnClickListener(v -> {
+            startActivity(new Intent(this, InfoSetActivity.class));
+            drawerLayout.closeDrawers();
+        });
+        rlSetting.setOnClickListener(v -> {
+            startActivity(new Intent(this, SetActivity.class));
+            drawerLayout.closeDrawers();
+        });
     }
 
     private void test() {
@@ -258,6 +297,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     @Override
+    protected boolean isUseEventBus() {
+        return true;
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.cl_main_home:
@@ -279,6 +323,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 upIc(3);
                 vpMain.setCurrentItem(3);
                 break;
+        }
+    }
+
+    @Subscribe
+    public void onMessageEvent(MessageEvent event) {
+        if (event.getMsg().equals("openDrawLayout")) {
+            drawerLayout.openDrawer(navLeft);
+        }
+        if (event.getMsg().equals("closeDrawLayout")) {
+            drawerLayout.closeDrawers();
         }
     }
 

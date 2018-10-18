@@ -16,8 +16,7 @@
         <activity
             android:name=".activity.main.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:windowSoftInputMode="stateHidden|adjustPan"
-            >
+            android:windowSoftInputMode="stateHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -31,6 +30,8 @@
         <activity android:name=".activity.navigation.SetActivity">
         </activity>
         <activity android:name=".activity.navigation.InfoSetActivity">
+        </activity>
+        <activity android:name=".activity.navigation.MyCircleActivity">
         </activity>
     </application>
 

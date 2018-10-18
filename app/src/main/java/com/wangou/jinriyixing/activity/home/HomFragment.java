@@ -14,11 +14,14 @@ import com.tong.library.base.BaseFragment;
 import com.tong.library.bean.NewsTitleBean;
 import com.tong.library.retrofit.Api;
 import com.tong.library.retrofit.RxSchedulers;
+import com.tong.library.utils.MessageEvent;
 import com.tong.library.view.CircleImageView;
 import com.tong.library.view.PagerSlidingTabStrip;
 import com.wangou.jinriyixing.R;
 import com.wangou.jinriyixing.adpter.ViewPagerAdpter;
 import com.wangou.jinriyixing.utils.ParamUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +64,12 @@ public class HomFragment extends BaseFragment {
 
     @Override
     protected void initEvent() {
-
+        imgHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().post(new MessageEvent("openDrawLayout"));
+            }
+        });
     }
 
     private void initNews() {

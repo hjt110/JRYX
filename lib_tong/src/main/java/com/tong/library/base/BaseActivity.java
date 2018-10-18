@@ -37,7 +37,9 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         mUnbinder = ButterKnife.bind(this);
         activity = this;
         init(savedInstanceState);
-
+        if (isUseEventBus()) {
+            EventBus.getDefault().register(this);
+        }
         initEvent();
     }
 
@@ -76,9 +78,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     @Override
     protected void onStart() {
         super.onStart();
-        if (isUseEventBus()) {
-            EventBus.getDefault().register(this);
-        }
     }
 
 
