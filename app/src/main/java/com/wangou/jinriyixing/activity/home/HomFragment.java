@@ -2,7 +2,6 @@ package com.wangou.jinriyixing.activity.home;
 
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import com.tong.library.base.BaseFragment;
 import com.tong.library.bean.NewsTitleBean;
 import com.tong.library.retrofit.Api;
 import com.tong.library.retrofit.RxSchedulers;
+import com.tong.library.view.CircleImageView;
 import com.tong.library.view.PagerSlidingTabStrip;
 import com.wangou.jinriyixing.R;
 import com.wangou.jinriyixing.adpter.ViewPagerAdpter;
@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +40,8 @@ public class HomFragment extends BaseFragment {
     ViewPager viewPager;
     @BindView(R.id.psts)
     PagerSlidingTabStrip psts;
+    @BindView(R.id.img_head)
+    CircleImageView imgHead;
 
     private List<String> titleList = new ArrayList<>();
     private List<Fragment> fragmentList = new ArrayList<>();

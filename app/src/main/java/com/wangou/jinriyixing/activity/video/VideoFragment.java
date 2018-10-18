@@ -2,12 +2,8 @@ package com.wangou.jinriyixing.activity.video;
 
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.tong.library.base.BaseFragment;
@@ -15,8 +11,8 @@ import com.tong.library.bean.VideoTitleBean;
 import com.tong.library.retrofit.Api;
 import com.tong.library.retrofit.BaseObsever;
 import com.tong.library.retrofit.RxSchedulers;
+import com.tong.library.view.PagerSlidingTabStrip;
 import com.wangou.jinriyixing.R;
-import com.wangou.jinriyixing.activity.collection.HotFragment;
 import com.wangou.jinriyixing.adpter.ViewPagerAdpter;
 import com.wangou.jinriyixing.utils.ParamUtils;
 
@@ -24,8 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import cn.jzvd.JZVideoPlayer;
 
 /**
@@ -33,12 +27,12 @@ import cn.jzvd.JZVideoPlayer;
  */
 public class VideoFragment extends BaseFragment {
 
-    @BindView(R.id.tabLayout)
-    TabLayout tabLayout;
     @BindView(R.id.img_camera)
     ImageView imgCamera;
     @BindView(R.id.vp)
     ViewPager vp;
+    @BindView(R.id.psts)
+    PagerSlidingTabStrip psts;
 
     private List<String> titleList = new ArrayList<>();
     private List<Fragment> fragmentList = new ArrayList<>();
@@ -52,7 +46,6 @@ public class VideoFragment extends BaseFragment {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        initViewPager();
         initVideo();
     }
 
@@ -79,7 +72,7 @@ public class VideoFragment extends BaseFragment {
     private void initViewPager() {
         viewPagerAdpter = new ViewPagerAdpter(getChildFragmentManager(), titleList, fragmentList);
         vp.setAdapter(viewPagerAdpter);
-        tabLayout.setupWithViewPager(vp);
+        psts.setViewPager(vp);
     }
 
     private void initVideo() {
@@ -89,14 +82,14 @@ public class VideoFragment extends BaseFragment {
                 .subscribe(new BaseObsever<VideoTitleBean>() {
                     @Override
                     public void onSuccess(VideoTitleBean videoTitleBean) {
-                        if (videoTitleBean.getCode()==0){
+                        if (videoTitleBean.getCode() == 0) {
                             List<VideoTitleBean.DataBean> data = videoTitleBean.getData();
                             setDataList(data);
                             for (int i = 0; i < data.size(); i++) {
                                 titleList.add(data.get(i).getName());
                                 fragmentList.add(new MyVideoFragment(i));
                             }
-                            viewPagerAdpter.notifyDataSetChanged();
+                            initViewPager();
                         }
                     }
                 });

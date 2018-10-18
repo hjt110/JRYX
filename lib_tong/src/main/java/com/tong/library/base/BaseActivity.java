@@ -1,13 +1,19 @@
 package com.tong.library.base;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tong.library.R;
 import com.tong.library.mvp.IBaseView;
 import com.tong.library.utils.ScreenUtils;
+import com.tong.library.utils.StatusBarCompat;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -31,7 +37,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         mUnbinder = ButterKnife.bind(this);
         activity = this;
         init(savedInstanceState);
+
         initEvent();
+    }
+
+    protected void setStatusBar(int color) {
+        StatusBarCompat.setColorNoTranslucent(this,color);
     }
 
     protected abstract int getLayoutResID();
@@ -59,6 +70,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
             EventBus.getDefault().register(this);
         }
     }
+
 
     @Override
     protected void onDestroy() {

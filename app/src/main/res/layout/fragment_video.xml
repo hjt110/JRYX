@@ -12,17 +12,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.tong.library.view.PagerSlidingTabStrip
+            android:id="@+id/psts"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@+id/img_camera"
-            app:tabIndicatorColor="@color/red_little"
-            app:tabIndicatorHeight="1dp"
-            app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/red_little"
-            app:tabTextColor="@color/color_3"
+            android:background="@color/white"
+            app:pstsDividerColor="@color/transparent"
+            app:pstsIndicatorColor="@color/red_little"
+            app:pstsIndicatorHeight="1dp"
+            app:pstsTabPaddingLeftRight="10dp"
+            app:pstsTabSelectedColor="@color/red_little"
+            app:pstsTabSelectedSize="@dimen/textSize_15"
+            app:pstsTabTextColor="@color/color_3"
+            app:pstsTabTextSize="@dimen/textSize_15"
+            app:pstsUnderlineHeight="0dp"
             />
 
         <ImageView

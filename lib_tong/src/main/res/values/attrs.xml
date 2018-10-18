@@ -12,6 +12,7 @@
     <declare-styleable name="PagerSlidingTabStrip">
         <attr name="pstsIndicatorColor" format="color" />//滑动indicator的颜色
         <attr name="pstsIndicatorHeight" format="dimension" />//滑动indicator的高度
+        <attr name="pstsIndicatorLengthSameText" format="boolean"/>//滑动indicator的长度是否与text一致
         <attr name="pstsUnderlineColor" format="color" />//底部分割线的颜色
         <attr name="pstsUnderlineHeight" format="dimension" />//底部分割线的高度
         <attr name="pstsDividerColor" format="color" />//两个tab之间分割线的颜色
@@ -21,9 +22,9 @@
         <attr name="pstsTabBackground" format="reference" />//每个Tab的背景图
         <attr name="pstsShouldExpand" format="boolean" />//设为true时，每个tab的weight相同，默认false
         <attr name="pstsTextAllCaps" format="boolean" />// 设为true时，所有tab标题为大写，默认true
-        <attr name="pstsTabSelectedColor" format="color"/>
-        <attr name="pstsTabSelectedSize" format="dimension"/>
-        <attr name="pstsTabTextSize" format="dimension"/>
-        <attr name="pstsTabTextColor" format="color"/>
+        <attr name="pstsTabSelectedColor" format="color"/>//选中text的颜色
+        <attr name="pstsTabSelectedSize" format="dimension"/>//选中text的字体大小
+        <attr name="pstsTabTextSize" format="dimension"/>//text的字体大小
+        <attr name="pstsTabTextColor" format="color"/>//text的颜色
     </declare-styleable>
 </resources>
