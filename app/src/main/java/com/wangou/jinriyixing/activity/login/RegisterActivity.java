@@ -53,7 +53,8 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-
+        setStatusBarColor(R.color.white);
+        setStatusBarIcon(true);
     }
 
     @Override
@@ -135,4 +136,5 @@ public class RegisterActivity extends BaseActivity {
             mCountDownTimer.cancel();
         }
     }
+
 }

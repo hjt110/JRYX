@@ -20,7 +20,7 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class BaseActivity extends AppCompatActivity implements IBaseView {
+public abstract class BaseActivity extends AppCompatActivity implements IBaseView,StatusBarIml {
 
     private Unbinder mUnbinder;
     private Activity activity;
@@ -41,19 +41,13 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         initEvent();
     }
 
-    /**
-     * 设置状态栏颜色
-     * @param color
-     */
-    protected void setStatusBar(int color) {
-        StatusBarCompat.setColorNoTranslucent(this, color);
+    @Override
+    public void setStatusBarColor(int color) {
+        StatusBarCompat.setColorNoTranslucent(this, getResources().getColor(color));
     }
 
-    /**
-     * 设置状态栏图标颜色是否为黑色
-     * @param isDark
-     */
-    protected void setStatusBarIconDark(boolean isDark) {
+    @Override
+    public void setStatusBarIcon(boolean isDark) {
         if (isDark) {
             StatusBarCompat.darkMode(this, true);
         } else {

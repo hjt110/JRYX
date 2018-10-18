@@ -18,13 +18,14 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.tong.library.base.BaseActivity;
-import com.tong.library.utils.StatusBarCompat;
 import com.tong.library.view.CircleImageView;
 import com.wangou.jinriyixing.R;
 import com.wangou.jinriyixing.activity.circle.CircleFragment;
 import com.wangou.jinriyixing.activity.collection.CollectionFragment;
 import com.wangou.jinriyixing.activity.home.HomFragment;
 import com.wangou.jinriyixing.activity.login.LoginActivity;
+import com.wangou.jinriyixing.activity.navigation.InfoSetActivity;
+import com.wangou.jinriyixing.activity.navigation.SetActivity;
 import com.wangou.jinriyixing.activity.video.VideoFragment;
 import com.wangou.jinriyixing.adpter.MainAdpter;
 import com.wangou.jinriyixing.adpter.NavLeftAdpter;
@@ -228,26 +229,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         tvMainVideo.setTextColor(getResources().getColor(R.color.color_9));
         switch (pos) {
             case 0:
-                setStatusBar(getResources().getColor(R.color.red_little));
-                setStatusBarIconDark(false);
+                setStatusBarColor(R.color.red_little);
+                setStatusBarIcon(false);
                 imgMainHome.setImageResource(R.mipmap.ic_main_home_red);
                 tvMainHome.setTextColor(getResources().getColor(R.color.red));
                 break;
             case 1:
-                setStatusBar(getResources().getColor(R.color.white));
-                setStatusBarIconDark(true);
+                setStatusBarColor(R.color.white);
+                setStatusBarIcon(true);
                 imgMainCollection.setImageResource(R.mipmap.ic_main_collection_red);
                 tvMainCollection.setTextColor(getResources().getColor(R.color.red));
                 break;
             case 2:
-                setStatusBar(getResources().getColor(R.color.white));
-                setStatusBarIconDark(true);
+                setStatusBarColor(R.color.white);
+                setStatusBarIcon(true);
                 imgMainCircle.setImageResource(R.mipmap.ic_main_circle_red);
                 tvMainCircle.setTextColor(getResources().getColor(R.color.red));
                 break;
             case 3:
-                setStatusBar(getResources().getColor(R.color.white));
-                setStatusBarIconDark(true);
+                setStatusBarColor(R.color.white);
+                setStatusBarIcon(true);
                 imgMainVideo.setImageResource(R.mipmap.ic_main_video_red);
                 tvMainVideo.setTextColor(getResources().getColor(R.color.red));
                 break;
@@ -289,10 +290,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         super.onBackPressed();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
+
 }

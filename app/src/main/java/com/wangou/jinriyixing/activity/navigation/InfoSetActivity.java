@@ -1,4 +1,4 @@
-package com.wangou.jinriyixing.activity.main;
+package com.wangou.jinriyixing.activity.navigation;
 
 import android.os.Bundle;
 import android.view.View;
@@ -51,6 +51,8 @@ public class InfoSetActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        setStatusBarColor(R.color.white);
+        setStatusBarIcon(true);
         tvTitle.setText("编辑资料");
     }
 

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".activity.main.SetActivity">
+    tools:context=".activity.navigation.SetActivity">
 
     <include layout="@layout/layout_title"/>
 

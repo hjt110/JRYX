@@ -1,4 +1,4 @@
-package com.wangou.jinriyixing.activity.main;
+package com.wangou.jinriyixing.activity.navigation;
 
 import android.os.Bundle;
 import android.view.View;
@@ -37,6 +37,8 @@ public class SetActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        setStatusBarColor(R.color.white);
+        setStatusBarIcon(true);
         tvTitle.setText("系统设置");
     }
 
@@ -64,5 +66,4 @@ public class SetActivity extends BaseActivity {
         }
 
     }
-
 }
