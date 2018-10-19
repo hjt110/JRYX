@@ -10,7 +10,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="3dp">
 
         <com.tong.library.view.PagerSlidingTabStrip
             android:id="@+id/psts"
@@ -18,7 +20,6 @@
             android:layout_height="48dp"
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@+id/img_camera"
-            android:background="@color/white"
             app:pstsDividerColor="@color/transparent"
             app:pstsIndicatorColor="@color/red_little"
             app:pstsIndicatorHeight="1dp"

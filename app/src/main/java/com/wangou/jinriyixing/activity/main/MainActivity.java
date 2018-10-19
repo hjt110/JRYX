@@ -26,6 +26,7 @@ import com.wangou.jinriyixing.activity.circle.CircleFragment;
 import com.wangou.jinriyixing.activity.collection.CollectionFragment;
 import com.wangou.jinriyixing.activity.home.HomFragment;
 import com.wangou.jinriyixing.activity.login.LoginActivity;
+import com.wangou.jinriyixing.activity.navigation.EditBusinessActivity;
 import com.wangou.jinriyixing.activity.navigation.InfoSetActivity;
 import com.wangou.jinriyixing.activity.navigation.MyCircleActivity;
 import com.wangou.jinriyixing.activity.navigation.MyCollectionActivity;
@@ -187,15 +188,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 switch (position) {
                     case 0:
                         startActivity(new Intent(getActivity(), MyCircleActivity.class));
-                        drawerLayout.closeDrawers();
                         break;
                     case 1:
                         startActivity(new Intent(getActivity(), MyCollectionActivity.class));
-                        drawerLayout.closeDrawers();
                         break;
                     case 2:
+                        startActivity(new Intent(getActivity(), InfoSetActivity.class));
                         break;
                     case 3:
+                        startActivity(new Intent(getActivity(), EditBusinessActivity.class));
                         break;
                     case 4:
                         break;
@@ -204,6 +205,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     case 6:
                         break;
                 }
+                drawerLayout.closeDrawers();
             }
 
             @Override
