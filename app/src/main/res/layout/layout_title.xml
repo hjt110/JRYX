@@ -4,38 +4,44 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:elevation="3dp"
     >
 
-    <ImageView
-        android:id="@+id/img_back"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="25dp"
-        android:paddingRight="15dp"
-        android:src="@mipmap/ic_back"
-        />
+        android:layout_marginBottom="14dp">
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="25dp"
-        android:layout_marginTop="12dp"
-        android:textColor="@color/color_3"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        />
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@mipmap/ic_back"
+            />
 
-    <ImageView
-        android:id="@+id/img_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        />
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="11dp"
+            android:textColor="@color/color_3"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            />
+
+        <ImageView
+            android:id="@+id/img_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            />
+
+    </RelativeLayout>
+
 
 </RelativeLayout>

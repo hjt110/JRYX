@@ -88,7 +88,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="37dp"
-            android:src="@mipmap/add_cricle"
+            android:src="@mipmap/add_circle"
             />
 
         <ImageView
