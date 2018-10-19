@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.navigation.MyCollectionActivity">
+
+    <include layout="@layout/layout_title"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rl_article"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            >
+
+            <TextView
+                android:id="@+id/tv_article"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="文章"
+                android:textColor="@color/red_little"
+                android:textSize="@dimen/textSize_14"
+                />
+
+            <View
+                android:id="@+id/line_article"
+                android:layout_width="31dp"
+                android:layout_height="1dp"
+                android:layout_below="@+id/tv_article"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="@color/red_little"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_collection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            >
+
+            <TextView
+                android:id="@+id/tv_collection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="征集"
+                android:textColor="@color/color_6"
+                android:textSize="@dimen/textSize_14"
+                />
+
+            <View
+                android:id="@+id/line_collection"
+                android:layout_width="31dp"
+                android:layout_height="1dp"
+                android:layout_below="@+id/tv_collection"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="@color/red_little"
+                android:visibility="invisible"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="17dp"
+            >
+
+            <TextView
+                android:id="@+id/tv_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="视频"
+                android:textColor="@color/color_6"
+                android:textSize="@dimen/textSize_14"
+                />
+
+            <View
+                android:id="@+id/line_video"
+                android:layout_width="31dp"
+                android:layout_height="1dp"
+                android:layout_below="@+id/tv_video"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="@color/red_little"
+                android:visibility="invisible"
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

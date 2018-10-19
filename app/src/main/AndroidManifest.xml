@@ -33,6 +33,8 @@
         </activity>
         <activity android:name=".activity.navigation.MyCircleActivity">
         </activity>
+        <activity android:name=".activity.navigation.MyCollectionActivity">
+        </activity>
     </application>
 
 </manifest>

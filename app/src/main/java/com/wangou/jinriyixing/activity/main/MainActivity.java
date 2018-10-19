@@ -28,6 +28,7 @@ import com.wangou.jinriyixing.activity.home.HomFragment;
 import com.wangou.jinriyixing.activity.login.LoginActivity;
 import com.wangou.jinriyixing.activity.navigation.InfoSetActivity;
 import com.wangou.jinriyixing.activity.navigation.MyCircleActivity;
+import com.wangou.jinriyixing.activity.navigation.MyCollectionActivity;
 import com.wangou.jinriyixing.activity.navigation.SetActivity;
 import com.wangou.jinriyixing.activity.video.VideoFragment;
 import com.wangou.jinriyixing.adpter.MainAdpter;
@@ -189,6 +190,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         drawerLayout.closeDrawers();
                         break;
                     case 1:
+                        startActivity(new Intent(getActivity(), MyCollectionActivity.class));
+                        drawerLayout.closeDrawers();
                         break;
                     case 2:
                         break;
