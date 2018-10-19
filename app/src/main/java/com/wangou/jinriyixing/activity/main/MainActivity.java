@@ -28,6 +28,7 @@ import com.wangou.jinriyixing.activity.home.HomFragment;
 import com.wangou.jinriyixing.activity.login.LoginActivity;
 import com.wangou.jinriyixing.activity.navigation.EditBusinessActivity;
 import com.wangou.jinriyixing.activity.navigation.InfoSetActivity;
+import com.wangou.jinriyixing.activity.navigation.MessageActivity;
 import com.wangou.jinriyixing.activity.navigation.MyCircleActivity;
 import com.wangou.jinriyixing.activity.navigation.MyCollectionActivity;
 import com.wangou.jinriyixing.activity.navigation.SetActivity;
@@ -201,6 +202,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     case 4:
                         break;
                     case 5:
+                        startActivity(new Intent(getActivity(), MessageActivity.class));
                         break;
                     case 6:
                         break;
