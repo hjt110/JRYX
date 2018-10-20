@@ -39,13 +39,13 @@
         android:layout_width="64dp"
         android:layout_height="24dp"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="-1dp"
         android:layout_marginTop="29dp"
         android:background="@drawable/shape_kuang_left"
         android:gravity="center"
         android:text="签到"
         android:textColor="@color/red_little"
         android:textSize="@dimen/textSize_11"
-        android:layout_marginRight="-1dp"
         />
 
     <LinearLayout

@@ -31,6 +31,7 @@ import com.wangou.jinriyixing.activity.navigation.InfoSetActivity;
 import com.wangou.jinriyixing.activity.navigation.MessageActivity;
 import com.wangou.jinriyixing.activity.navigation.MyCircleActivity;
 import com.wangou.jinriyixing.activity.navigation.MyCollectionActivity;
+import com.wangou.jinriyixing.activity.navigation.PrivateLetterActivity;
 import com.wangou.jinriyixing.activity.navigation.SetActivity;
 import com.wangou.jinriyixing.activity.navigation.UserFeedbackActivity;
 import com.wangou.jinriyixing.activity.video.VideoFragment;
@@ -223,6 +224,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         });
         rlSetting.setOnClickListener(v -> {
             startActivity(new Intent(this, SetActivity.class));
+            drawerLayout.closeDrawers();
+        });
+        rlEmail.setOnClickListener(v -> {
+            startActivity(new Intent(this, PrivateLetterActivity.class));
             drawerLayout.closeDrawers();
         });
     }
