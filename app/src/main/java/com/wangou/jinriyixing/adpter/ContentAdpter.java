@@ -1,15 +1,19 @@
 package com.wangou.jinriyixing.adpter;
 
 import android.content.Context;
+import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.tong.library.adapter.recyclerview.CommonAdapter;
 import com.tong.library.adapter.recyclerview.base.ViewHolder;
+import com.tong.library.bean.CollectionListBean;
 import com.wangou.jinriyixing.R;
 
 import java.util.List;
 
-public class ContentAdpter extends CommonAdapter<String> {
-    public ContentAdpter(Context context, List<String> datas) {
+public class ContentAdpter extends CommonAdapter<CollectionListBean.DataBean> {
+    public ContentAdpter(Context context, List<CollectionListBean.DataBean> datas) {
         super(context, datas);
     }
 
@@ -19,7 +23,11 @@ public class ContentAdpter extends CommonAdapter<String> {
     }
 
     @Override
-    protected void convert(ViewHolder holder, String s, int position) {
-        holder.setText(R.id.tv_title,s);
+    protected void convert(ViewHolder holder, CollectionListBean.DataBean dataBean, int position) {
+        ImageView img = holder.getView(R.id.img);
+        Glide.with(mContext).load(dataBean.getThumb()).into(img);
+        holder.setText(R.id.tv_title,dataBean.getTitle())
+                .setText(R.id.tv_authorNum,"作者编号："+dataBean.getSponsorid())
+                .setText(R.id.tv_author,"作者："+dataBean.getMember_list_username());
     }
 }

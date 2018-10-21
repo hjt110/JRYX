@@ -9,7 +9,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="3dp">
 
         <ImageView
             android:id="@+id/img_search"
@@ -27,6 +29,7 @@
             android:text="社区"
             android:textColor="@color/color_3"
             android:textSize="17sp"
+            android:textStyle="bold"
             />
 
         <ImageView
