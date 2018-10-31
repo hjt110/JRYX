@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tong.library.base.BaseFragment;
+import com.tong.library.bean.BannerBean;
 import com.tong.library.bean.CollectionListBean;
 import com.tong.library.bean.CollectionTitleBean;
 import com.tong.library.retrofit.Api;
@@ -47,7 +48,7 @@ public class HotFragment extends BaseFragment {
     RecyclerView rlvContent;
     private int pos;
 
-    private List<CollectionListBean.DataBean> dataList = new ArrayList<>();
+    private List<CollectionListBean.DataBean.ListBean> dataList = new ArrayList<>();
     private ContentAdpter contentAdpter;
 
     @SuppressLint("ValidFragment")
@@ -62,12 +63,8 @@ public class HotFragment extends BaseFragment {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        List<String> imgList = new ArrayList<>();
-        imgList.add("http://imgsrc.baidu.com/imgad/pic/item/b21bb051f8198618b4505a5040ed2e738ad4e6cb.jpg");
-        imgList.add("http://pic1.win4000.com/wallpaper/d/58070b53cd218.jpg");
-        imgList.add("http://pic1.16pic.com/00/11/69/16pic_1169706_b.jpg");
-        banner.setImages(imgList).setImageLoader(new GlideImageLoader()).start();
         initGuide();
+        initBanner();
         initContent();
     }
 
@@ -89,6 +86,28 @@ public class HotFragment extends BaseFragment {
         rlvGuide.setAdapter(guideAdpter);
     }
 
+    private void initBanner() {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("typeid", "14");
+        paramMap.put("limit", "");
+        Api.getInstance()
+                .getBanner(ParamUtils.getNormalHeaderMap(), paramMap)
+                .compose(RxSchedulers.io_main())
+                .subscribe(new BaseObsever<BannerBean>() {
+                    @Override
+                    public void onSuccess(BannerBean bannerBean) {
+                        if (bannerBean.getCode()==0){
+                            List<BannerBean.DataBean> data = bannerBean.getData();
+                            List<String> imgList = new ArrayList<>();
+                            for (int i = 0; i < data.size(); i++) {
+                                imgList.add(data.get(i).getPlug_ad_pic());
+                                banner.setImages(imgList).setImageLoader(new GlideImageLoader()).start();
+                            }
+                        }
+                    }
+                });
+    }
+
     private void initContent() {
         contentAdpter = new ContentAdpter(getActivity(), dataList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity()) {
@@ -101,17 +120,19 @@ public class HotFragment extends BaseFragment {
         rlvContent.setAdapter(contentAdpter);
 
         List<CollectionTitleBean.DataBean> data = ((CollectionFragment) getParentFragment()).getDataList();
-        Map<String,String> paramMap = new HashMap<>();
-        paramMap.put("mid",data.get(pos).getVmid()+"");
-        paramMap.put("type","");
-        paramMap.put("page","");
-        Api.getInstance().getCollectionList(ParamUtils.getNormalHeaderMap(),paramMap)
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("mid", data.get(pos).getVmid() + "");
+        paramMap.put("type", "");
+        paramMap.put("page", "");
+        Api.getInstance()
+                .getCollectionList(ParamUtils.getNormalHeaderMap(), paramMap)
                 .compose(RxSchedulers.io_main())
                 .subscribe(new BaseObsever<CollectionListBean>() {
                     @Override
                     public void onSuccess(CollectionListBean collectionListBean) {
-                        if (collectionListBean.getCode()==0){
-                            List<CollectionListBean.DataBean> data = collectionListBean.getData();
+                        if (collectionListBean.getCode() == 0) {
+                            CollectionListBean.DataBean info = collectionListBean.getData();
+                            List<CollectionListBean.DataBean.ListBean> data = info.getList();
                             dataList.clear();
                             dataList.addAll(data);
                             contentAdpter.notifyDataSetChanged();

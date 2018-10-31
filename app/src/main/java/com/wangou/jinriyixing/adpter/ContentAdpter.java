@@ -12,8 +12,8 @@ import com.wangou.jinriyixing.R;
 
 import java.util.List;
 
-public class ContentAdpter extends CommonAdapter<CollectionListBean.DataBean> {
-    public ContentAdpter(Context context, List<CollectionListBean.DataBean> datas) {
+public class ContentAdpter extends CommonAdapter<CollectionListBean.DataBean.ListBean> {
+    public ContentAdpter(Context context, List<CollectionListBean.DataBean.ListBean> datas) {
         super(context, datas);
     }
 
@@ -23,7 +23,7 @@ public class ContentAdpter extends CommonAdapter<CollectionListBean.DataBean> {
     }
 
     @Override
-    protected void convert(ViewHolder holder, CollectionListBean.DataBean dataBean, int position) {
+    protected void convert(ViewHolder holder, CollectionListBean.DataBean.ListBean dataBean, int position) {
         ImageView img = holder.getView(R.id.img);
         Glide.with(mContext).load(dataBean.getThumb()).into(img);
         holder.setText(R.id.tv_title,dataBean.getTitle())

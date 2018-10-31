@@ -1,5 +1,6 @@
 package com.tong.library.retrofit;
 
+import com.tong.library.bean.BannerBean;
 import com.tong.library.bean.BaseBean;
 import com.tong.library.bean.CollectionListBean;
 import com.tong.library.bean.CollectionTitleBean;
@@ -55,4 +56,8 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("Solicitation/getSolicitationlist")
     Observable<CollectionListBean> getCollectionList(@HeaderMap Map<String,String> headMap,@FieldMap Map<String,String> paramMap);
+
+    @FormUrlEncoded
+    @POST("Other/getAdlist")
+    Observable<BannerBean> getBanner(@HeaderMap Map<String,String> headMap,@FieldMap Map<String,String> paramMap);
 }
