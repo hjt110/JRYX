@@ -21,6 +21,15 @@
             android:layout_height="48dp"
             android:background="@color/mainColor">
 
+            <com.tong.library.view.CircleImageView
+                android:id="@+id/img_head"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/ic_head"
+                />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -35,20 +44,49 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
-                android:background="?attr/selectableItemBackground"
                 android:src="@mipmap/search"/>
 
         </RelativeLayout>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabLayout"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            app:tabTextColor="@color/color_6"
-            app:tabSelectedTextColor="@color/color_3"
-            app:tabIndicatorColor="@color/transparent"
-            app:tabMode="scrollable"
-            android:background="@color/white"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <com.tong.library.view.PagerSlidingTabStrip
+                android:id="@+id/psts"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                app:pstsDividerColor="@color/transparent"
+                app:pstsIndicatorHeight="0dp"
+                app:pstsTabPaddingLeftRight="9dp"
+                app:pstsTabSelectedColor="@color/color_3"
+                app:pstsTabSelectedSize="@dimen/textSize_14"
+                app:pstsTabTextColor="@color/color_6"
+                app:pstsTabTextSize="@dimen/textSize_13"
+                app:pstsUnderlineHeight="0dp"
+                />
+
+            <RelativeLayout
+                android:id="@+id/rl_heng3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="18dp"
+                    android:src="@mipmap/heng3"
+                    />
+            </RelativeLayout>
+
+
+        </LinearLayout>
 
 
     </LinearLayout>

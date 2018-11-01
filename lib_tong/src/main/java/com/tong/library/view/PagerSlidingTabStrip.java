@@ -81,6 +81,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	private boolean shouldExpand = false;
 	private boolean textAllCaps = true;
+	private boolean IndicatorLengthSameText = true;
 
 	private int scrollOffset = 52;
 	private int indicatorHeight = 8;
@@ -161,6 +162,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		tabSelectedColor=a.getColor(R.styleable.PagerSlidingTabStrip_pstsTabSelectedColor,tabSelectedColor);
 		tabTextSize=a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsTabTextSize,tabTextSize);
 		tabSelectedSize=a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsTabSelectedSize,tabSelectedSize);
+        IndicatorLengthSameText = a.getBoolean(R.styleable.PagerSlidingTabStrip_pstsIndicatorLengthSameText,IndicatorLengthSameText);
 
 		a.recycle();
 
@@ -351,7 +353,12 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 			lineRight = (currentPositionOffset * nextTabRight + (1f - currentPositionOffset) * lineRight);
 		}
 
-		canvas.drawRect(lineLeft, height - indicatorHeight, lineRight, height, rectPaint);
+        if (IndicatorLengthSameText){
+            //通过处理tabPadding，设置底部横线与文字宽度一致，
+            canvas.drawRect(lineLeft+tabPadding, height - indicatorHeight, lineRight-tabPadding, height, rectPaint);
+        }else {
+            canvas.drawRect(lineLeft, height - indicatorHeight, lineRight, height, rectPaint);
+        }
 
 		// draw underline
 

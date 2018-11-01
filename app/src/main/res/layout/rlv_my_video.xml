@@ -18,7 +18,7 @@
         <com.tong.library.view.CircleImageView
             android:id="@+id/img_header"
             android:layout_width="19dp"
-            android:layout_height="19dp"
+            android:layout_height="17dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:src="@mipmap/ic_head"
@@ -74,7 +74,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
             android:layout_toLeftOf="@+id/tv_eyes"
-            android:src="@mipmap/comment_small"
+            android:src="@mipmap/eyes"
             />
 
     </RelativeLayout>

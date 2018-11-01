@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_f8"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="#1ef59691"
+            android:gravity="center"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:text="1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize_11"
+            />
+
+        <TextView
+            android:id="@+id/tv_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="21dp"
+            android:text="author"
+            android:textColor="#f59691"
+            android:textSize="@dimen/textSize_12"
+            />
+
+        <TextView
+            android:id="@+id/tv_author2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_author"
+            android:textColor="@color/color_5"
+            android:textSize="@dimen/textSize_12"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="13dp"
+        android:text="content"
+        android:textColor="@color/color_3"
+        android:textSize="@dimen/textSize_12"
+        />
+
+
+</LinearLayout>

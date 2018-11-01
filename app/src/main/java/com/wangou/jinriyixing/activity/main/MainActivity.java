@@ -13,16 +13,27 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.tong.library.adapter.recyclerview.MultiItemTypeAdapter;
 import com.tong.library.base.BaseActivity;
+import com.tong.library.utils.MessageEvent;
 import com.tong.library.view.CircleImageView;
 import com.wangou.jinriyixing.R;
 import com.wangou.jinriyixing.activity.circle.CircleFragment;
 import com.wangou.jinriyixing.activity.collection.CollectionFragment;
 import com.wangou.jinriyixing.activity.home.HomFragment;
 import com.wangou.jinriyixing.activity.login.LoginActivity;
+import com.wangou.jinriyixing.activity.navigation.EditBusinessActivity;
+import com.wangou.jinriyixing.activity.navigation.InfoSetActivity;
+import com.wangou.jinriyixing.activity.navigation.MessageActivity;
+import com.wangou.jinriyixing.activity.navigation.MyCircleActivity;
+import com.wangou.jinriyixing.activity.navigation.MyCollectionActivity;
+import com.wangou.jinriyixing.activity.navigation.PrivateLetterActivity;
+import com.wangou.jinriyixing.activity.navigation.SetActivity;
+import com.wangou.jinriyixing.activity.navigation.UserFeedbackActivity;
 import com.wangou.jinriyixing.activity.video.VideoFragment;
 import com.wangou.jinriyixing.adpter.MainAdpter;
 import com.wangou.jinriyixing.adpter.NavLeftAdpter;
@@ -30,6 +41,8 @@ import com.wangou.jinriyixing.utils.AesEncryptionUtil;
 import com.wangou.jinriyixing.utils.DeviceUtils;
 import com.wangou.jinriyixing.utils.LogUtils;
 import com.wangou.jinriyixing.utils.RsaUtils;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -96,6 +109,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     FrameLayout navLeft;
     @BindView(R.id.drawerLayout)
     DrawerLayout drawerLayout;
+    @BindView(R.id.rl_setting)
+    RelativeLayout rlSetting;
+    @BindView(R.id.rl_email)
+    RelativeLayout rlEmail;
 
     private List<Fragment> fragmentList = new ArrayList<>();
 
@@ -135,7 +152,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         });
 
-        test();
+//        test();
     }
 
     private void initViewPager() {
@@ -168,7 +185,51 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         rlv.setLayoutManager(new LinearLayoutManager(this));
         NavLeftAdpter navLeftAdpter = new NavLeftAdpter(this, titleList);
         rlv.setAdapter(navLeftAdpter);
-        imgHeader.setOnClickListener(v -> startActivity(new Intent(this, LoginActivity.class)));
+        navLeftAdpter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+                switch (position) {
+                    case 0:
+                        startActivity(new Intent(getActivity(), MyCircleActivity.class));
+                        break;
+                    case 1:
+                        startActivity(new Intent(getActivity(), MyCollectionActivity.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(getActivity(), InfoSetActivity.class));
+                        break;
+                    case 3:
+                        startActivity(new Intent(getActivity(), EditBusinessActivity.class));
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        startActivity(new Intent(getActivity(), MessageActivity.class));
+                        break;
+                    case 6:
+                        startActivity(new Intent(getActivity(), UserFeedbackActivity.class));
+                        break;
+                }
+                drawerLayout.closeDrawers();
+            }
+
+            @Override
+            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+                return false;
+            }
+        });
+        imgHeader.setOnClickListener(v -> {
+            startActivity(new Intent(this, InfoSetActivity.class));
+            drawerLayout.closeDrawers();
+        });
+        rlSetting.setOnClickListener(v -> {
+            startActivity(new Intent(this, SetActivity.class));
+            drawerLayout.closeDrawers();
+        });
+        rlEmail.setOnClickListener(v -> {
+            startActivity(new Intent(this, PrivateLetterActivity.class));
+            drawerLayout.closeDrawers();
+        });
     }
 
     private void test() {
@@ -221,24 +282,37 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         tvMainVideo.setTextColor(getResources().getColor(R.color.color_9));
         switch (pos) {
             case 0:
+                setStatusBarColor(R.color.red_little);
+                setStatusBarIcon(false);
                 imgMainHome.setImageResource(R.mipmap.ic_main_home_red);
                 tvMainHome.setTextColor(getResources().getColor(R.color.red));
                 break;
             case 1:
+                setStatusBarColor(R.color.white);
+                setStatusBarIcon(true);
                 imgMainCollection.setImageResource(R.mipmap.ic_main_collection_red);
                 tvMainCollection.setTextColor(getResources().getColor(R.color.red));
                 break;
             case 2:
+                setStatusBarColor(R.color.white);
+                setStatusBarIcon(true);
                 imgMainCircle.setImageResource(R.mipmap.ic_main_circle_red);
                 tvMainCircle.setTextColor(getResources().getColor(R.color.red));
                 break;
             case 3:
+                setStatusBarColor(R.color.white);
+                setStatusBarIcon(true);
                 imgMainVideo.setImageResource(R.mipmap.ic_main_video_red);
                 tvMainVideo.setTextColor(getResources().getColor(R.color.red));
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    protected boolean isUseEventBus() {
+        return true;
     }
 
     @Override
@@ -266,11 +340,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
+    @Subscribe
+    public void onMessageEvent(MessageEvent event) {
+        if (event.getMsg().equals("openDrawLayout")) {
+            drawerLayout.openDrawer(navLeft);
+        }
+        if (event.getMsg().equals("closeDrawLayout")) {
+            drawerLayout.closeDrawers();
+        }
+    }
+
     @Override
     public void onBackPressed() {
-        if (JZVideoPlayer.backPress()){
+        if (JZVideoPlayer.backPress()) {
             return;
         }
         super.onBackPressed();
     }
+
+
 }

@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawerLayout"
     tools:context=".activity.main.MainActivity">
 
     <android.support.constraint.ConstraintLayout
@@ -193,8 +193,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="left"
         >
-        <include
-            layout="@layout/drawlayout_left"></include>
+
+        <include layout="@layout/drawlayout_left"/>
 
     </FrameLayout>
 

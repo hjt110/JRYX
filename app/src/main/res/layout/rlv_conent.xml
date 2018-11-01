@@ -27,6 +27,8 @@
         android:layout_toRightOf="@+id/img"
         android:text="content"
         android:textColor="@color/color_3"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textSize="@dimen/textSize_14"/>
 
     <TextView

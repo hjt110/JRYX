@@ -11,7 +11,7 @@
         android:layout_height="46dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="25dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_head"/>
 
     <TextView
         android:id="@+id/tv_name"
@@ -39,6 +39,7 @@
         android:layout_width="64dp"
         android:layout_height="24dp"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="-1dp"
         android:layout_marginTop="29dp"
         android:background="@drawable/shape_kuang_left"
         android:gravity="center"
@@ -93,8 +94,65 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rlv"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/ll_state"
-        android:layout_marginTop="16dp"
-        android:layout_height="wrap_content"/>
+        android:layout_marginTop="16dp"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="18dp"
+        android:layout_marginLeft="24dp"
+        >
+
+        <ImageView
+            android:id="@+id/img_setting"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/setting"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_setting"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="7dp"
+            android:text="设置"
+            android:textColor="@color/color_5"
+            android:textSize="@dimen/textSize_11"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/rl_setting"
+        android:layout_marginLeft="80dp"
+        >
+
+        <ImageView
+            android:id="@+id/img_email"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/email"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_email"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="7dp"
+            android:text="私信"
+            android:textColor="@color/color_5"
+            android:textSize="@dimen/textSize_11"
+            />
+
+    </RelativeLayout>
 
 </RelativeLayout>

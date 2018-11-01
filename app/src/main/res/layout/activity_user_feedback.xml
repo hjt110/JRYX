@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.navigation.UserFeedbackActivity">
+
+    <include layout="@layout/layout_title"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="173dp"
+        android:background="@drawable/shape_kuang_grey"
+        android:layout_margin="10dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/rl_add"
+            android:layout_alignParentTop="true"
+            >
+
+            <EditText
+                android:id="@+id/edit_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="请提出您的宝贵意见吧！！"
+                android:layout_margin="10dp"
+                android:textSize="@dimen/textSize_12"
+                android:textColor="@color/color_9"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_add"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/shape_kuang_9"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="13dp"
+            >
+            
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@mipmap/add_circle"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
+        
+    </RelativeLayout>
+
+
+</LinearLayout>

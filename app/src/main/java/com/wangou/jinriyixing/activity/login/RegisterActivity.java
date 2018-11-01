@@ -14,6 +14,8 @@ import com.tong.library.retrofit.Api;
 import com.tong.library.retrofit.BaseObsever;
 import com.tong.library.retrofit.RxSchedulers;
 import com.wangou.jinriyixing.R;
+import com.wangou.jinriyixing.base.MyCallback;
+import com.wangou.jinriyixing.base.RequestHelper;
 import com.wangou.jinriyixing.utils.AesEncryptionUtil;
 import com.wangou.jinriyixing.utils.DeviceUtils;
 import com.wangou.jinriyixing.utils.LogUtils;
@@ -51,7 +53,8 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-
+        setStatusBarColor(R.color.white);
+        setStatusBarIcon(true);
     }
 
     @Override
@@ -63,7 +66,7 @@ public class RegisterActivity extends BaseActivity {
     public void toDo(View view) {
         switch (view.getId()) {
             case R.id.tv_getCode:
-                if (!tvGetCode.getText().toString().equals("发送验证码")) return;
+                if (!tvGetCode.getText().toString().equals("获取验证码")) return;
                 getCode(editPhone.getText().toString());
                 break;
             case R.id.btn_register:
@@ -86,7 +89,6 @@ public class RegisterActivity extends BaseActivity {
 
         Api.getInstance().getCode(headerMap, param).compose(RxSchedulers.io_main()).subscribe(baseBean -> {
             LogUtils.e("baseBean", baseBean.getMsg());
-            LogUtils.e("baseBean", baseBean.getData().toString());
         });
 
     }
@@ -105,35 +107,22 @@ public class RegisterActivity extends BaseActivity {
         mCountDownTimer = new CountDownTimer(60 * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                tvGetCode.setClickable(false);
                 tvGetCode.setText("重新发送(" + millisUntilFinished / 1000 + "s)");
             }
 
             @Override
             public void onFinish() {
-                tvGetCode.setClickable(true);
                 tvGetCode.setText("发送验证码");
             }
         }.start();
 
-        Map<String, String> headerMap = ParamUtils.getHeaderMap();
-        Map<String, String> map = new HashMap<>();
-        map.put("time", ParamUtils.TimeCurrent);
-        map.put("type", "register");
-        map.put("mobile", phone);
-        String param = ParamUtils.getParam(map);
-        Api.getInstance()
-                .getCode(headerMap, param)
-                .compose(RxSchedulers.io_main())
-                .subscribe(new BaseObsever<BaseBean>() {
-                    @Override
-                    public void onSuccess(BaseBean baseBean) {
-                        if (baseBean.getCode() == 0) {
-                            smsid = baseBean.getData().getSmsid();
-                        }
-                        show(baseBean.getMsg());
-                    }
-                });
+        RequestHelper.getCode(phone, "register", o -> {
+            BaseBean baseBean = (BaseBean) o;
+            if (baseBean.getCode() == 0) {
+                smsid = baseBean.getData().getSmsid();
+            }
+            show(baseBean.getMsg());
+        });
     }
 
     public void finish(View view) {
@@ -149,4 +138,5 @@ public class RegisterActivity extends BaseActivity {
             
         }
     }
+
 }

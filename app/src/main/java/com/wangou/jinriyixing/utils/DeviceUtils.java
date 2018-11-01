@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Build;
 import android.provider.Settings;
 
+import com.wangou.jinriyixing.base.APP;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -11,6 +13,16 @@ public class DeviceUtils {
 
     public static String getUniqueId(Context context) {
         String androidID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        String id = androidID + Build.SERIAL;
+        try {
+            return toMD5(id);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return id;
+        }
+    }
+    public static String getUniqueId() {
+        String androidID = Settings.Secure.getString(APP.getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         String id = androidID + Build.SERIAL;
         try {
             return toMD5(id);
