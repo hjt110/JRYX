@@ -14,9 +14,9 @@ import java.util.List;
 
 import cn.jzvd.JZVideoPlayerStandard;
 
-public class MyVideoAdpter extends CommonAdapter<VideoListBean.DataBean> {
+public class MyVideoAdpter extends CommonAdapter<VideoListBean.DataBean.ListBean> {
 
-    public MyVideoAdpter(Context context, List<VideoListBean.DataBean> datas) {
+    public MyVideoAdpter(Context context, List<VideoListBean.DataBean.ListBean> datas) {
         super(context, datas);
     }
 
@@ -26,7 +26,7 @@ public class MyVideoAdpter extends CommonAdapter<VideoListBean.DataBean> {
     }
 
     @Override
-    protected void convert(ViewHolder holder, VideoListBean.DataBean dataBean, int position) {
+    protected void convert(ViewHolder holder, VideoListBean.DataBean.ListBean dataBean, int position) {
         JZVideoPlayerStandard video = holder.getView(R.id.video);
         video.setUp(dataBean.getVideo(), JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, dataBean.getTitle());
         Glide.with(mContext).load(dataBean.getCover()).into(video.thumbImageView);

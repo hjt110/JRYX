@@ -41,7 +41,7 @@ public class MyVideoFragment extends BaseFragment {
     RecyclerView rlv;
     private int position;
 
-    private List<VideoListBean.DataBean> dataList = new ArrayList<>();
+    private List<VideoListBean.DataBean.ListBean> dataList = new ArrayList<>();
     private MyVideoAdpter myVideoAdpter;
 
 
@@ -81,9 +81,10 @@ public class MyVideoFragment extends BaseFragment {
                     @Override
                     public void onSuccess(VideoListBean videoListBean) {
                         if (videoListBean.getCode()==0){
-                            List<VideoListBean.DataBean> data = videoListBean.getData();
+                            VideoListBean.DataBean data = videoListBean.getData();
+                            List<VideoListBean.DataBean.ListBean> list = data.getList();
                             dataList.clear();
-                            dataList.addAll(data);
+                            dataList.addAll(list);
                             myVideoAdpter.notifyDataSetChanged();
                         }
                     }
