@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.tong.library.base.BaseActivity;
 import com.tong.library.bean.BaseBean;
+import com.tong.library.bean.RegisterBean;
 import com.tong.library.retrofit.Api;
 import com.tong.library.retrofit.BaseObsever;
 import com.tong.library.retrofit.RxSchedulers;
@@ -19,6 +20,7 @@ import com.wangou.jinriyixing.base.RequestHelper;
 import com.wangou.jinriyixing.utils.AesEncryptionUtil;
 import com.wangou.jinriyixing.utils.DeviceUtils;
 import com.wangou.jinriyixing.utils.LogUtils;
+import com.wangou.jinriyixing.utils.MD5Utils;
 import com.wangou.jinriyixing.utils.ParamUtils;
 import com.wangou.jinriyixing.utils.RsaUtils;
 import com.wangou.jinriyixing.utils.UsefulUtils;
@@ -78,18 +80,36 @@ public class RegisterActivity extends BaseActivity {
 
     private void register(String phone, String code, String smsid, String pwd) {
 
+        if (smsid.equals("")) {
+            show("请先获取验证码");
+            return;
+        }
+
+        if (pwd.equals("")) {
+            show("密码不能为空");
+            return;
+        }
+
         Map<String, String> headerMap = ParamUtils.getHeaderMap();
         Map<String, String> map = new HashMap<>();
         map.put("time", ParamUtils.TimeCurrent);
         map.put("mobile", phone);
         map.put("code", code);
         map.put("smsid", smsid);
-        map.put("pwd", pwd);
+        map.put("pwd", MD5Utils.md5(pwd));
         String param = ParamUtils.getParam(map);
 
-        Api.getInstance().getCode(headerMap, param).compose(RxSchedulers.io_main()).subscribe(baseBean -> {
-            LogUtils.e("baseBean", baseBean.getMsg());
-        });
+        Api.getInstance()
+                .register(headerMap, param)
+                .compose(RxSchedulers.io_main())
+                .subscribe(new BaseObsever<RegisterBean>() {
+                    @Override
+                    public void onSuccess(RegisterBean registerBean) {
+                        if (registerBean.getCode() == 0) {
+                            show(registerBean.getMsg());
+                        }
+                    }
+                });
 
     }
 

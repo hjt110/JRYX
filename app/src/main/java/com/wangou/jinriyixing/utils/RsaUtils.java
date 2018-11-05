@@ -14,7 +14,7 @@ import javax.crypto.Cipher;
 
 public class RsaUtils {
 
-    private static final String RSA_PUBLICE = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCtSCuZyK0WaTt9tedrwZE4cH/S\n" + "ELZo9RRIuKw3910465WTE04dviLScX2EkRNUNDhm1Cr5/Y/DaJATUUU7KNh67/xc\n" + "0H9T7KpuXY6rG0vhtFIfdajErpwdheiY9DPLoDGG2RcrCPlJC2ulyE7J5KccEVoI\n" + "QNhN5PXHyCNSfrgcqwIDAQAB\n";
+    private static final String RSA_PUBLICE = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDTbZ6cNH9PgdF60aQKveLz3FTalyzHQwbp601y77SzmGHX3F5NoVUZbdK7UMdoCLK4FBziTewYD9DWvAErXZo9BFuI96bAop8wfl1VkZyyHTcznxNJFGSQd/B70/ExMgMBpEwkAAdyUqIjIdVGh1FQK/4acwS39YXwbS+IlHsPSQIDAQAB";
     private static final String ALGORITHM = "RSA";
 
     /**

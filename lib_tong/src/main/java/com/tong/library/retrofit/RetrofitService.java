@@ -6,6 +6,7 @@ import com.tong.library.bean.CollectionListBean;
 import com.tong.library.bean.CollectionTitleBean;
 import com.tong.library.bean.NewsContentBean;
 import com.tong.library.bean.NewsTitleBean;
+import com.tong.library.bean.RegisterBean;
 import com.tong.library.bean.VideoListBean;
 import com.tong.library.bean.VideoTitleBean;
 
@@ -30,6 +31,10 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("Common/getcode")
     Observable<BaseBean> getCode(@HeaderMap Map<String,String> map, @Field("param")String param);
+
+    @FormUrlEncoded
+    @POST("Register/registerrun")
+    Observable<RegisterBean> register(@HeaderMap Map<String,String> map,@Field("param")String param);
 
     @FormUrlEncoded
     @POST("{path}")
