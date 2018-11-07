@@ -3,6 +3,7 @@ package com.wangou.jinriyixing.activity.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,11 +13,22 @@ import android.widget.TextView;
 import com.tong.library.base.BaseActivity;
 import com.tong.library.bean.BaseBean;
 import com.tong.library.bean.LoginBean;
+import com.tong.library.bean.RegisterBean;
+import com.tong.library.retrofit.Api;
+import com.tong.library.retrofit.BaseObsever;
+import com.tong.library.retrofit.RxSchedulers;
 import com.tong.library.utils.JsonParse;
 import com.tong.library.utils.JsonUtil;
+import com.tong.library.utils.MessageEvent;
+import com.tong.library.utils.SPUtils;
 import com.wangou.jinriyixing.R;
+import com.wangou.jinriyixing.activity.main.MainActivity;
 import com.wangou.jinriyixing.base.RequestHelper;
+import com.wangou.jinriyixing.utils.MD5Utils;
 import com.wangou.jinriyixing.utils.ParamUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,6 +58,8 @@ public class LoginActivity extends BaseActivity {
     ImageView imgEyes;
     private CountDownTimer mCountDownTimer;
     private String smsid = "";
+    private boolean pwdIsVisiable = false;
+
 
     @Override
     protected int getLayoutResID() {
@@ -63,15 +77,28 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.normal_login, R.id.sms_login, R.id.tv_yzm, R.id.btnLogin})
+    @OnClick({R.id.imgEyes, R.id.normal_login, R.id.sms_login, R.id.tv_yzm, R.id.btnLogin})
     public void clickEvent(View view) {
         switch (view.getId()) {
+            case R.id.imgEyes:
+                if (pwdIsVisiable) {
+                    pwdIsVisiable = false;
+                    imgEyes.setImageResource(R.mipmap.eyes_close);
+                    editYzm.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                } else {
+                    pwdIsVisiable = true;
+                    imgEyes.setImageResource(R.mipmap.eyes_open);
+                    editYzm.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                }
+                break;
             case R.id.normal_login:
                 normalLogin.setTextColor(getResources().getColor(R.color.mainColor));
                 lineLeft.setVisibility(View.VISIBLE);
                 smsLogin.setTextColor(getResources().getColor(R.color.color_9));
                 lineRight.setVisibility(View.INVISIBLE);
                 editYzm.setHint("请输入密码");
+                editPhone.setText("");
+                editYzm.setText("");
                 imgEyes.setVisibility(View.VISIBLE);
                 tvYzm.setVisibility(View.GONE);
                 if (mCountDownTimer != null) {
@@ -84,6 +111,8 @@ public class LoginActivity extends BaseActivity {
                 smsLogin.setTextColor(getResources().getColor(R.color.mainColor));
                 lineRight.setVisibility(View.VISIBLE);
                 editYzm.setHint("请输入验证码");
+                editPhone.setText("");
+                editYzm.setText("");
                 imgEyes.setVisibility(View.GONE);
                 tvYzm.setVisibility(View.VISIBLE);
                 break;
@@ -92,7 +121,7 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.btnLogin:
                 if (lineLeft.getVisibility() == View.VISIBLE) {
-                    normalLogin();
+                    normalLogin(editPhone.getText().toString(), editYzm.getText().toString());
                 } else {
                     smsLogin(editPhone.getText().toString(), editYzm.getText().toString());
                 }
@@ -133,7 +162,36 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-    private void normalLogin() {
+    private void normalLogin(String phone, String pwd) {
+        if (phone.equals("") || phone.length() != 11) {
+            show("请输入正确的手机号");
+            return;
+        }
+        if (pwd.equals("")) {
+            show("密码不能为空");
+            return;
+        }
+        Map<String, String> headerMap = ParamUtils.getHeaderMap();
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("time", ParamUtils.TimeCurrent);
+        paramMap.put("mobile", phone);
+        paramMap.put("pwd", MD5Utils.md5(pwd));
+        String param = ParamUtils.getParam(paramMap);
+        Api.getInstance()
+                .pwdLogin(headerMap, param)
+                .compose(RxSchedulers.io_main())
+                .subscribe(new BaseObsever<RegisterBean>() {
+                    @Override
+                    public void onSuccess(RegisterBean registerBean) {
+                        show(registerBean.getMsg());
+                        if (registerBean.getCode() == 0) {
+                            RegisterBean.DataBean data = registerBean.getData();
+                            SPUtils.put("token", data.getToken());
+                            EventBus.getDefault().post(new MessageEvent("updateLogin"));
+                            finish();
+                        }
+                    }
+                });
 
     }
 
@@ -153,13 +211,20 @@ public class LoginActivity extends BaseActivity {
         paramMap.put("code", sms);
         paramMap.put("smsid", smsid);
         String param = ParamUtils.getParam(paramMap);
-        RequestHelper.normalRequest("Login/smsloginrun", headerMap, param, o -> {
-            String s = o.toString();
-//            LoginBean loginbean = JsonUtil.getInstance().fromJson(o.toString(), LoginBean.class);
-//            show(loginbean.getMsg());
-            LoginBean result = JsonParse.getResult(o.toString(), LoginBean.class);
-            show(result.getMsg());
-        });
+        Api.getInstance()
+                .smsLogin(headerMap, param)
+                .compose(RxSchedulers.io_main())
+                .subscribe(new BaseObsever<RegisterBean>() {
+                    @Override
+                    public void onSuccess(RegisterBean registerBean) {
+                        show(registerBean.getMsg());
+                        if (registerBean.getCode() == 0) {
+                            RegisterBean.DataBean data = registerBean.getData();
+                            finish();
+                        }
+                    }
+                });
+
     }
 
     public void finish(View view) {
@@ -168,6 +233,18 @@ public class LoginActivity extends BaseActivity {
 
     public void register(View view) {
         startActivity(new Intent(getActivity(), RegisterActivity.class));
+    }
+
+    @Override
+    protected boolean isUseEventBus() {
+        return true;
+    }
+
+    @Subscribe
+    public void myMessagEvent(MessageEvent event) {
+        if (event.getMsg().equals("finishActivity")) {
+            finish();
+        }
     }
 
     @Override

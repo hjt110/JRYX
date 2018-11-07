@@ -72,9 +72,9 @@
                 android:layout_alignLeft="@+id/normal_login"
                 android:layout_alignRight="@+id/normal_login"
                 android:layout_below="@id/normal_login"
-                android:layout_marginTop="8dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:layout_marginTop="8dp"
                 android:background="@color/mainColor"/>
 
         </RelativeLayout>
@@ -103,8 +103,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="8dp"
-                android:visibility="invisible"
-                android:background="@color/mainColor"/>
+                android:background="@color/mainColor"
+                android:visibility="invisible"/>
 
         </RelativeLayout>
 
@@ -128,6 +128,8 @@
             android:background="@color/transparent"
             android:gravity="center_vertical"
             android:hint="请输入手机号"
+            android:inputType="number"
+            android:maxLength="11"
             android:textColor="@color/text_color"
             android:textColorHint="@color/color_9"/>
 
@@ -149,11 +151,11 @@
             android:layout_height="32dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_weight="1"
             android:background="@color/transparent"
             android:gravity="center_vertical"
             android:hint="请输入密码"
+            android:inputType="textPassword"
             android:textColor="@color/text_color"
             android:textColorHint="@color/color_9"/>
 
@@ -182,7 +184,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:src="@mipmap/eyes"/>
+                android:src="@mipmap/eyes_close"/>
 
         </FrameLayout>
 
@@ -207,9 +209,9 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
+        android:background="@drawable/bg_login_tv"
         android:gravity="center"
         android:text="登录"
-        android:background="@drawable/bg_login_tv"
         android:textColor="@color/red"
         android:textSize="20sp"/>
 

@@ -3,6 +3,7 @@ package com.wangou.jinriyixing.base;
 import android.app.Application;
 import android.content.Context;
 
+import com.tong.library.utils.SPUtils;
 import com.tong.library.utils.Utils;
 
 public class APP extends Application {
@@ -14,6 +15,7 @@ public class APP extends Application {
         super.onCreate();
         context = this;
         Utils.init(this);
+        SPUtils.init(this);
 
     }
 

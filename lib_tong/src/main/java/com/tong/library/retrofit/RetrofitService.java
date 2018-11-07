@@ -29,6 +29,10 @@ import retrofit2.http.Path;
 public interface RetrofitService {
 
     @FormUrlEncoded
+    @POST("{path}")
+    Observable<Object> normalRequest(@Path("path") String path,@HeaderMap Map<String,String> map, @Field("param")String param);
+
+    @FormUrlEncoded
     @POST("Common/getcode")
     Observable<BaseBean> getCode(@HeaderMap Map<String,String> map, @Field("param")String param);
 
@@ -37,8 +41,12 @@ public interface RetrofitService {
     Observable<RegisterBean> register(@HeaderMap Map<String,String> map,@Field("param")String param);
 
     @FormUrlEncoded
-    @POST("{path}")
-    Observable<Object> normalRequest(@Path("path") String path,@HeaderMap Map<String,String> map, @Field("param")String param);
+    @POST("Login/loginrun")
+    Observable<RegisterBean> pwdLogin(@HeaderMap Map<String,String> map,@Field("param")String param);
+
+    @FormUrlEncoded
+    @POST("Login/smsloginrun")
+    Observable<RegisterBean> smsLogin(@HeaderMap Map<String,String> map,@Field("param") String param);
 
     @GET("News/getNewsMenu")
     Observable<NewsTitleBean> getNewsTitle(@HeaderMap Map<String,String> headMap);

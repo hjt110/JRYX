@@ -1,11 +1,12 @@
 package com.wangou.jinriyixing.activity.login;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tong.library.base.BaseActivity;
@@ -14,21 +15,19 @@ import com.tong.library.bean.RegisterBean;
 import com.tong.library.retrofit.Api;
 import com.tong.library.retrofit.BaseObsever;
 import com.tong.library.retrofit.RxSchedulers;
+import com.tong.library.utils.MessageEvent;
 import com.wangou.jinriyixing.R;
-import com.wangou.jinriyixing.base.MyCallback;
 import com.wangou.jinriyixing.base.RequestHelper;
-import com.wangou.jinriyixing.utils.AesEncryptionUtil;
-import com.wangou.jinriyixing.utils.DeviceUtils;
-import com.wangou.jinriyixing.utils.LogUtils;
 import com.wangou.jinriyixing.utils.MD5Utils;
 import com.wangou.jinriyixing.utils.ParamUtils;
-import com.wangou.jinriyixing.utils.RsaUtils;
-import com.wangou.jinriyixing.utils.UsefulUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RegisterActivity extends BaseActivity {
@@ -45,8 +44,14 @@ public class RegisterActivity extends BaseActivity {
     EditText editConfirmPwd;
     @BindView(R.id.btn_register)
     Button btnRegister;
+    @BindView(R.id.img_eyes)
+    ImageView imgEyes;
+    @BindView(R.id.img_eyesConfirm)
+    ImageView imgEyesConfirm;
     private String smsid = "";
     private CountDownTimer mCountDownTimer;
+    private boolean pwdIsVisiable;
+    private boolean pwdConfirmIsVisiable;
 
     @Override
     protected int getLayoutResID() {
@@ -64,7 +69,7 @@ public class RegisterActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_getCode, R.id.btn_register})
+    @OnClick({R.id.tv_getCode, R.id.btn_register, R.id.img_eyes, R.id.img_eyesConfirm})
     public void toDo(View view) {
         switch (view.getId()) {
             case R.id.tv_getCode:
@@ -74,6 +79,28 @@ public class RegisterActivity extends BaseActivity {
             case R.id.btn_register:
                 register(editPhone.getText().toString(), editVerificationCode.getText()
                         .toString(), smsid, editPwd.getText().toString());
+                break;
+            case R.id.img_eyes:
+                if (pwdIsVisiable) {
+                    pwdIsVisiable = false;
+                    imgEyes.setImageResource(R.mipmap.eyes_close);
+                    editPwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                } else {
+                    pwdIsVisiable = true;
+                    imgEyes.setImageResource(R.mipmap.eyes_open);
+                    editPwd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                }
+                break;
+            case R.id.img_eyesConfirm:
+                if (pwdConfirmIsVisiable) {
+                    pwdConfirmIsVisiable = false;
+                    imgEyes.setImageResource(R.mipmap.eyes_close);
+                    editConfirmPwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                } else {
+                    pwdConfirmIsVisiable = true;
+                    imgEyes.setImageResource(R.mipmap.eyes_open);
+                    editConfirmPwd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                }
                 break;
         }
     }
@@ -107,6 +134,8 @@ public class RegisterActivity extends BaseActivity {
                     public void onSuccess(RegisterBean registerBean) {
                         if (registerBean.getCode() == 0) {
                             show(registerBean.getMsg());
+                            EventBus.getDefault().post(new MessageEvent("finishActivity"));
+                            finish();
                         }
                     }
                 });

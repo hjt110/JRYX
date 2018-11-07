@@ -1,5 +1,6 @@
 package com.wangou.jinriyixing.activity.main;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -20,6 +21,7 @@ import com.google.gson.Gson;
 import com.tong.library.adapter.recyclerview.MultiItemTypeAdapter;
 import com.tong.library.base.BaseActivity;
 import com.tong.library.utils.MessageEvent;
+import com.tong.library.utils.SPUtils;
 import com.tong.library.view.CircleImageView;
 import com.wangou.jinriyixing.R;
 import com.wangou.jinriyixing.activity.circle.CircleFragment;
@@ -232,45 +234,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         });
     }
 
-    private void test() {
-        String uniqueId = DeviceUtils.getUniqueId(this);
-        LogUtils.e("uniqueId", uniqueId);
-        long l = System.currentTimeMillis() / 1000;
-        String key = "aaaabbbbddddcccc";
-        LogUtils.e("l", l + "");
-        Map<String, String> map = new HashMap<>();
-        map.put("time", l + "");
-        map.put("key", key);
-        String result = mapToJson(map);
-        LogUtils.e("json", result);
-        String rsaResult = RsaUtils.encryptByPublic(result);
-        LogUtils.e("rsaResult", rsaResult);
-        String replace = rsaResult.replaceAll("\\s*", "");
-        LogUtils.e("rsaResult2", replace);
-
-        Map<String, String> map1 = new HashMap<>();
-        map1.put("time", l + "");
-        map1.put("type", "login");
-        map1.put("mobile", "18120845138");
-        String s = mapToJson(map1);
-        LogUtils.e("s", s);
-        String encrypt = AesEncryptionUtil.encrypt(s, key, AesEncryptionUtil.IV);
-        LogUtils.e("encrypt", encrypt);
-
-    }
-
-    /**
-     * 将Map转化为Json字符串
-     *
-     * @param map
-     * @return String
-     */
-    public static <T> String mapToJson(Map<String, T> map) {
-        Gson gson = new Gson();
-        String jsonStr = gson.toJson(map);
-        return jsonStr;
-    }
-
     public void upIc(int pos) {
         imgMainHome.setImageResource(R.mipmap.ic_main_home);
         tvMainHome.setTextColor(getResources().getColor(R.color.color_9));
@@ -348,6 +311,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if (event.getMsg().equals("closeDrawLayout")) {
             drawerLayout.closeDrawers();
         }
+        if (event.getMsg().equals("updateLogin")){
+            String token = (String) SPUtils.get("token", "");
+            String ss =token;
+        }
+    }
+
+    public static void goToMain(Activity activity){
+        Intent intent = new Intent(activity,MainActivity.class);
+        activity.startActivity(intent);
     }
 
     @Override

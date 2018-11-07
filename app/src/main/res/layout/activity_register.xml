@@ -53,6 +53,7 @@
             android:gravity="center_vertical"
             android:hint="请输入手机号"
             android:maxLength="11"
+            android:inputType="number"
             android:singleLine="true"
             android:textColor="@color/text_color"
             android:textColorHint="@color/color_9"/>
@@ -114,23 +115,24 @@
             android:layout_height="32dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_weight="1"
             android:background="@color/transparent"
             android:gravity="center_vertical"
             android:hint="请输入密码"
+            android:inputType="textPassword"
             android:textColor="@color/text_color"
             android:textColorHint="@color/color_9"
             android:singleLine="true"
             />
 
         <ImageView
+            android:id="@+id/img_eyes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:src="@mipmap/eyes"
+            android:src="@mipmap/eyes_close"
             />
 
     </LinearLayout>
@@ -149,17 +151,18 @@
             android:layout_height="32dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_weight="1"
             android:background="@color/transparent"
             android:gravity="center_vertical"
             android:hint="确认密码"
+            android:inputType="textPassword"
             android:textColor="@color/text_color"
             android:textColorHint="@color/color_9"
             android:singleLine="true"
             />
 
         <ImageView
+            android:id="@+id/img_eyesConfirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
