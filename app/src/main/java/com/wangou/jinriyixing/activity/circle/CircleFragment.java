@@ -12,11 +12,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tong.library.base.BaseFragment;
+import com.tong.library.bean.BannerBean;
+import com.tong.library.bean.CircleListBean;
+import com.tong.library.retrofit.Api;
+import com.tong.library.retrofit.BaseObsever;
+import com.tong.library.retrofit.RxSchedulers;
 import com.wangou.jinriyixing.R;
 import com.wangou.jinriyixing.adpter.CircleAdpter;
+import com.wangou.jinriyixing.base.RequestHelper;
+import com.wangou.jinriyixing.utils.GlideImageLoader;
+import com.wangou.jinriyixing.utils.ParamUtils;
+import com.youth.banner.Banner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +46,11 @@ public class CircleFragment extends BaseFragment {
     ImageView imgPen;
     @BindView(R.id.rlv)
     RecyclerView rlv;
+    @BindView(R.id.banner)
+    Banner banner;
+
+    private List<CircleListBean.DataBean.ListBean> dataList = new ArrayList<>();
+    private CircleAdpter circleAdpter;
 
     @Override
     protected int getLayoutResID() {
@@ -43,12 +59,15 @@ public class CircleFragment extends BaseFragment {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        List<String> titleList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            titleList.add("test" + i);
-        }
-        rlv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        CircleAdpter circleAdpter = new CircleAdpter(getActivity(), titleList);
+        RequestHelper.initBanner("15", banner);
+        initContent();
+        rlv.setLayoutManager(new LinearLayoutManager(getActivity()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+        circleAdpter = new CircleAdpter(getActivity(), dataList);
         rlv.setAdapter(circleAdpter);
     }
 
@@ -57,4 +76,40 @@ public class CircleFragment extends BaseFragment {
 
     }
 
+    private void initContent() {
+        Map<String, String> headerMap = ParamUtils.getNormalHeaderMap();
+        headerMap.put("token", "");
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("page", "");
+        Api.getInstance()
+                .getCircleList(headerMap, paramMap)
+                .compose(RxSchedulers.io_main())
+                .subscribe(new BaseObsever<CircleListBean>() {
+                    @Override
+                    public void onSuccess(CircleListBean circleListBean) {
+                        if (circleListBean.getCode() == 0) {
+                            CircleListBean.DataBean data = circleListBean.getData();
+                            List<CircleListBean.DataBean.ListBean> list = data.getList();
+                            dataList.clear();
+                            dataList.addAll(list);
+                            circleAdpter.notifyDataSetChanged();
+                        }
+                    }
+                });
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        banner.startAutoPlay();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (banner != null) {
+            banner.stopAutoPlay();
+        }
+    }
 }

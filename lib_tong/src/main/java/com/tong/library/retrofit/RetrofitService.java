@@ -2,6 +2,7 @@ package com.tong.library.retrofit;
 
 import com.tong.library.bean.BannerBean;
 import com.tong.library.bean.BaseBean;
+import com.tong.library.bean.CircleListBean;
 import com.tong.library.bean.CollectionListBean;
 import com.tong.library.bean.CollectionTitleBean;
 import com.tong.library.bean.NewsContentBean;
@@ -73,4 +74,8 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("Other/getAdlist")
     Observable<BannerBean> getBanner(@HeaderMap Map<String,String> headMap,@FieldMap Map<String,String> paramMap);
+
+    @FormUrlEncoded
+    @POST("Circle/index")
+    Observable<CircleListBean> getCircleList(@HeaderMap Map<String,String> headMap,@FieldMap Map<String,String> fieldMap);
 }

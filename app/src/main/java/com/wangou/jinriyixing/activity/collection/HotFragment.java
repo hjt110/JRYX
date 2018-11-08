@@ -21,6 +21,7 @@ import com.tong.library.retrofit.RxSchedulers;
 import com.wangou.jinriyixing.R;
 import com.wangou.jinriyixing.adpter.ContentAdpter;
 import com.wangou.jinriyixing.adpter.GuideAdpter;
+import com.wangou.jinriyixing.base.RequestHelper;
 import com.wangou.jinriyixing.utils.GlideImageLoader;
 import com.wangou.jinriyixing.utils.ParamUtils;
 import com.youth.banner.Banner;
@@ -64,7 +65,7 @@ public class HotFragment extends BaseFragment {
     @Override
     protected void init(Bundle savedInstanceState) {
         initGuide();
-        initBanner();
+        RequestHelper.initBanner("14",banner);
         initContent();
     }
 
@@ -84,28 +85,6 @@ public class HotFragment extends BaseFragment {
         rlvGuide.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         GuideAdpter guideAdpter = new GuideAdpter(getActivity(), titleList);
         rlvGuide.setAdapter(guideAdpter);
-    }
-
-    private void initBanner() {
-        Map<String, String> paramMap = new HashMap<>();
-        paramMap.put("typeid", "14");
-        paramMap.put("limit", "");
-        Api.getInstance()
-                .getBanner(ParamUtils.getNormalHeaderMap(), paramMap)
-                .compose(RxSchedulers.io_main())
-                .subscribe(new BaseObsever<BannerBean>() {
-                    @Override
-                    public void onSuccess(BannerBean bannerBean) {
-                        if (bannerBean.getCode()==0){
-                            List<BannerBean.DataBean> data = bannerBean.getData();
-                            List<String> imgList = new ArrayList<>();
-                            for (int i = 0; i < data.size(); i++) {
-                                imgList.add(data.get(i).getPlug_ad_pic());
-                                banner.setImages(imgList).setImageLoader(new GlideImageLoader()).start();
-                            }
-                        }
-                    }
-                });
     }
 
     private void initContent() {
