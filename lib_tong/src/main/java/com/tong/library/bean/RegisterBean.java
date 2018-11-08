@@ -59,12 +59,12 @@ public class RegisterBean {
         private int sex;
         private String headpic;
         private String mobile;
-        private Object signature;
+        private String signature;
         private int birthday_time;
         private String birthday_date;
-        private Object province;
-        private Object city;
-        private Object town;
+        private String province;
+        private String city;
+        private String town;
         private int dynamicnum;
         private int follownum;
         private int fansnum;
@@ -109,11 +109,11 @@ public class RegisterBean {
             this.mobile = mobile;
         }
 
-        public Object getSignature() {
+        public String getSignature() {
             return signature;
         }
 
-        public void setSignature(Object signature) {
+        public void setSignature(String signature) {
             this.signature = signature;
         }
 
@@ -133,27 +133,27 @@ public class RegisterBean {
             this.birthday_date = birthday_date;
         }
 
-        public Object getProvince() {
+        public String getProvince() {
             return province;
         }
 
-        public void setProvince(Object province) {
+        public void setProvince(String province) {
             this.province = province;
         }
 
-        public Object getCity() {
+        public String getCity() {
             return city;
         }
 
-        public void setCity(Object city) {
+        public void setCity(String city) {
             this.city = city;
         }
 
-        public Object getTown() {
+        public String getTown() {
             return town;
         }
 
-        public void setTown(Object town) {
+        public void setTown(String town) {
             this.town = town;
         }
 

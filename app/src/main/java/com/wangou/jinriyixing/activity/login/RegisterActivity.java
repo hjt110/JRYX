@@ -18,6 +18,7 @@ import com.tong.library.retrofit.RxSchedulers;
 import com.tong.library.utils.MessageEvent;
 import com.wangou.jinriyixing.R;
 import com.wangou.jinriyixing.base.RequestHelper;
+import com.wangou.jinriyixing.db.account.UserAccount;
 import com.wangou.jinriyixing.utils.MD5Utils;
 import com.wangou.jinriyixing.utils.ParamUtils;
 
@@ -132,9 +133,12 @@ public class RegisterActivity extends BaseActivity {
                 .subscribe(new BaseObsever<RegisterBean>() {
                     @Override
                     public void onSuccess(RegisterBean registerBean) {
+                        show(registerBean.getMsg());
                         if (registerBean.getCode() == 0) {
-                            show(registerBean.getMsg());
+                            RegisterBean.DataBean data = registerBean.getData();
+                            UserAccount.getInstance().save(data);
                             EventBus.getDefault().post(new MessageEvent("finishActivity"));
+                            EventBus.getDefault().post(new MessageEvent("updateLogin"));
                             finish();
                         }
                     }

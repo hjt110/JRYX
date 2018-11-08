@@ -24,6 +24,7 @@ import com.tong.library.utils.SPUtils;
 import com.wangou.jinriyixing.R;
 import com.wangou.jinriyixing.activity.main.MainActivity;
 import com.wangou.jinriyixing.base.RequestHelper;
+import com.wangou.jinriyixing.db.account.UserAccount;
 import com.wangou.jinriyixing.utils.MD5Utils;
 import com.wangou.jinriyixing.utils.ParamUtils;
 
@@ -186,7 +187,7 @@ public class LoginActivity extends BaseActivity {
                         show(registerBean.getMsg());
                         if (registerBean.getCode() == 0) {
                             RegisterBean.DataBean data = registerBean.getData();
-                            SPUtils.put("token", data.getToken());
+                            UserAccount.getInstance().save(data);
                             EventBus.getDefault().post(new MessageEvent("updateLogin"));
                             finish();
                         }
@@ -220,6 +221,8 @@ public class LoginActivity extends BaseActivity {
                         show(registerBean.getMsg());
                         if (registerBean.getCode() == 0) {
                             RegisterBean.DataBean data = registerBean.getData();
+                            UserAccount.getInstance().save(data);
+                            EventBus.getDefault().post(new MessageEvent("updateLogin"));
                             finish();
                         }
                     }
