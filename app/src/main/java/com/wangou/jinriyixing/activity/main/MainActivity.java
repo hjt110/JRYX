@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.tong.library.adapter.recyclerview.MultiItemTypeAdapter;
 import com.tong.library.base.BaseActivity;
@@ -39,6 +40,8 @@ import com.wangou.jinriyixing.activity.navigation.UserFeedbackActivity;
 import com.wangou.jinriyixing.activity.video.VideoFragment;
 import com.wangou.jinriyixing.adpter.MainAdpter;
 import com.wangou.jinriyixing.adpter.NavLeftAdpter;
+import com.wangou.jinriyixing.base.APP;
+import com.wangou.jinriyixing.db.account.UserAccount;
 import com.wangou.jinriyixing.utils.AesEncryptionUtil;
 import com.wangou.jinriyixing.utils.DeviceUtils;
 import com.wangou.jinriyixing.utils.LogUtils;
@@ -127,6 +130,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void init(Bundle savedInstanceState) {
         initViewPager();
         initLeft();
+        updateInfo();
     }
 
     @Override
@@ -154,7 +158,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         });
 
-//        test();
     }
 
     private void initViewPager() {
@@ -190,6 +193,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         navLeftAdpter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+                if (!APP.isLogin()){
+                    LoginActivity.goToLogin(getActivity());
+                    return;
+                }
                 switch (position) {
                     case 0:
                         startActivity(new Intent(getActivity(), MyCircleActivity.class));
@@ -221,17 +228,40 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         });
         imgHeader.setOnClickListener(v -> {
+            if (!APP.isLogin()){
+                LoginActivity.goToLogin(getActivity());
+                return;
+            }
             startActivity(new Intent(this, InfoSetActivity.class));
             drawerLayout.closeDrawers();
         });
         rlSetting.setOnClickListener(v -> {
+            if (!APP.isLogin()){
+                LoginActivity.goToLogin(getActivity());
+                return;
+            }
             startActivity(new Intent(this, SetActivity.class));
             drawerLayout.closeDrawers();
         });
         rlEmail.setOnClickListener(v -> {
+            if (!APP.isLogin()){
+                LoginActivity.goToLogin(getActivity());
+                return;
+            }
             startActivity(new Intent(this, PrivateLetterActivity.class));
             drawerLayout.closeDrawers();
         });
+    }
+
+    private void updateInfo() {
+        if (APP.isLogin()){
+            UserAccount info = UserAccount.getInstance();
+            Glide.with(getActivity()).load(info.getHeadpic()).into(imgHeader);
+            tvName.setText(info.getUsername());
+            tvDynamic.setText("动态"+info.getDynamicnum());
+            tvGiveGood.setText("关注"+info.getFollownum());
+            tvFans.setText("粉丝"+info.getFansnum());
+        }
     }
 
     public void upIc(int pos) {
@@ -312,8 +342,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             drawerLayout.closeDrawers();
         }
         if (event.getMsg().equals("updateLogin")){
-            String token = (String) SPUtils.get("token", "");
-            String ss =token;
+            updateInfo();
         }
     }
 

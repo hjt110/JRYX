@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
 import com.tong.library.base.BaseFragment;
 import com.tong.library.bean.NewsTitleBean;
 import com.tong.library.retrofit.Api;
@@ -19,6 +20,8 @@ import com.tong.library.view.CircleImageView;
 import com.tong.library.view.PagerSlidingTabStrip;
 import com.wangou.jinriyixing.R;
 import com.wangou.jinriyixing.adpter.ViewPagerAdpter;
+import com.wangou.jinriyixing.base.APP;
+import com.wangou.jinriyixing.db.account.UserAccount;
 import com.wangou.jinriyixing.utils.ParamUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -58,8 +61,8 @@ public class HomFragment extends BaseFragment {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-
         initNews();
+        updateInfo();
     }
 
     @Override
@@ -87,6 +90,12 @@ public class HomFragment extends BaseFragment {
                         initViewPager();
                     }
                 });
+    }
+
+    private void updateInfo() {
+        if(APP.isLogin()){
+            Glide.with(getActivity()).load(UserAccount.getInstance().getHeadpic()).into(imgHead);
+        }
     }
 
     private void initViewPager() {

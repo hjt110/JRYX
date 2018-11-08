@@ -73,6 +73,7 @@ public class UserAccount {
         userInfo.setFollownum(bean.getFollownum() + "");
         userInfo.setFansnum(bean.getFansnum() + "");
         UserDBHelper.getInstance().updateUserInfo(userInfo);
+        init();
     }
 
     public String getToken() {

@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.tong.library.utils.SPUtils;
 import com.tong.library.utils.Utils;
+import com.wangou.jinriyixing.activity.login.LoginActivity;
 import com.wangou.jinriyixing.db.account.UserAccount;
 import com.wangou.jinriyixing.db.gen.DaoMaster;
 import com.wangou.jinriyixing.db.gen.DaoSession;

@@ -26,6 +26,7 @@
             app:tabSelectedTextColor="@color/red_little"
             app:tabTextColor="@color/color_3"
             app:tabMode="scrollable"
+            android:background="@color/white"
             />
 
         <ImageView

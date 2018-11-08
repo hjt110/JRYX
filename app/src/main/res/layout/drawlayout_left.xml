@@ -10,6 +10,7 @@
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="25dp"
         android:src="@mipmap/ic_head"/>
 
@@ -19,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/img_header"
         android:layout_toRightOf="@+id/img_header"
-        android:text="请叫我傲娇女王"
+        android:text="用户昵称"
         android:textColor="@color/color_3"
         android:textSize="@dimen/textSize_15"/>
 
@@ -29,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/img_header"
         android:layout_toRightOf="@+id/img_header"
-        android:text="世界上最好关注的"
+        android:text="简介：xxx"
         android:textColor="@color/color_9"
         android:textSize="@dimen/textSize_12"
         />
@@ -42,8 +43,10 @@
         android:layout_marginRight="-1dp"
         android:layout_marginTop="29dp"
         android:background="@drawable/shape_kuang_left"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:text="签到"
+        android:paddingLeft="15dp"
+        android:drawableLeft="@mipmap/sign"
         android:textColor="@color/red_little"
         android:textSize="@dimen/textSize_11"
         />

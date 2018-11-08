@@ -1,5 +1,6 @@
 package com.wangou.jinriyixing.activity.login;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -248,6 +249,11 @@ public class LoginActivity extends BaseActivity {
         if (event.getMsg().equals("finishActivity")) {
             finish();
         }
+    }
+
+    public static void goToLogin(Activity activity) {
+        Intent intent = new Intent(activity, LoginActivity.class);
+        activity.startActivity(intent);
     }
 
     @Override
