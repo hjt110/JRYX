@@ -49,5 +49,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'cn.jzvd:jiaozivideoplayer:6.2.12'
     implementation 'org.greenrobot:greendao:3.2.2'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
 
 }

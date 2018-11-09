@@ -2,6 +2,7 @@ package com.wangou.jinriyixing.adpter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.tong.library.adapter.recyclerview.CommonAdapter;
@@ -28,6 +29,7 @@ public class MyVideoAdpter extends CommonAdapter<VideoListBean.DataBean.ListBean
     @Override
     protected void convert(ViewHolder holder, VideoListBean.DataBean.ListBean dataBean, int position) {
         JZVideoPlayerStandard video = holder.getView(R.id.video);
+        video.thumbImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         video.setUp(dataBean.getVideo(), JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, dataBean.getTitle());
         Glide.with(mContext).load(dataBean.getCover()).into(video.thumbImageView);
         CircleImageView imgHeader = holder.getView(R.id.img_header);

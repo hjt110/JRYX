@@ -4,19 +4,24 @@ package com.wangou.jinriyixing.activity.circle;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.tong.library.base.BaseFragment;
 import com.tong.library.bean.CircleListBean;
 import com.tong.library.retrofit.Api;
@@ -37,6 +42,8 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,10 +60,14 @@ public class CircleFragment extends BaseFragment {
     RecyclerView rlv;
     @BindView(R.id.banner)
     Banner banner;
+    @BindView(R.id.srfresh)
+    SmartRefreshLayout srfresh;
 
     private List<CircleListBean.DataBean.ListBean> dataList = new ArrayList<>();
     private CircleAdpter circleAdpter;
     private static int num;
+    private int mPage = 0;
+    private int mPageCount = 0;
 
     @Override
     protected int getLayoutResID() {
@@ -66,7 +77,7 @@ public class CircleFragment extends BaseFragment {
     @Override
     protected void init(Bundle savedInstanceState) {
         RequestHelper.initBanner("15", banner);
-        initContent();
+        initContent(mPage,true);
         rlv.setLayoutManager(new LinearLayoutManager(getActivity()) {
             @Override
             public boolean canScrollVertically() {
@@ -75,6 +86,21 @@ public class CircleFragment extends BaseFragment {
         });
         circleAdpter = new CircleAdpter(getActivity(), dataList);
         rlv.setAdapter(circleAdpter);
+        srfresh.setRefreshFooter(new BallPulseFooter(getActivity()).setSpinnerStyle(SpinnerStyle.Scale));
+        srfresh.setEnableRefresh(false);
+        srfresh.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                if (mPage < mPageCount - 1) {
+                    mPage++;
+                } else {
+                    refreshLayout.finishLoadMoreWithNoMoreData();
+                    return;
+                }
+                initContent(mPage, false);
+                refreshLayout.finishLoadMore(1200);
+            }
+        });
     }
 
     @Override
@@ -82,11 +108,11 @@ public class CircleFragment extends BaseFragment {
 
     }
 
-    private void initContent() {
+    private void initContent(int page, boolean isClear) {
         Map<String, String> headerMap = ParamUtils.getNormalHeaderMap();
         headerMap.put("token", UserAccount.getInstance().getToken());
         Map<String, String> paramMap = new HashMap<>();
-        paramMap.put("page", "");
+        paramMap.put("page", page + "");
         Api.getInstance()
                 .getCircleList(headerMap, paramMap)
                 .compose(RxSchedulers.io_main())
@@ -96,7 +122,10 @@ public class CircleFragment extends BaseFragment {
                         if (circleListBean.getCode() == 0) {
                             CircleListBean.DataBean data = circleListBean.getData();
                             List<CircleListBean.DataBean.ListBean> list = data.getList();
-                            dataList.clear();
+                            mPageCount = data.getPagecount();
+                            if (isClear){
+                                dataList.clear();
+                            }
                             dataList.addAll(list);
                             circleAdpter.notifyDataSetChanged();
                         }

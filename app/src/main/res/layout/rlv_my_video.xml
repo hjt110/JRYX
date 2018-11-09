@@ -4,16 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <cn.jzvd.JZVideoPlayerStandard
-        android:id="@+id/video"
-        android:layout_width="match_parent"
-        android:layout_height="177dp"
-        android:layout_margin="10dp"/>
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_kuang_radiu_10"
+        >
+
+        <cn.jzvd.JZVideoPlayerStandard
+            android:id="@+id/video"
+            android:layout_width="match_parent"
+            android:layout_height="177dp"
+            />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/video">
+        android:layout_below="@+id/rl">
 
         <com.tong.library.view.CircleImageView
             android:id="@+id/img_header"
