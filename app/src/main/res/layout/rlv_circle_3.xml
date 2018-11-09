@@ -8,45 +8,19 @@
 
     <include layout="@layout/layout_header_circle"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal"
-        >
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_marginLeft="10dp"
+       android:layout_marginRight="10dp"
+       android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/img_1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_weight="1"
-            android:scaleType="fitXY"
-            />
+       <android.support.v7.widget.RecyclerView
+           android:id="@+id/rlv"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+       </android.support.v7.widget.RecyclerView>
 
-        <ImageView
-            android:id="@+id/img_2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_weight="1"
-            android:scaleType="fitXY"
-            />
-
-        <ImageView
-            android:id="@+id/img_3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_weight="1"
-            android:scaleType="fitXY"
-            />
-
-    </LinearLayout>
+   </RelativeLayout>
 
     <include layout="@layout/layout_bottom_4"/>
 

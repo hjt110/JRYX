@@ -1,13 +1,24 @@
 package com.wangou.jinriyixing.adpter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.tong.library.adapter.recyclerview.CommonAdapter;
@@ -15,6 +26,8 @@ import com.tong.library.adapter.recyclerview.base.ViewHolder;
 import com.tong.library.bean.CircleListBean;
 import com.tong.library.view.CircleImageView;
 import com.wangou.jinriyixing.R;
+import com.wangou.jinriyixing.activity.circle.CircleFragment;
+import com.wangou.jinriyixing.activity.main.MainActivity;
 import com.wangou.jinriyixing.utils.DateTimeUtils;
 
 import org.w3c.dom.Text;
@@ -42,12 +55,8 @@ public class CircleAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             case 1:
                 TYPE = TYPE_ONE;
                 break;
-            case 3:
+            default:
                 TYPE = TYPE_THREE;
-                break;
-            case 4:
-            case 5:
-                TYPE = TYPE_FOUR;
                 break;
         }
         return TYPE;
@@ -86,6 +95,12 @@ public class CircleAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             holder1.tvComment.setText(bean.getCommentcount() + "");
 
             Glide.with(mContext).load(bean.getPics().get(0)).into(holder1.img);
+            holder1.img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CircleFragment.showPop(mContext, bean.getPics(), 0);
+                }
+            });
 
         }
         if (holder instanceof ViewHolder3) {
@@ -99,9 +114,10 @@ public class CircleAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             holder1.tvShare.setText(bean.getListorder() + "");
             holder1.tvComment.setText(bean.getCommentcount() + "");
 
-            Glide.with(mContext).load(bean.getPics().get(0)).into(holder1.img1);
-            Glide.with(mContext).load(bean.getPics().get(1)).into(holder1.img2);
-            Glide.with(mContext).load(bean.getPics().get(2)).into(holder1.img3);
+            holder1.rlv.setLayoutManager(new GridLayoutManager(mContext, 3));
+            CircleImgAdpter circleImgAdpter = new CircleImgAdpter(mContext, bean.getPics());
+            holder1.rlv.setAdapter(circleImgAdpter);
+
         }
         if (holder instanceof ViewHolder4) {
             ViewHolder4 holder1 = (ViewHolder4) holder;
@@ -167,9 +183,7 @@ public class CircleAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         TextView tvShare;
         TextView tvComment;
 
-        ImageView img1;
-        ImageView img2;
-        ImageView img3;
+        RecyclerView rlv;
 
         public ViewHolder3(View itemView) {
             super(itemView);
@@ -183,9 +197,7 @@ public class CircleAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             tvShare = itemView.findViewById(R.id.tv_share);
             tvComment = itemView.findViewById(R.id.tv_comment);
 
-            img1 = itemView.findViewById(R.id.img_1);
-            img2 = itemView.findViewById(R.id.img_2);
-            img3 = itemView.findViewById(R.id.img_3);
+            rlv = itemView.findViewById(R.id.rlv);
         }
     }
 

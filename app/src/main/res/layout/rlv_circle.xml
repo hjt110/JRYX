@@ -9,15 +9,13 @@
     
     <ImageView
         android:id="@+id/img"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="161dp"
-        android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         />
 
     <include layout="@layout/layout_bottom_4"/>
-
 
 </LinearLayout>

@@ -1,16 +1,23 @@
 package com.wangou.jinriyixing.activity.circle;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.tong.library.base.BaseFragment;
 import com.tong.library.bean.BannerBean;
 import com.tong.library.bean.CircleListBean;
@@ -51,6 +58,7 @@ public class CircleFragment extends BaseFragment {
 
     private List<CircleListBean.DataBean.ListBean> dataList = new ArrayList<>();
     private CircleAdpter circleAdpter;
+    private static int num;
 
     @Override
     protected int getLayoutResID() {
@@ -96,6 +104,42 @@ public class CircleFragment extends BaseFragment {
                         }
                     }
                 });
+    }
+
+    public static void showPop(Context context, List<String> urlLisst, int pos) {
+        View contentView = LayoutInflater.from(context).inflate(R.layout.popwindow, null);
+        num = pos;
+        PopupWindow popupWindow = new PopupWindow(contentView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setFocusable(true);
+        popupWindow.setTouchable(true);
+        popupWindow.showAtLocation(((Activity) context).getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+        ImageView img = contentView.findViewById(R.id.img);
+        ViewGroup.LayoutParams layoutParams = img.getLayoutParams();
+        Glide.with(context).load(urlLisst.get(pos)).into(img);
+        img.setOnClickListener(v -> {
+        });
+        RelativeLayout rl = contentView.findViewById(R.id.rl);
+        contentView.findViewById(R.id.img_left).setOnClickListener(v -> {
+            if (urlLisst.size() == 1) {
+                return;
+            }
+            if (num > 0){
+                num --;
+                Glide.with(context).load(urlLisst.get(num)).into(img);
+            }
+
+        });
+        contentView.findViewById(R.id.img_right).setOnClickListener(v -> {
+            if (urlLisst.size() == 1) {
+                return;
+            }
+            if (num < urlLisst.size()-1){
+                num ++;
+                Glide.with(context).load(urlLisst.get(num)).into(img);
+            }
+        });
+        contentView.findViewById(R.id.img_cha).setOnClickListener(v -> popupWindow.dismiss());
     }
 
 
