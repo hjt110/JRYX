@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -26,6 +27,7 @@ import com.tong.library.retrofit.BaseObsever;
 import com.tong.library.retrofit.RxSchedulers;
 import com.wangou.jinriyixing.R;
 import com.wangou.jinriyixing.adpter.CircleAdpter;
+import com.wangou.jinriyixing.adpter.MyPagerAdpter;
 import com.wangou.jinriyixing.base.RequestHelper;
 import com.wangou.jinriyixing.utils.GlideImageLoader;
 import com.wangou.jinriyixing.utils.ParamUtils;
@@ -114,19 +116,17 @@ public class CircleFragment extends BaseFragment {
         popupWindow.setFocusable(true);
         popupWindow.setTouchable(true);
         popupWindow.showAtLocation(((Activity) context).getWindow().getDecorView(), Gravity.CENTER, 0, 0);
-        ImageView img = contentView.findViewById(R.id.img);
-        ViewGroup.LayoutParams layoutParams = img.getLayoutParams();
-        Glide.with(context).load(urlLisst.get(pos)).into(img);
-        img.setOnClickListener(v -> {
-        });
-        RelativeLayout rl = contentView.findViewById(R.id.rl);
+        ViewPager vp = contentView.findViewById(R.id.vp);
+        MyPagerAdpter myPagerAdpter = new MyPagerAdpter(context, urlLisst);
+        vp.setAdapter(myPagerAdpter);
+        vp.setCurrentItem(pos, false);
         contentView.findViewById(R.id.img_left).setOnClickListener(v -> {
             if (urlLisst.size() == 1) {
                 return;
             }
-            if (num > 0){
-                num --;
-                Glide.with(context).load(urlLisst.get(num)).into(img);
+            if (num > 0) {
+                num--;
+                vp.setCurrentItem(num, false);
             }
 
         });
@@ -134,9 +134,9 @@ public class CircleFragment extends BaseFragment {
             if (urlLisst.size() == 1) {
                 return;
             }
-            if (num < urlLisst.size()-1){
-                num ++;
-                Glide.with(context).load(urlLisst.get(num)).into(img);
+            if (num < urlLisst.size() - 1) {
+                num++;
+                vp.setCurrentItem(num, false);
             }
         });
         contentView.findViewById(R.id.img_cha).setOnClickListener(v -> popupWindow.dismiss());
