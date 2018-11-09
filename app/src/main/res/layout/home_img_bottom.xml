@@ -18,25 +18,17 @@
         android:textSize="@dimen/textSize_14"
         />
 
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="match_parent"
-        android:layout_height="133dp"
-        android:layout_below="@+id/tv_title"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher"
-        />
-
     <TextView
         android:id="@+id/tv_author"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/img"
+        android:layout_below="@+id/tv_title"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/tv_comment"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="author"
         android:textColor="@color/ab"
         android:textSize="@dimen/textSize_10"
@@ -46,24 +38,28 @@
         android:id="@+id/tv_giveGood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="点赞"
-        android:layout_alignRight="@+id/img"
         android:layout_alignBottom="@+id/tv_author"
-        android:textSize="@dimen/textSize_10"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:text="点赞"
         android:textColor="@color/ab"
+        android:textSize="@dimen/textSize_10"
         />
 
     <TextView
         android:id="@+id/tv_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="评论"
         android:layout_alignBottom="@id/tv_giveGood"
-        android:layout_toLeftOf="@+id/tv_giveGood"
         android:layout_marginRight="10dp"
-        android:textSize="@dimen/textSize_10"
+        android:layout_toLeftOf="@+id/tv_giveGood"
+        android:text="评论"
         android:textColor="@color/ab"
-
+        android:textSize="@dimen/textSize_10"
         />
+
+    <View
+        style="@style/ItemLine_10"
+        android:layout_below="@+id/tv_author"/>
 
 </RelativeLayout>

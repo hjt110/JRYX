@@ -93,7 +93,7 @@ public class GeneralFragment extends BaseFragment {
         Map<String, String> map = new HashMap<>();
         map.put("mid", dataBean.getId()+"");
         map.put("limit", "");
-        map.put("page", "1");
+        map.put("page", "");
         map.put("key", "");
         Api.getInstance()
                 .getNewsContent(ParamUtils.getNormalHeaderMap(), map)

@@ -32,27 +32,45 @@
         />
 
     <TextView
-        android:id="@+id/tv_tag"
+        android:id="@+id/tv_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="17dp"
         android:layout_marginLeft="10dp"
-        android:text="tag"
+        android:ellipsize="end"
+        android:maxLength="18"
+        android:text="author"
         android:textColor="@color/ab"
         android:textSize="@dimen/textSize_10"
         />
 
     <TextView
-        android:id="@+id/tv_orgin"
+        android:id="@+id/tv_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tv_tag"
+        android:layout_alignBottom="@+id/tv_author"
         android:layout_marginLeft="9dp"
-        android:layout_toRightOf="@+id/tv_tag"
-        android:text="origin"
+        android:layout_toRightOf="@+id/tv_author"
+        android:text="comment"
         android:textColor="@color/ab"
         android:textSize="@dimen/textSize_10"
         />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_comment"
+        android:layout_marginLeft="9dp"
+        android:layout_toRightOf="@+id/tv_comment"
+        android:text="time"
+        android:textColor="@color/ab"
+        android:textSize="@dimen/textSize_10"
+        />
+
+    <View
+        style="@style/ItemLine_10"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

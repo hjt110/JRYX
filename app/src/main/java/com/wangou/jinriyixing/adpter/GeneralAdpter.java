@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.tong.library.bean.NewsContentBean;
 import com.wangou.jinriyixing.R;
 import com.wangou.jinriyixing.base.APP;
+import com.wangou.jinriyixing.utils.DateTimeUtils;
 import com.wangou.jinriyixing.utils.LogUtils;
 
 import java.util.List;
@@ -68,10 +69,11 @@ public class GeneralAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         NewsContentBean.DataBean.NewslistBean dataBean = dataList.get(position);
         if (holder instanceof BottomViewHolder) {
-//            BottomViewHolder holder1 = (BottomViewHolder) holder;
-//            holder1.tvTitle.setText(dataBean.getNews_title());
-//            Glide.with(APP.getContext()).load(dataBean.getNews_pic_allurl().toString()).into(holder1.img);
-//            holder1.tvAuthor.setText(dataBean.getMember_list_username());
+            BottomViewHolder holder1 = (BottomViewHolder) holder;
+            holder1.tvTitle.setText(dataBean.getNews_title());
+            holder1.tvAuthor.setText(dataBean.getMember_list_username());
+            holder1.tvComment.setText(dataBean.getCommentcount()+"评论");
+            holder1.tvGiveGood.setText(DateTimeUtils.getDate("MM-dd", dataBean.getNews_time()));
         }
         if (holder instanceof RightViewHolder){
             RightViewHolder holder1 = (RightViewHolder) holder;
@@ -81,7 +83,9 @@ public class GeneralAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            holder1.tvTag.setText(dataBean.getMember_list_username());
+            holder1.tvAuthor.setText(dataBean.getMember_list_username());
+            holder1.tvComment.setText(dataBean.getCommentcount()+"评论");
+            holder1.tvTime.setText(DateTimeUtils.getDate("MM-dd", dataBean.getNews_time()));
         }
         if (holder instanceof Bottom3ImgViewHolder) {
             Bottom3ImgViewHolder holder2 = (Bottom3ImgViewHolder) holder;
@@ -94,6 +98,8 @@ public class GeneralAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 e.printStackTrace();
             }
             holder2.tvAuthor.setText(dataBean.getMember_list_username());
+            holder2.tvComment.setText(dataBean.getCommentcount()+"评论");
+            holder2.tvGiveGood.setText(DateTimeUtils.getDate("MM-dd", dataBean.getNews_time()));
         }
     }
 
@@ -105,15 +111,17 @@ public class GeneralAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     class RightViewHolder extends RecyclerView.ViewHolder {
         ImageView img;
-        TextView tvTag;
-        TextView tvOrigin;
+        TextView tvComment;
+        TextView tvAuthor;
         TextView tvTitle;
+        TextView tvTime;
         public RightViewHolder(View itemView) {
             super(itemView);
             img = itemView.findViewById(R.id.img);
-            tvTag = itemView.findViewById(R.id.tv_tag);
-            tvOrigin = itemView.findViewById(R.id.tv_orgin);
             tvTitle = itemView.findViewById(R.id.tv_title);
+            tvAuthor = itemView.findViewById(R.id.tv_author);
+            tvComment = itemView.findViewById(R.id.tv_comment);
+            tvTime = itemView.findViewById(R.id.tv_time);
         }
     }
 
@@ -142,7 +150,6 @@ public class GeneralAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     class BottomViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle;
-        ImageView img;
         TextView tvAuthor;
         TextView tvGiveGood;
         TextView tvComment;
@@ -150,7 +157,6 @@ public class GeneralAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         public BottomViewHolder(View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tv_title);
-            img = itemView.findViewById(R.id.img);
             tvAuthor = itemView.findViewById(R.id.tv_author);
             tvGiveGood = itemView.findViewById(R.id.tv_giveGood);
             tvComment = itemView.findViewById(R.id.tv_comment);
