@@ -10,17 +10,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.tong.library.base.BaseFragment;
-import com.tong.library.bean.BannerBean;
 import com.tong.library.bean.CircleListBean;
 import com.tong.library.retrofit.Api;
 import com.tong.library.retrofit.BaseObsever;
@@ -29,7 +26,8 @@ import com.wangou.jinriyixing.R;
 import com.wangou.jinriyixing.adpter.CircleAdpter;
 import com.wangou.jinriyixing.adpter.MyPagerAdpter;
 import com.wangou.jinriyixing.base.RequestHelper;
-import com.wangou.jinriyixing.utils.GlideImageLoader;
+import com.wangou.jinriyixing.customview.NoScrollViewPager;
+import com.wangou.jinriyixing.db.account.UserAccount;
 import com.wangou.jinriyixing.utils.ParamUtils;
 import com.youth.banner.Banner;
 
@@ -39,8 +37,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,7 +84,7 @@ public class CircleFragment extends BaseFragment {
 
     private void initContent() {
         Map<String, String> headerMap = ParamUtils.getNormalHeaderMap();
-        headerMap.put("token", "");
+        headerMap.put("token", UserAccount.getInstance().getToken());
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("page", "");
         Api.getInstance()
@@ -116,17 +112,17 @@ public class CircleFragment extends BaseFragment {
         popupWindow.setFocusable(true);
         popupWindow.setTouchable(true);
         popupWindow.showAtLocation(((Activity) context).getWindow().getDecorView(), Gravity.CENTER, 0, 0);
-        ViewPager vp = contentView.findViewById(R.id.vp);
+        NoScrollViewPager vp = contentView.findViewById(R.id.vp);
         MyPagerAdpter myPagerAdpter = new MyPagerAdpter(context, urlLisst);
         vp.setAdapter(myPagerAdpter);
-        vp.setCurrentItem(pos, false);
+        vp.setCurrentItem(pos);
         contentView.findViewById(R.id.img_left).setOnClickListener(v -> {
             if (urlLisst.size() == 1) {
                 return;
             }
             if (num > 0) {
                 num--;
-                vp.setCurrentItem(num, false);
+                vp.setCurrentItem(num);
             }
 
         });
@@ -136,7 +132,7 @@ public class CircleFragment extends BaseFragment {
             }
             if (num < urlLisst.size() - 1) {
                 num++;
-                vp.setCurrentItem(num, false);
+                vp.setCurrentItem(num);
             }
         });
         contentView.findViewById(R.id.img_cha).setOnClickListener(v -> popupWindow.dismiss());
