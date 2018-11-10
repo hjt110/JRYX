@@ -48,7 +48,9 @@ public abstract class BaseFragment extends Fragment implements IBaseView {
     public void onStart() {
         super.onStart();
         if (isUseEventBus()){
-            EventBus.getDefault().register(this);
+            if (!EventBus.getDefault().isRegistered(this)){
+                EventBus.getDefault().register(this);
+            }
         }
     }
 

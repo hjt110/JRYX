@@ -25,6 +25,7 @@ import com.wangou.jinriyixing.db.account.UserAccount;
 import com.wangou.jinriyixing.utils.ParamUtils;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +103,18 @@ public class HomFragment extends BaseFragment {
         viewPagerAdpter = new ViewPagerAdpter(getChildFragmentManager(), titleList, fragmentList);
         viewPager.setAdapter(viewPagerAdpter);
         psts.setViewPager(viewPager);
+    }
+
+    @Override
+    protected boolean isUseEventBus() {
+        return true;
+    }
+
+    @Subscribe
+    public void onMessageEvent(MessageEvent event){
+        if (event.getMsg().equals("updateLogin")){
+            updateInfo();
+        }
     }
 
     protected List<NewsTitleBean.DataBean> getDataList() {
