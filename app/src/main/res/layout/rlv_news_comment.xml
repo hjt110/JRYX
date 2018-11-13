@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    >
+
+    <com.tong.library.view.CircleImageView
+        android:id="@+id/img_author"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_orgin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/img_author"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/tv_goodNum"
+        android:layout_toRightOf="@+id/img_author"
+        android:textColor="#f59691"
+        android:textSize="12sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_goodNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/img_author"
+        android:layout_marginRight="10dp"
+        android:drawableLeft="@mipmap/good_red"
+        android:drawablePadding="3dp"
+        android:textColor="#f59691"
+        />
+
+    <TextView
+        android:id="@+id/tv_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_orgin"
+        android:layout_below="@+id/tv_orgin"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="13dp"
+        android:textColor="@color/color_3"
+        android:textSize="@dimen/textSize_12"/>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_comment"
+        android:layout_below="@+id/tv_comment"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/ab"
+        android:textSize="@dimen/textSize_10"
+        />
+
+    <TextView
+        android:id="@+id/tv_reply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_time"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/tv_time"
+        android:drawableRight="@mipmap/right_blue"
+        android:textColor="#457ed2"
+        android:textSize="@dimen/textSize_10"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rlv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_orgin"
+        android:layout_below="@+id/tv_time"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"/>
+
+</RelativeLayout>

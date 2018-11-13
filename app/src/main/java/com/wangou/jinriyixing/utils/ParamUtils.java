@@ -1,6 +1,7 @@
 package com.wangou.jinriyixing.utils;
 
 import com.wangou.jinriyixing.base.APP;
+import com.wangou.jinriyixing.db.account.UserAccount;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,6 +56,13 @@ public class ParamUtils {
         Map<String, String> map = new HashMap<>();
         map.put("deviceid",DeviceUtils.getUniqueId());
         map.put("time", getTimeCurrent());
+        return map;
+    }
+    public static Map<String, String> getHeaderMapWithToken() {
+        Map<String, String> map = new HashMap<>();
+        map.put("deviceid",DeviceUtils.getUniqueId());
+        map.put("time", getTimeCurrent());
+        map.put("token", UserAccount.getInstance().getToken());
         return map;
     }
 }

@@ -1,6 +1,8 @@
 package com.wangou.jinriyixing.activity.home;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -9,22 +11,26 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.tong.library.base.BaseActivity;
+import com.tong.library.bean.CommentBean;
 import com.tong.library.bean.NewsBean;
 import com.tong.library.retrofit.Api;
 import com.tong.library.retrofit.BaseObsever;
 import com.tong.library.retrofit.RxSchedulers;
 import com.tong.library.view.CircleImageView;
 import com.wangou.jinriyixing.R;
+import com.wangou.jinriyixing.adpter.NewsCommentAdpter;
 import com.wangou.jinriyixing.utils.DateTimeUtils;
 import com.wangou.jinriyixing.utils.ParamUtils;
 import com.zzhoujay.richtext.RichText;
-import com.zzhoujay.richtext.callback.Callback;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class NewsActivity extends BaseActivity {
 
@@ -72,6 +78,10 @@ public class NewsActivity extends BaseActivity {
     TextView tvAbout;
     @BindView(R.id.rl_bottom)
     RelativeLayout rlBottom;
+    @BindView(R.id.rlv)
+    RecyclerView rlv;
+    private List<CommentBean.DataBean.ListBean> dataList = new ArrayList<>();
+    private NewsCommentAdpter newsCommentAdpter;
 
     @Override
     protected int getLayoutResID() {
@@ -82,7 +92,16 @@ public class NewsActivity extends BaseActivity {
     protected void init(Bundle savedInstanceState) {
         setStatusBarColor(R.color.white);
         setStatusBarIcon(true);
+        rlv.setLayoutManager(new LinearLayoutManager(getActivity()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+        newsCommentAdpter = new NewsCommentAdpter(getActivity(), dataList);
+        rlv.setAdapter(newsCommentAdpter);
         initContent();
+        initComment("5");
     }
 
     @Override
@@ -107,6 +126,29 @@ public class NewsActivity extends BaseActivity {
                 });
     }
 
+    private void initComment(String type) {
+        String nid = getIntent().getStringExtra("nid");
+        HashMap<String, String> paramMap = new HashMap<>();
+        paramMap.put("type", type);
+        paramMap.put("ncvid", nid);
+        paramMap.put("page", "");
+        Api.getInstance()
+                .getComment(ParamUtils.getHeaderMapWithToken(), paramMap)
+                .compose(RxSchedulers.io_main())
+                .subscribe(new BaseObsever<CommentBean>() {
+                    @Override
+                    public void onSuccess(CommentBean commentBean) {
+                        if (commentBean.getCode() == 0) {
+                            CommentBean.DataBean data = commentBean.getData();
+                            List<CommentBean.DataBean.ListBean> list = data.getList();
+                            dataList.clear();
+                            dataList.addAll(list);
+                            newsCommentAdpter.notifyDataSetChanged();
+                        }
+                    }
+                });
+    }
+
     private void initInfo(NewsBean newsBean) {
         NewsBean.DataBean data = newsBean.getData();
         Glide.with(getActivity()).load(data.getMember_list_headpic()).into(imgAuthor);
@@ -121,6 +163,21 @@ public class NewsActivity extends BaseActivity {
         tvAbout.setText("简介：" + data.getNews_scontent());
         rlBottom.setVisibility(View.VISIBLE);
 
+    }
+
+    @OnClick({R.id.img_back,R.id.img_author,R.id.tv_follow,R.id.img_share})
+    public void myClick(View view){
+        switch (view.getId()){
+            case R.id.img_back:
+                finish();
+                break;
+            case R.id.img_author:
+                break;
+            case R.id.tv_follow:
+                break;
+            case R.id.img_share:
+                break;
+        }
     }
 
 }
