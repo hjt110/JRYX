@@ -6,6 +6,7 @@ import com.tong.library.bean.CircleListBean;
 import com.tong.library.bean.CollectionListBean;
 import com.tong.library.bean.CollectionTitleBean;
 import com.tong.library.bean.CommentBean;
+import com.tong.library.bean.GoodBean;
 import com.tong.library.bean.NewsBean;
 import com.tong.library.bean.NewsContentBean;
 import com.tong.library.bean.NewsTitleBean;
@@ -88,6 +89,10 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("Comment/getCommentlist")
     Observable<CommentBean> getComment(@HeaderMap Map<String,String> headMap, @FieldMap Map<String,String> fieldMap);
+
+    @FormUrlEncoded
+    @POST("Other/dolikes")
+    Observable<GoodBean> clickGood(@HeaderMap Map<String,String> headMap, @FieldMap Map<String,String> fieldMap);
 
 
 }

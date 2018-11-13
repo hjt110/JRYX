@@ -1,6 +1,7 @@
 package com.wangou.jinriyixing.activity.home;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.tong.library.base.BaseActivity;
 import com.tong.library.bean.CommentBean;
+import com.tong.library.bean.GoodBean;
 import com.tong.library.bean.NewsBean;
 import com.tong.library.retrofit.Api;
 import com.tong.library.retrofit.BaseObsever;
@@ -120,7 +122,11 @@ public class NewsActivity extends BaseActivity {
                     @Override
                     public void onSuccess(NewsBean newsBean) {
                         if (newsBean.getCode() == 0) {
-                            initInfo(newsBean);
+                            try {
+                                initInfo(newsBean);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 });
@@ -161,13 +167,18 @@ public class NewsActivity extends BaseActivity {
         Glide.with(getActivity()).load(data.getMember_list_headpic()).into(imgAuthorBottom);
         tvOrginBottom.setText(data.getMember_list_username());
         tvAbout.setText("简介：" + data.getNews_scontent());
-        rlBottom.setVisibility(View.VISIBLE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                rlBottom.setVisibility(View.VISIBLE);
+            }
+        },500);
 
     }
 
-    @OnClick({R.id.img_back,R.id.img_author,R.id.tv_follow,R.id.img_share})
-    public void myClick(View view){
-        switch (view.getId()){
+    @OnClick({R.id.img_back, R.id.img_author, R.id.tv_follow, R.id.img_share, R.id.tv_good})
+    public void myClick(View view) {
+        switch (view.getId()) {
             case R.id.img_back:
                 finish();
                 break;
@@ -177,7 +188,32 @@ public class NewsActivity extends BaseActivity {
                 break;
             case R.id.img_share:
                 break;
+            case R.id.tv_good:
+                clickGood("5", getIntent().getStringExtra("nid"));
+                break;
         }
+    }
+
+    private void clickGood(String type, String ncvid) {
+        HashMap<String, String> paramMap = new HashMap<>();
+        paramMap.put("type", type);
+        paramMap.put("ncvid", ncvid);
+        Api.getInstance()
+                .clickGood(ParamUtils.getHeaderMapWithToken(), paramMap)
+                .compose(RxSchedulers.io_main())
+                .subscribe(new BaseObsever<GoodBean>() {
+                    @Override
+                    public void onSuccess(GoodBean goodBean) {
+                        if (goodBean.getCode() == 0) {
+                            GoodBean.DataBean data = goodBean.getData();
+                            if (data.getDolikestype()==1){
+                                tvGood.setText("已赞");
+                            }else {
+                                tvGood.setText("赞一下呗");
+                            }
+                        }
+                    }
+                });
     }
 
 }
