@@ -67,15 +67,20 @@ public class GeneralAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        holder.itemView.setOnClickListener(v -> {
+            if (mOnMyItemClick != null) {
+                mOnMyItemClick.OnClickItem(holder.itemView, position);
+            }
+        });
         NewsContentBean.DataBean.NewslistBean dataBean = dataList.get(position);
         if (holder instanceof BottomViewHolder) {
             BottomViewHolder holder1 = (BottomViewHolder) holder;
             holder1.tvTitle.setText(dataBean.getNews_title());
             holder1.tvAuthor.setText(dataBean.getMember_list_username());
-            holder1.tvComment.setText(dataBean.getCommentcount()+"评论");
+            holder1.tvComment.setText(dataBean.getCommentcount() + "评论");
             holder1.tvGiveGood.setText(DateTimeUtils.getDate("MM-dd", dataBean.getNews_time()));
         }
-        if (holder instanceof RightViewHolder){
+        if (holder instanceof RightViewHolder) {
             RightViewHolder holder1 = (RightViewHolder) holder;
             holder1.tvTitle.setText(dataBean.getNews_title());
             try {
@@ -84,7 +89,7 @@ public class GeneralAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 e.printStackTrace();
             }
             holder1.tvAuthor.setText(dataBean.getMember_list_username());
-            holder1.tvComment.setText(dataBean.getCommentcount()+"评论");
+            holder1.tvComment.setText(dataBean.getCommentcount() + "评论");
             holder1.tvTime.setText(DateTimeUtils.getDate("MM-dd", dataBean.getNews_time()));
         }
         if (holder instanceof Bottom3ImgViewHolder) {
@@ -98,11 +103,20 @@ public class GeneralAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 e.printStackTrace();
             }
             holder2.tvAuthor.setText(dataBean.getMember_list_username());
-            holder2.tvComment.setText(dataBean.getCommentcount()+"评论");
+            holder2.tvComment.setText(dataBean.getCommentcount() + "评论");
             holder2.tvGiveGood.setText(DateTimeUtils.getDate("MM-dd", dataBean.getNews_time()));
         }
     }
 
+    public void setmOnMyItemClick(OnMyItemClick onMyItemClick) {
+        mOnMyItemClick = onMyItemClick;
+    }
+
+    private OnMyItemClick mOnMyItemClick;
+
+    public interface OnMyItemClick {
+        void OnClickItem(View view, int pos);
+    }
 
     @Override
     public int getItemCount() {
@@ -115,6 +129,7 @@ public class GeneralAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         TextView tvAuthor;
         TextView tvTitle;
         TextView tvTime;
+
         public RightViewHolder(View itemView) {
             super(itemView);
             img = itemView.findViewById(R.id.img);
@@ -135,6 +150,7 @@ public class GeneralAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         TextView tvAuthor;
         TextView tvGiveGood;
         TextView tvComment;
+
         public Bottom3ImgViewHolder(View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tv_title);
@@ -147,6 +163,7 @@ public class GeneralAdpter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
 
     }
+
     class BottomViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle;

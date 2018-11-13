@@ -72,6 +72,8 @@
         </activity>
         <activity android:name=".activity.navigation.PrivateLetterActivity">
         </activity>
+        <activity android:name=".activity.home.NewsActivity">
+        </activity>
     </application>
 
 </manifest>

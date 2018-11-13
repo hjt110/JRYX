@@ -5,6 +5,7 @@ import com.tong.library.bean.BaseBean;
 import com.tong.library.bean.CircleListBean;
 import com.tong.library.bean.CollectionListBean;
 import com.tong.library.bean.CollectionTitleBean;
+import com.tong.library.bean.NewsBean;
 import com.tong.library.bean.NewsContentBean;
 import com.tong.library.bean.NewsTitleBean;
 import com.tong.library.bean.RegisterBean;
@@ -55,6 +56,10 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("News/getNewsList")
     Observable<NewsContentBean> getNewsContent(@HeaderMap Map<String,String>headMap, @FieldMap Map<String,String> pramMap);
+
+    @FormUrlEncoded
+    @POST("News/getNewsdetails")
+    Observable<NewsBean> getNews(@HeaderMap Map<String,String> headMap,@FieldMap Map<String,String> fieldMap);
 
     @GET("Video/getVideoMenu")
     Observable<VideoTitleBean> getVideoTitle(@HeaderMap Map<String,String> headMap);

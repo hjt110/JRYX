@@ -2,6 +2,7 @@ package com.wangou.jinriyixing.activity.home;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -113,7 +114,11 @@ public class GeneralFragment extends BaseFragment {
 
     @Override
     protected void initEvent() {
-
+        generalAdpter.setmOnMyItemClick((view, pos) -> {
+            Intent intent = new Intent(getActivity(), NewsActivity.class);
+            intent.putExtra("nid",dataList.get(pos).getN_id()+"");
+            startActivity(intent);
+        });
     }
 
     private void initBanner() {

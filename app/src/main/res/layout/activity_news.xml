@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".activity.home.NewsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@mipmap/ic_back"
+            />
+
+        <com.tong.library.view.CircleImageView
+            android:id="@+id/img_author"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:layout_toRightOf="@+id/img_back"
+            />
+
+        <TextView
+            android:id="@+id/tv_orgin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/img_author"
+            android:textColor="@color/color_3"
+            android:textSize="@dimen/textSize_13"
+            />
+
+        <ImageView
+            android:id="@+id/img_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="16dp"
+            android:src="@mipmap/share_red"
+            />
+
+        <TextView
+            android:id="@+id/tv_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@+id/img_share"
+            android:background="@drawable/shape_kuang_maincolor"
+            android:drawableLeft="@mipmap/ten"
+            android:drawablePadding="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:text="关注"
+            android:textColor="@color/mainColor"
+            android:textSize="@dimen/textSize_12"
+            />
+
+    </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="13dp"
+                android:textColor="@color/color_3"
+                android:textSize="@dimen/textSize_15"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="17dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_views"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/ab"
+                    android:textSize="9dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:textColor="@color/ab"
+                    android:textSize="9dp"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="16dp"
+                />
+
+            <RelativeLayout
+                android:id="@+id/rl_bottom"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_good"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_bg_red"
+                    android:drawableLeft="@mipmap/good_white"
+                    android:drawablePadding="3dp"
+                    android:paddingBottom="11dp"
+                    android:paddingLeft="23dp"
+                    android:paddingRight="23dp"
+                    android:paddingTop="11dp"
+                    android:text="赞一下呗"
+                    android:textColor="@color/white"
+                    android:textSize="13dp"
+                    android:layout_centerHorizontal="true"
+                    />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_good"
+                    android:layout_marginTop="33dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/shape_kuang_grey_1"
+                    >
+                    
+                    <com.tong.library.view.CircleImageView
+                        android:id="@+id/img_author_bottom"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginTop="17dp"
+                        android:layout_marginBottom="17dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_orgin_bottom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/textSize_13"
+                        android:textColor="@color/color_3"
+                        android:layout_alignTop="@+id/img_author_bottom"
+                        android:layout_toRightOf="@+id/img_author_bottom"
+                        android:layout_marginLeft="7dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_follow_bottom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="关注"
+                        android:textSize="@dimen/textSize_13"
+                        android:textColor="@color/mainColor"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignTop="@+id/img_author_bottom"
+                        android:background="@drawable/shape_kuang_maincolor"
+                        android:paddingLeft="19dp"
+                        android:layout_marginTop="-5dp"
+                        android:paddingRight="19dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:layout_marginRight="7dp"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_alignLeft="@+id/tv_orgin_bottom"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_fansNum"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="@dimen/textSize_11"
+                            android:textColor="@color/color_9"
+                            />
+                        <TextView
+                            android:id="@+id/tv_followNum"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="@dimen/textSize_11"
+                            android:textColor="@color/color_9"
+                            />
+                        <TextView
+                            android:id="@+id/tv_readNum"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="@dimen/textSize_11"
+                            android:textColor="@color/color_9"
+                            />
+
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_about"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/textSize_11"
+                        android:textColor="#959595"
+                        android:layout_alignLeft="@+id/tv_orgin_bottom"
+                        android:layout_alignBottom="@id/img_author_bottom"
+                        android:text="简介"
+                        android:layout_marginRight="7dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        />
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/color_e"
+        android:elevation="3dp"
+        android:orientation="horizontal"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape_kuang_white">
+
+            <EditText
+                android:id="@+id/edit_comment"
+                android:layout_width="181dp"
+                android:layout_height="28dp"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="写评论..."
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp"
+                android:textColor="#d1d1d1"
+                android:textSize="@dimen/textSize_12"
+                />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/img_comment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:src="@mipmap/comment"
+            />
+
+        <ImageView
+            android:id="@+id/img_read"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:src="@mipmap/read"
+            />
+
+        <ImageView
+            android:id="@+id/img_follow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:src="@mipmap/follow"
+            />
+
+
+    </LinearLayout>
+
+</LinearLayout>

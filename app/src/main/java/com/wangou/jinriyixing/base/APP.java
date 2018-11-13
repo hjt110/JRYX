@@ -10,6 +10,7 @@ import com.wangou.jinriyixing.activity.login.LoginActivity;
 import com.wangou.jinriyixing.db.account.UserAccount;
 import com.wangou.jinriyixing.db.gen.DaoMaster;
 import com.wangou.jinriyixing.db.gen.DaoSession;
+import com.zzhoujay.richtext.RichText;
 
 public class APP extends Application {
 
@@ -25,6 +26,7 @@ public class APP extends Application {
         SPUtils.init(this);
         initDB();
         UserAccount.getInstance().init();
+        initOthers();
 
     }
 
@@ -38,6 +40,15 @@ public class APP extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void initOthers() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                RichText.initCacheDir(context);
+            }
+        }).start();
     }
 
     public static boolean isLogin() {
