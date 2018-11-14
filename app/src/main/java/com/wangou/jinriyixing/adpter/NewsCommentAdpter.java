@@ -33,7 +33,7 @@ public class NewsCommentAdpter extends CommonAdapter<CommentBean.DataBean.ListBe
                 .setText(R.id.tv_goodNum, bean.getDolikes() + "")
                 .setText(R.id.tv_comment, bean.getContent())
                 .setText(R.id.tv_time, DateTimeUtils.getDate("MM-dd", bean.getAddtime()))
-                .setText(R.id.tv_reply, bean.getSecond_count() + "条回复");
+                .setText(R.id.tv_reply, bean.getItem().size()  + "条回复");
         RecyclerView rlv = holder.getView(R.id.rlv);
         if (bean.getItem().size() > 0) {
             List<CommentBean.DataBean.ListBean.ItemBean> item = bean.getItem();

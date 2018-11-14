@@ -21,6 +21,7 @@ import com.tong.library.retrofit.RxSchedulers;
 import com.tong.library.view.CircleImageView;
 import com.wangou.jinriyixing.R;
 import com.wangou.jinriyixing.adpter.NewsCommentAdpter;
+import com.wangou.jinriyixing.base.RequestHelper;
 import com.wangou.jinriyixing.utils.DateTimeUtils;
 import com.wangou.jinriyixing.utils.ParamUtils;
 import com.zzhoujay.richtext.RichText;
@@ -84,6 +85,7 @@ public class NewsActivity extends BaseActivity {
     RecyclerView rlv;
     private List<CommentBean.DataBean.ListBean> dataList = new ArrayList<>();
     private NewsCommentAdpter newsCommentAdpter;
+    private List<NewsBean.DataBean> newsData = new ArrayList<>();
 
     @Override
     protected int getLayoutResID() {
@@ -157,6 +159,8 @@ public class NewsActivity extends BaseActivity {
 
     private void initInfo(NewsBean newsBean) {
         NewsBean.DataBean data = newsBean.getData();
+        newsData.clear();
+        newsData.add(data);
         Glide.with(getActivity()).load(data.getMember_list_headpic()).into(imgAuthor);
         tvOrgin.setText(data.getMember_list_username());
         tvTitle.setText(data.getNews_title());
@@ -185,6 +189,7 @@ public class NewsActivity extends BaseActivity {
             case R.id.img_author:
                 break;
             case R.id.tv_follow:
+//                RequestHelper.initFollow(newsData.get(0).getMember_list_id()+"");
                 break;
             case R.id.img_share:
                 break;

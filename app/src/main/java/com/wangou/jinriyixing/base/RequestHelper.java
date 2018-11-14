@@ -2,9 +2,12 @@ package com.wangou.jinriyixing.base;
 
 import com.tong.library.bean.BannerBean;
 import com.tong.library.bean.BaseBean;
+import com.tong.library.bean.FollowBean;
 import com.tong.library.retrofit.Api;
 import com.tong.library.retrofit.BaseObsever;
+import com.tong.library.retrofit.RetrofitService;
 import com.tong.library.retrofit.RxSchedulers;
+import com.tong.library.retrofit.config.HttpConfig;
 import com.wangou.jinriyixing.utils.GlideImageLoader;
 import com.wangou.jinriyixing.utils.ParamUtils;
 import com.youth.banner.Banner;
@@ -13,6 +16,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RequestHelper {
 
@@ -53,6 +61,27 @@ public class RequestHelper {
                                 imgList.add(data.get(i).getPlug_ad_pic());
                                 banner.setImages(imgList).setImageLoader(new GlideImageLoader()).start();
                             }
+                        }
+                    }
+                });
+    }
+
+    public static void initFollow(String memberid){
+        Retrofit build = new Retrofit.Builder().baseUrl("http://localhost/yxapi/api/")
+                .addConverterFactory(ScalarsConverterFactory.create())//结果以String返回
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+        RetrofitService service = build.create(RetrofitService.class);
+        Map<String,String> paramMap = new HashMap<>();
+        paramMap.put("memberid",memberid);
+        Api.getInstance().getFollow(ParamUtils.getHeaderMapWithToken(),paramMap)
+                .compose(RxSchedulers.io_main())
+                .subscribe(new BaseObsever<FollowBean>() {
+                    @Override
+                    public void onSuccess(FollowBean followBean) {
+                        if (followBean.getCode()==0){
+                            int code = followBean.getCode();
                         }
                     }
                 });
