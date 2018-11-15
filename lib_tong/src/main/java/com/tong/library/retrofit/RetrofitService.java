@@ -12,6 +12,7 @@ import com.tong.library.bean.NewsBean;
 import com.tong.library.bean.NewsContentBean;
 import com.tong.library.bean.NewsTitleBean;
 import com.tong.library.bean.RegisterBean;
+import com.tong.library.bean.ServiceBean;
 import com.tong.library.bean.VideoListBean;
 import com.tong.library.bean.VideoTitleBean;
 
@@ -35,69 +36,72 @@ public interface RetrofitService {
 
     @FormUrlEncoded
     @POST("{path}")
-    Observable<Object> normalRequest(@Path("path") String path,@HeaderMap Map<String,String> map, @Field("param")String param);
+    Observable<Object> normalRequest(@Path("path") String path, @HeaderMap Map<String, String> map, @Field("param") String param);
 
     @FormUrlEncoded
     @POST("Common/getcode")
-    Observable<BaseBean> getCode(@HeaderMap Map<String,String> map, @Field("param")String param);
+    Observable<BaseBean> getCode(@HeaderMap Map<String, String> map, @Field("param") String param);
 
     @FormUrlEncoded
     @POST("Register/registerrun")
-    Observable<RegisterBean> register(@HeaderMap Map<String,String> map,@Field("param")String param);
+    Observable<RegisterBean> register(@HeaderMap Map<String, String> map, @Field("param") String param);
 
     @FormUrlEncoded
     @POST("Login/loginrun")
-    Observable<RegisterBean> pwdLogin(@HeaderMap Map<String,String> map,@Field("param")String param);
+    Observable<RegisterBean> pwdLogin(@HeaderMap Map<String, String> map, @Field("param") String param);
 
     @FormUrlEncoded
     @POST("Login/smsloginrun")
-    Observable<RegisterBean> smsLogin(@HeaderMap Map<String,String> map,@Field("param") String param);
+    Observable<RegisterBean> smsLogin(@HeaderMap Map<String, String> map, @Field("param") String param);
 
     @GET("News/getNewsMenu")
-    Observable<NewsTitleBean> getNewsTitle(@HeaderMap Map<String,String> headMap);
+    Observable<NewsTitleBean> getNewsTitle(@HeaderMap Map<String, String> headMap);
 
     @FormUrlEncoded
     @POST("News/getNewsList")
-    Observable<NewsContentBean> getNewsContent(@HeaderMap Map<String,String>headMap, @FieldMap Map<String,String> pramMap);
+    Observable<NewsContentBean> getNewsContent(@HeaderMap Map<String, String> headMap, @FieldMap Map<String, String> pramMap);
 
     @FormUrlEncoded
     @POST("News/getNewsdetails")
-    Observable<NewsBean> getNews(@HeaderMap Map<String,String> headMap,@FieldMap Map<String,String> fieldMap);
+    Observable<NewsBean> getNews(@HeaderMap Map<String, String> headMap, @FieldMap Map<String, String> fieldMap);
 
     @GET("Video/getVideoMenu")
-    Observable<VideoTitleBean> getVideoTitle(@HeaderMap Map<String,String> headMap);
+    Observable<VideoTitleBean> getVideoTitle(@HeaderMap Map<String, String> headMap);
 
     @FormUrlEncoded
     @POST("Video/getVideoList")
-    Observable<VideoListBean> getVideoList(@HeaderMap Map<String,String> headMap,@FieldMap Map<String,String> paramMap);
+    Observable<VideoListBean> getVideoList(@HeaderMap Map<String, String> headMap, @FieldMap Map<String, String> paramMap);
 
     @FormUrlEncoded
     @POST("Solicitation/getSolicitationmenu")
-    Observable<CollectionTitleBean> getCollectionTitle(@HeaderMap Map<String,String> headMap,@FieldMap Map<String,String> paramMap);
+    Observable<CollectionTitleBean> getCollectionTitle(@HeaderMap Map<String, String> headMap, @FieldMap Map<String, String> paramMap);
 
     @FormUrlEncoded
     @POST("Solicitation/getSolicitationlist")
-    Observable<CollectionListBean> getCollectionList(@HeaderMap Map<String,String> headMap,@FieldMap Map<String,String> paramMap);
+    Observable<CollectionListBean> getCollectionList(@HeaderMap Map<String, String> headMap, @FieldMap Map<String, String> paramMap);
 
     @FormUrlEncoded
     @POST("Other/getAdlist")
-    Observable<BannerBean> getBanner(@HeaderMap Map<String,String> headMap,@FieldMap Map<String,String> paramMap);
+    Observable<BannerBean> getBanner(@HeaderMap Map<String, String> headMap, @FieldMap Map<String, String> paramMap);
 
     @FormUrlEncoded
     @POST("Circle/index")
-    Observable<CircleListBean> getCircleList(@HeaderMap Map<String,String> headMap,@FieldMap Map<String,String> fieldMap);
+    Observable<CircleListBean> getCircleList(@HeaderMap Map<String, String> headMap, @FieldMap Map<String, String> fieldMap);
 
     @FormUrlEncoded
     @POST("Comment/getCommentlist")
-    Observable<CommentBean> getComment(@HeaderMap Map<String,String> headMap, @FieldMap Map<String,String> fieldMap);
+    Observable<CommentBean> getComment(@HeaderMap Map<String, String> headMap, @FieldMap Map<String, String> fieldMap);
 
     @FormUrlEncoded
     @POST("Other/dolikes")
-    Observable<GoodBean> clickGood(@HeaderMap Map<String,String> headMap, @FieldMap Map<String,String> fieldMap);
+    Observable<GoodBean> clickGood(@HeaderMap Map<String, String> headMap, @FieldMap Map<String, String> fieldMap);
 
     @FormUrlEncoded
     @POST("Other/dolikes")
-    Observable<FollowBean> getFollow(@HeaderMap Map<String,String> headMap, @FieldMap Map<String,String> fieldMap);
+    Observable<FollowBean> getFollow(@HeaderMap Map<String, String> headMap, @FieldMap Map<String, String> fieldMap);
+
+    @GET("Index/getWebinfo")
+    Observable<ServiceBean> getService(@HeaderMap Map<String, String> headMap);
 
 
 }

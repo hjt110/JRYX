@@ -49,6 +49,8 @@ public class RegisterActivity extends BaseActivity {
     ImageView imgEyes;
     @BindView(R.id.img_eyesConfirm)
     ImageView imgEyesConfirm;
+    @BindView(R.id.tv_service)
+    TextView tvService;
     private String smsid = "";
     private CountDownTimer mCountDownTimer;
     private boolean pwdIsVisiable;
@@ -67,7 +69,7 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     protected void initEvent() {
-
+        tvService.setOnClickListener(v -> LoginActivity.initServiceBean(getActivity()));
     }
 
     @OnClick({R.id.tv_getCode, R.id.btn_register, R.id.img_eyes, R.id.img_eyesConfirm})

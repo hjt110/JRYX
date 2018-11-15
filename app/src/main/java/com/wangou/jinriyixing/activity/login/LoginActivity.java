@@ -1,33 +1,35 @@
 package com.wangou.jinriyixing.activity.login;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.InputType;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.tong.library.base.BaseActivity;
 import com.tong.library.bean.BaseBean;
-import com.tong.library.bean.LoginBean;
 import com.tong.library.bean.RegisterBean;
+import com.tong.library.bean.ServiceBean;
 import com.tong.library.retrofit.Api;
 import com.tong.library.retrofit.BaseObsever;
 import com.tong.library.retrofit.RxSchedulers;
-import com.tong.library.utils.JsonParse;
-import com.tong.library.utils.JsonUtil;
 import com.tong.library.utils.MessageEvent;
-import com.tong.library.utils.SPUtils;
 import com.wangou.jinriyixing.R;
-import com.wangou.jinriyixing.activity.main.MainActivity;
 import com.wangou.jinriyixing.base.RequestHelper;
 import com.wangou.jinriyixing.db.account.UserAccount;
 import com.wangou.jinriyixing.utils.MD5Utils;
 import com.wangou.jinriyixing.utils.ParamUtils;
+import com.zzhoujay.richtext.RichText;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -36,6 +38,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
@@ -58,6 +61,8 @@ public class LoginActivity extends BaseActivity {
     Button btnLogin;
     @BindView(R.id.imgEyes)
     ImageView imgEyes;
+    @BindView(R.id.tv_service)
+    TextView tvService;
     private CountDownTimer mCountDownTimer;
     private String smsid = "";
     private boolean pwdIsVisiable = false;
@@ -79,7 +84,7 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.imgEyes, R.id.normal_login, R.id.sms_login, R.id.tv_yzm, R.id.btnLogin})
+    @OnClick({R.id.imgEyes, R.id.normal_login, R.id.sms_login, R.id.tv_yzm, R.id.btnLogin, R.id.tv_service})
     public void clickEvent(View view) {
         switch (view.getId()) {
             case R.id.imgEyes:
@@ -127,6 +132,9 @@ public class LoginActivity extends BaseActivity {
                 } else {
                     smsLogin(editPhone.getText().toString(), editYzm.getText().toString());
                 }
+                break;
+            case R.id.tv_service:
+                initServiceBean(getActivity());
                 break;
         }
     }
@@ -242,6 +250,44 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected boolean isUseEventBus() {
         return true;
+    }
+
+    /**
+     * 获取服务bean
+     *
+     * @param context
+     */
+    public static void initServiceBean(Context context) {
+        Api.getInstance()
+                .getService(ParamUtils.getNormalHeaderMap())
+                .compose(RxSchedulers.io_main())
+                .subscribe(new BaseObsever<ServiceBean>() {
+                    @Override
+                    public void onSuccess(ServiceBean serviceBean) {
+                        if (serviceBean.getCode() == 0) {
+                            showService(context, serviceBean);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 弹出服务协议框
+     *
+     * @param context
+     * @param serviceBean
+     */
+    public static void showService(Context context, ServiceBean serviceBean) {
+        View view = LayoutInflater.from(context).inflate(R.layout.pop_service, null);
+        TextView tv_content = view.findViewById(R.id.tv_content);
+        ImageView img_close = view.findViewById(R.id.img_close);
+        RichText.from(serviceBean.getData().getProtocol_content()).singleLoad(false).into(tv_content);
+        PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setFocusable(true);
+        popupWindow.setTouchable(true);
+        popupWindow.showAtLocation(((Activity) context).getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+        img_close.setOnClickListener(v -> popupWindow.dismiss());
     }
 
     @Subscribe
