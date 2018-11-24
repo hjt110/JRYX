@@ -123,6 +123,7 @@
             android:singleLine="true"
             android:textColor="@color/text_color"
             android:textColorHint="@color/color_9"
+            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             />
 
         <ImageView
@@ -160,6 +161,7 @@
             android:singleLine="true"
             android:textColor="@color/text_color"
             android:textColorHint="@color/color_9"
+            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             />
 
         <ImageView
@@ -169,7 +171,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:src="@mipmap/eyes"
+            android:src="@mipmap/eyes_close"
             />
 
     </LinearLayout>

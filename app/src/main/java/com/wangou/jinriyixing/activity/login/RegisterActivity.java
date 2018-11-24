@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tong.library.base.BaseActivity;
 import com.tong.library.bean.BaseBean;
@@ -26,6 +27,8 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -80,6 +83,14 @@ public class RegisterActivity extends BaseActivity {
                 getCode(editPhone.getText().toString());
                 break;
             case R.id.btn_register:
+                if (!editPwd.getText().toString().equals(editConfirmPwd.getText().toString())){
+                    show("请确保2次输入密码的一致");
+                    return;
+                }
+                if (isChinese(editPwd.getText().toString())){
+                    show("密码不能包含中文");
+                    return;
+                }
                 register(editPhone.getText().toString(), editVerificationCode.getText()
                         .toString(), smsid, editPwd.getText().toString());
                 break;
@@ -97,11 +108,11 @@ public class RegisterActivity extends BaseActivity {
             case R.id.img_eyesConfirm:
                 if (pwdConfirmIsVisiable) {
                     pwdConfirmIsVisiable = false;
-                    imgEyes.setImageResource(R.mipmap.eyes_close);
+                    imgEyesConfirm.setImageResource(R.mipmap.eyes_close);
                     editConfirmPwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 } else {
                     pwdConfirmIsVisiable = true;
-                    imgEyes.setImageResource(R.mipmap.eyes_open);
+                    imgEyesConfirm.setImageResource(R.mipmap.eyes_open);
                     editConfirmPwd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                 }
                 break;
@@ -182,6 +193,20 @@ public class RegisterActivity extends BaseActivity {
 
     public void finish(View view) {
         finish();
+    }
+
+    /**
+     * 判断是否输入中文
+     * @param text
+     * @return
+     */
+    private boolean isChinese(String text){
+        Pattern p= Pattern.compile("[\u4e00-\u9fa5]");
+        Matcher m=p.matcher(text);
+        if(m.matches()){
+            return true;
+        }
+        return false;
     }
 
     @Override
