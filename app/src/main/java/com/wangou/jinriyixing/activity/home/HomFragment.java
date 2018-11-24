@@ -1,6 +1,7 @@
 package com.wangou.jinriyixing.activity.home;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.tong.library.base.BaseFragment;
@@ -49,6 +51,8 @@ public class HomFragment extends BaseFragment {
     PagerSlidingTabStrip psts;
     @BindView(R.id.img_head)
     CircleImageView imgHead;
+    @BindView(R.id.rl_heng3)
+    RelativeLayout rlHeng3;
 
     private List<String> titleList = new ArrayList<>();
     private List<Fragment> fragmentList = new ArrayList<>();
@@ -74,6 +78,9 @@ public class HomFragment extends BaseFragment {
                 EventBus.getDefault().post(new MessageEvent("openDrawLayout"));
             }
         });
+        rlHeng3.setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), CustomColumnsActivity.class));
+        });
     }
 
     private void initNews() {
@@ -94,7 +101,7 @@ public class HomFragment extends BaseFragment {
     }
 
     private void updateInfo() {
-        if(APP.isLogin()){
+        if (APP.isLogin()) {
             Glide.with(getActivity()).load(UserAccount.getInstance().getHeadpic()).into(imgHead);
         }
     }
@@ -111,8 +118,8 @@ public class HomFragment extends BaseFragment {
     }
 
     @Subscribe
-    public void onMessageEvent(MessageEvent event){
-        if (event.getMsg().equals("updateLogin")){
+    public void onMessageEvent(MessageEvent event) {
+        if (event.getMsg().equals("updateLogin")) {
             updateInfo();
         }
     }

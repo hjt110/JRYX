@@ -29,7 +29,7 @@ public class MyVideoAdpter extends CommonAdapter<VideoListBean.DataBean.ListBean
     @Override
     protected void convert(ViewHolder holder, VideoListBean.DataBean.ListBean dataBean, int position) {
         JZVideoPlayerStandard video = holder.getView(R.id.video);
-        video.thumbImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//        video.thumbImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         video.setUp(dataBean.getVideo(), JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, dataBean.getTitle());
         Glide.with(mContext).load(dataBean.getCover()).into(video.thumbImageView);
         CircleImageView imgHeader = holder.getView(R.id.img_header);
