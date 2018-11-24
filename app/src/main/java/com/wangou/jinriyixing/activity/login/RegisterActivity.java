@@ -58,6 +58,8 @@ public class RegisterActivity extends BaseActivity {
     private CountDownTimer mCountDownTimer;
     private boolean pwdIsVisiable;
     private boolean pwdConfirmIsVisiable;
+    private String type = "register";
+    private String url = "Register/registerrun";
 
     @Override
     protected int getLayoutResID() {
@@ -68,6 +70,14 @@ public class RegisterActivity extends BaseActivity {
     protected void init(Bundle savedInstanceState) {
         setStatusBarColor(R.color.white);
         setStatusBarIcon(true);
+        boolean isForgetPwd = getIntent().getBooleanExtra("isForgetPwd", false);
+        if (isForgetPwd) {
+            editPwd.setHint("请输入新密码");
+            editConfirmPwd.setHint("确认新密码");
+            btnRegister.setText("找回密码");
+            type = "retrievepwd";
+            url = "Register/retrievepwd";
+        }
     }
 
     @Override
@@ -80,19 +90,19 @@ public class RegisterActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.tv_getCode:
                 if (!tvGetCode.getText().toString().equals("获取验证码")) return;
-                getCode(editPhone.getText().toString());
+                getCode(editPhone.getText().toString(), type);
                 break;
             case R.id.btn_register:
-                if (!editPwd.getText().toString().equals(editConfirmPwd.getText().toString())){
-                    show("请确保2次输入密码的一致");
+                if (!editPwd.getText().toString().equals(editConfirmPwd.getText().toString())) {
+                    show("输入密码不一致");
                     return;
                 }
-                if (isChinese(editPwd.getText().toString())){
+                if (isChinese(editPwd.getText().toString())) {
                     show("密码不能包含中文");
                     return;
                 }
                 register(editPhone.getText().toString(), editVerificationCode.getText()
-                        .toString(), smsid, editPwd.getText().toString());
+                        .toString(), smsid, editPwd.getText().toString(),url);
                 break;
             case R.id.img_eyes:
                 if (pwdIsVisiable) {
@@ -119,7 +129,7 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
-    private void register(String phone, String code, String smsid, String pwd) {
+    private void register(String phone, String code, String smsid, String pwd,String url) {
 
         if (smsid.equals("")) {
             show("请先获取验证码");
@@ -141,7 +151,7 @@ public class RegisterActivity extends BaseActivity {
         String param = ParamUtils.getParam(map);
 
         Api.getInstance()
-                .register(headerMap, param)
+                .register(url,headerMap, param)
                 .compose(RxSchedulers.io_main())
                 .subscribe(new BaseObsever<RegisterBean>() {
                     @Override
@@ -164,7 +174,7 @@ public class RegisterActivity extends BaseActivity {
      *
      * @param phone
      */
-    private void getCode(String phone) {
+    private void getCode(String phone, String type) {
         if (phone.equals("") || phone.length() != 11) {
             show("请输入正确的手机号");
             return;
@@ -182,7 +192,7 @@ public class RegisterActivity extends BaseActivity {
             }
         }.start();
 
-        RequestHelper.getCode(phone, "register", o -> {
+        RequestHelper.getCode(phone, type, o -> {
             BaseBean baseBean = (BaseBean) o;
             if (baseBean.getCode() == 0) {
                 smsid = baseBean.getData().getSmsid();
@@ -197,13 +207,14 @@ public class RegisterActivity extends BaseActivity {
 
     /**
      * 判断是否输入中文
+     *
      * @param text
      * @return
      */
-    private boolean isChinese(String text){
-        Pattern p= Pattern.compile("[\u4e00-\u9fa5]");
-        Matcher m=p.matcher(text);
-        if(m.matches()){
+    private boolean isChinese(String text) {
+        Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
+        Matcher m = p.matcher(text);
+        if (m.matches()) {
             return true;
         }
         return false;

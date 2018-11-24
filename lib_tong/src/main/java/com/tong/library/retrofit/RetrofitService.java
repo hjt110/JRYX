@@ -43,8 +43,8 @@ public interface RetrofitService {
     Observable<BaseBean> getCode(@HeaderMap Map<String, String> map, @Field("param") String param);
 
     @FormUrlEncoded
-    @POST("Register/registerrun")
-    Observable<RegisterBean> register(@HeaderMap Map<String, String> map, @Field("param") String param);
+    @POST("{path}")
+    Observable<RegisterBean> register(@Path("path") String path,@HeaderMap Map<String, String> map, @Field("param") String param);
 
     @FormUrlEncoded
     @POST("Login/loginrun")

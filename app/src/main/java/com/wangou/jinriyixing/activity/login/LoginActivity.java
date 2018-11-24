@@ -63,6 +63,8 @@ public class LoginActivity extends BaseActivity {
     ImageView imgEyes;
     @BindView(R.id.tv_service)
     TextView tvService;
+    @BindView(R.id.tv_forgetPwd)
+    TextView tvForgetPwd;
     private CountDownTimer mCountDownTimer;
     private String smsid = "";
     private boolean pwdIsVisiable = false;
@@ -84,7 +86,7 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.imgEyes, R.id.normal_login, R.id.sms_login, R.id.tv_yzm, R.id.btnLogin, R.id.tv_service})
+    @OnClick({R.id.imgEyes, R.id.normal_login, R.id.sms_login, R.id.tv_yzm, R.id.btnLogin, R.id.tv_service,R.id.tv_forgetPwd})
     public void clickEvent(View view) {
         switch (view.getId()) {
             case R.id.imgEyes:
@@ -135,6 +137,11 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.tv_service:
                 initServiceBean(getActivity());
+                break;
+            case R.id.tv_forgetPwd:
+                Intent intent = new Intent(getActivity(),RegisterActivity.class);
+                intent.putExtra("isForgetPwd",true);
+                startActivity(intent);
                 break;
         }
     }

@@ -17,7 +17,6 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:onClick="finish"
             android:padding="8dp"
             android:src="@mipmap/arrow_left"/>
@@ -28,7 +27,6 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:onClick="register"
             android:padding="8dp"
             android:text="注册"
@@ -192,6 +190,7 @@
 
 
     <TextView
+        android:id="@+id/tv_forgetPwd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
