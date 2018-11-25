@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    android:layout_marginTop="15dp"
-    android:layout_marginBottom="15dp"
+    android:layout_marginTop="13dp"
     android:background="@color/white"
     >
 
@@ -16,20 +15,19 @@
         android:layout_height="83dp"
         android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
         />
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/img"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/img"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="content"
         android:textColor="@color/color_3"
-        android:maxLines="1"
-        android:ellipsize="end"
         android:textSize="@dimen/textSize_14"/>
 
     <TextView
@@ -140,6 +138,10 @@
                 />
         </LinearLayout>
 
-
     </LinearLayout>
+
+    <View
+        style="@style/ItemLine"
+        android:layout_below="@+id/img"
+        android:layout_marginTop="13dp"/>
 </RelativeLayout>

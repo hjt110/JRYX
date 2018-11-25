@@ -113,7 +113,7 @@ public class DateTimeUtils {
      */
     public static String getDate(String pattern, long date) {
         pattern = pattern == null ? "yyyy/MM/dd/HH/mm/ss" : pattern;
-        return new SimpleDateFormat(pattern).format(new Date(date));
+        return new SimpleDateFormat(pattern).format(new Date(date*1000));
     }
 
     /**

@@ -2,6 +2,7 @@ package com.wangou.jinriyixing.activity.collection;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -138,6 +139,37 @@ public class HotFragment extends BaseFragment {
                 return false;
             }
         });
+
+        if (pos == 0 || pos == 2) {
+            contentAdpter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+                    Intent intent=new Intent(getActivity(),CollectionContentActivity.class);
+                    intent.putExtra("soid",dataList.get(position).getOsid()+"");
+                    startActivity(intent);
+                }
+
+                @Override
+                public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+                    return false;
+                }
+            });
+        }
+
+        if (pos == 1){
+            hotAdpter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+
+                }
+
+                @Override
+                public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+                    return false;
+                }
+            });
+        }
+
 
     }
 

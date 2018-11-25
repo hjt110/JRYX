@@ -76,6 +76,8 @@
         </activity>
         <activity android:name=".activity.home.CustomColumnsActivity">
         </activity>
+        <activity android:name=".activity.collection.CollectionContentActivity">
+        </activity>
     </application>
 
 </manifest>

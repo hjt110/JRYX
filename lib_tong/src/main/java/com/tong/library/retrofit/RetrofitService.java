@@ -3,12 +3,14 @@ package com.tong.library.retrofit;
 import com.tong.library.bean.BannerBean;
 import com.tong.library.bean.BaseBean;
 import com.tong.library.bean.CircleListBean;
+import com.tong.library.bean.CollectionContentBean;
 import com.tong.library.bean.CollectionListBean;
 import com.tong.library.bean.CollectionTitleBean;
 import com.tong.library.bean.CommentBean;
 import com.tong.library.bean.FollowBean;
 import com.tong.library.bean.GoodBean;
 import com.tong.library.bean.HotBean;
+import com.tong.library.bean.HotListBean;
 import com.tong.library.bean.NewsBean;
 import com.tong.library.bean.NewsContentBean;
 import com.tong.library.bean.NewsTitleBean;
@@ -84,6 +86,14 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("Solicitation/getSubmissionlistbymid")
     Observable<HotBean> getHotList(@HeaderMap Map<String, String> headMap, @FieldMap Map<String, String> paramMap);
+
+    @FormUrlEncoded
+    @POST("Solicitation/getSolicitationdetails")
+    Observable<CollectionContentBean> getCollectionContent(@HeaderMap Map<String, String> headMap, @FieldMap Map<String, String> paramMap);
+
+    @FormUrlEncoded
+    @POST("Solicitation/getSubmissionlistbysoid")
+    Observable<HotListBean> getHotOrNewestList(@HeaderMap Map<String, String> headMap, @FieldMap Map<String, String> paramMap);
 
     @FormUrlEncoded
     @POST("Other/getAdlist")

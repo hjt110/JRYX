@@ -27,6 +27,9 @@ public class HotAdpter extends CommonAdapter<HotBean.DataBean.ListBean> {
         Glide.with(mContext).load(listBean.getCover()).into(img);
         holder.setText(R.id.tv_title, listBean.getTitle())
                 .setText(R.id.tv_authorNum, "作者编号：" + listBean.getCode())
-                .setText(R.id.tv_author, "作者：" + listBean.getMember_list_username());
+                .setText(R.id.tv_author, "作者：" + listBean.getMember_list_username())
+                .setText(R.id.tv_eyes, listBean.getViews() + "")
+                .setText(R.id.tv_good, listBean.getDolikes() + "")
+                .setText(R.id.tv_comment, listBean.getCommentcount() + "");
     }
 }
