@@ -46,6 +46,24 @@ public class CollectionTitleBean {
 
         private int vmid;
         private String name;
+        private String pic_android;
+        private String pic_ios;
+
+        public String getPic_android() {
+            return pic_android;
+        }
+
+        public void setPic_android(String pic_android) {
+            this.pic_android = pic_android;
+        }
+
+        public String getPic_ios() {
+            return pic_ios;
+        }
+
+        public void setPic_ios(String pic_ios) {
+            this.pic_ios = pic_ios;
+        }
 
         public int getVmid() {
             return vmid;

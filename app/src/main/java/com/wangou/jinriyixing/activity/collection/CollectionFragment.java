@@ -54,13 +54,10 @@ public class CollectionFragment extends BaseFragment {
 
     }
 
-    /*************************todo token/limit 等之后有登录了再改********************************************/
     private void initCollection() {
-        Map<String, String> headerMap = ParamUtils.getNormalHeaderMap();
-        headerMap.put("token","");
         Map<String,String> paramMap = new HashMap<>();
         paramMap.put("limit","");
-        Api.getInstance().getCollectionTitle(headerMap,paramMap)
+        Api.getInstance().getCollectionTitle(ParamUtils.getHeaderMapWithToken(),paramMap)
                 .compose(RxSchedulers.io_main())
                 .subscribe(new BaseObsever<CollectionTitleBean>() {
                     @Override
@@ -68,16 +65,22 @@ public class CollectionFragment extends BaseFragment {
                         if (collectionTitleBean.getCode()==0){
                             List<CollectionTitleBean.DataBean> data = collectionTitleBean.getData();
                             setDataList(data);
-                            for (int i = 0; i < data.size(); i++) {
-                                titleList.add(data.get(i).getName());
-                                fragmentList.add(new HotFragment(i));
-                            }
-                            ViewPagerAdpter viewPagerAdpter = new ViewPagerAdpter(getChildFragmentManager(), titleList, fragmentList);
-                            vp.setAdapter(viewPagerAdpter);
-                            tablayout.setupWithViewPager(vp);
+                            initTab();
                         }
                     }
                 });
+    }
+
+    private void initTab() {
+        titleList.add("征集");
+        titleList.add("热门");
+        titleList.add("进行");
+        for (int i = 0; i < titleList.size(); i++) {
+            fragmentList.add(new HotFragment(i));
+        }
+        ViewPagerAdpter viewPagerAdpter = new ViewPagerAdpter(getChildFragmentManager(), titleList, fragmentList);
+        vp.setAdapter(viewPagerAdpter);
+        tablayout.setupWithViewPager(vp);
     }
 
     public List<CollectionTitleBean.DataBean> getDataList() {
