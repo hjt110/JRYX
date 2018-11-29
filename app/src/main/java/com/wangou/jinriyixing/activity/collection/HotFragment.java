@@ -122,13 +122,13 @@ public class HotFragment extends BaseFragment {
                 if (position == guideList.size() - 1) {
 
                 } else {
-                    switch (pos){
+                    switch (pos) {
                         case 0:
                         case 2:
                             initContent(guideList.get(position).getVmid() + "", type);
                             break;
                         case 1:
-                            initHot(guideList.get(position).getVmid()+"");
+                            initHot(guideList.get(position).getVmid() + "");
                             break;
                     }
                 }
@@ -144,8 +144,8 @@ public class HotFragment extends BaseFragment {
             contentAdpter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-                    Intent intent=new Intent(getActivity(),CollectionContentActivity.class);
-                    intent.putExtra("soid",dataList.get(position).getOsid()+"");
+                    Intent intent = new Intent(getActivity(), CollectionContentActivity.class);
+                    intent.putExtra("soid", dataList.get(position).getOsid() + "");
                     startActivity(intent);
                 }
 
@@ -156,11 +156,13 @@ public class HotFragment extends BaseFragment {
             });
         }
 
-        if (pos == 1){
+        if (pos == 1) {
             hotAdpter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-
+                    Intent intent = new Intent(getActivity(), HotContentActivity.class);
+                    intent.putExtra("ossid", hotList.get(position).getOssid()+"");
+                    startActivity(intent);
                 }
 
                 @Override

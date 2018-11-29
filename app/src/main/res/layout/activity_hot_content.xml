@@ -5,9 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".activity.home.NewsActivity">
+    tools:context=".activity.collection.HotContentActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -37,13 +36,13 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/tv_follow"
             android:layout_toRightOf="@+id/img_author"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textColor="@color/color_3"
             android:textSize="@dimen/textSize_13"
-            android:layout_toLeftOf="@+id/tv_follow"
-            android:layout_marginRight="10dp"
-            android:maxLines="1"
-            android:ellipsize="end"
             />
 
         <ImageView
@@ -97,9 +96,9 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="13dp"
+                android:text="title"
                 android:textColor="@color/color_3"
                 android:textSize="@dimen/textSize_15"
-                android:text="title"
                 />
 
             <LinearLayout
@@ -108,155 +107,192 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="17dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="date"
+                    android:textColor="@color/ab"
+                    android:textSize="11dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="comment"
+                    android:textColor="@color/ab"
+                    android:textSize="11dp"
+                    />
 
                 <TextView
                     android:id="@+id/tv_views"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="views"
                     android:textColor="@color/ab"
                     android:textSize="11dp"
                     />
 
                 <TextView
-                    android:id="@+id/tv_time"
+                    android:id="@+id/tv_goodNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="good"
                     android:textColor="@color/ab"
                     android:textSize="11dp"
                     />
-
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv"
+                android:id="@+id/tv_subheading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
+                android:text="subheading"
+                android:textColor="@color/ab"
+                android:textSize="11dp"
                 />
+
+            <ImageView
+                android:id="@+id/img_cover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_vote"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/circle_grey"
+                    android:gravity="center"
+                    android:text="投票"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_12"
+                    />
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rl_bottom"
                 android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tv_good"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_bg_red"
-                    android:drawableLeft="@mipmap/good_white"
-                    android:drawablePadding="3dp"
-                    android:paddingBottom="11dp"
-                    android:paddingLeft="23dp"
-                    android:paddingRight="23dp"
-                    android:paddingTop="11dp"
-                    android:text="赞一下呗"
-                    android:textColor="@color/white"
-                    android:textSize="13dp"
-                    android:layout_centerHorizontal="true"
-                    />
+                android:layout_height="wrap_content"
+                android:visibility="visible">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_good"
-                    android:layout_marginTop="33dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="33dp"
                     android:background="@drawable/shape_kuang_grey_1"
                     >
-                    
+
                     <com.tong.library.view.CircleImageView
                         android:id="@+id/img_author_bottom"
                         android:layout_width="55dp"
                         android:layout_height="55dp"
+                        android:layout_marginBottom="17dp"
                         android:layout_marginLeft="7dp"
                         android:layout_marginTop="17dp"
-                        android:layout_marginBottom="17dp"
                         />
 
                     <TextView
                         android:id="@+id/tv_orgin_bottom"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/textSize_13"
-                        android:textColor="@color/color_3"
                         android:layout_alignTop="@+id/img_author_bottom"
-                        android:layout_toRightOf="@+id/img_author_bottom"
                         android:layout_marginLeft="7dp"
+                        android:layout_toRightOf="@+id/img_author_bottom"
+                        android:textColor="@color/color_3"
+                        android:textSize="@dimen/textSize_13"
                         />
 
                     <TextView
                         android:id="@+id/tv_follow_bottom"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="关注"
-                        android:textSize="@dimen/textSize_13"
-                        android:textColor="@color/mainColor"
                         android:layout_alignParentRight="true"
                         android:layout_alignTop="@+id/img_author_bottom"
-                        android:background="@drawable/shape_kuang_maincolor"
-                        android:paddingLeft="19dp"
+                        android:layout_marginRight="7dp"
                         android:layout_marginTop="-5dp"
+                        android:background="@drawable/shape_kuang_maincolor"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="19dp"
                         android:paddingRight="19dp"
                         android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        android:layout_marginRight="7dp"
+                        android:text="关注"
+                        android:textColor="@color/mainColor"
+                        android:textSize="@dimen/textSize_13"
                         />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:orientation="horizontal"
+                        android:layout_height="wrap_content"
                         android:layout_alignLeft="@+id/tv_orgin_bottom"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="7dp"
                         android:layout_centerVertical="true"
-                        android:layout_height="wrap_content">
+                        android:layout_marginRight="7dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/tv_fansNum"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="@dimen/textSize_11"
                             android:textColor="@color/color_9"
+                            android:textSize="@dimen/textSize_11"
                             />
+
                         <TextView
                             android:id="@+id/tv_followNum"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="@dimen/textSize_11"
                             android:textColor="@color/color_9"
+                            android:textSize="@dimen/textSize_11"
                             />
+
                         <TextView
                             android:id="@+id/tv_readNum"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="@dimen/textSize_11"
                             android:textColor="@color/color_9"
+                            android:textSize="@dimen/textSize_11"
                             />
-
                     </LinearLayout>
+
                     <TextView
                         android:id="@+id/tv_about"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/textSize_11"
-                        android:textColor="#959595"
-                        android:layout_alignLeft="@+id/tv_orgin_bottom"
                         android:layout_alignBottom="@id/img_author_bottom"
-                        android:text="简介"
+                        android:layout_alignLeft="@+id/tv_orgin_bottom"
                         android:layout_marginRight="7dp"
-                        android:maxLines="1"
                         android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="简介"
+                        android:textColor="#959595"
+                        android:textSize="@dimen/textSize_11"
                         />
 
                 </RelativeLayout>
@@ -282,9 +318,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:background="@drawable/shape_kuang_white"
             android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:background="@drawable/shape_kuang_white">
+            android:focusableInTouchMode="true">
 
             <EditText
                 android:id="@+id/edit_comment"

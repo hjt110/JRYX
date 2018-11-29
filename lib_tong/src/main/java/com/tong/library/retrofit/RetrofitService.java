@@ -10,6 +10,7 @@ import com.tong.library.bean.CommentBean;
 import com.tong.library.bean.FollowBean;
 import com.tong.library.bean.GoodBean;
 import com.tong.library.bean.HotBean;
+import com.tong.library.bean.HotContentBean;
 import com.tong.library.bean.HotListBean;
 import com.tong.library.bean.NewsBean;
 import com.tong.library.bean.NewsContentBean;
@@ -94,6 +95,10 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("Solicitation/getSubmissionlistbysoid")
     Observable<HotListBean> getHotOrNewestList(@HeaderMap Map<String, String> headMap, @FieldMap Map<String, String> paramMap);
+
+    @FormUrlEncoded
+    @POST("Solicitation/getSubmissiondetails")
+    Observable<HotContentBean> getHotContent(@HeaderMap Map<String, String> headMap, @FieldMap Map<String, String> paramMap);
 
     @FormUrlEncoded
     @POST("Other/getAdlist")
